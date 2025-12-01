@@ -13,7 +13,7 @@ window.onmousemove = e => {
     if (track.dataset.mouseDownAt === "0") return;
 
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-        maxDelta = window.innerWidth / 2;
+        maxDelta = window.innerWidth / 3;
 
     const percentage = (mouseDelta / maxDelta) * -100;
         nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
@@ -31,4 +31,5 @@ window.onmousemove = e => {
     track.animate({
         transform: `translate(${nextPercentage}%, -50%)`
     }, { duration: 1000, fill: "forwards" });
+
 }
