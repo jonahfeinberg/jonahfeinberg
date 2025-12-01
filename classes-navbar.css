@@ -1,0 +1,29 @@
+.fixed-bottom {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background-color: white !important;
+}
+
+.fixed-bottom .nav-link,
+.fixed-bottom .navbar-brand,
+.fixed-bottom .dropdown-item,
+.fixed-bottom .btn {
+  color: black !important;
+}
+
+.fixed-bottom .nav-link:hover,
+.fixed-bottom .dropdown-item:hover,
+.fixed-bottom .btn:hover {
+  color: gray !important;
+}
+
+.fixed-bottom .nav-link.active {
+  background-color: black !important;
+  color: white !important;
+}
+
+body {
+  padding-top: 70px;
+  adding-bottom: 60px;
+}

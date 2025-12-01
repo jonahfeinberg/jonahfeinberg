@@ -1,0 +1,11 @@
+.stack-sans-notch-font {
+  font-family: "Stack Sans Notch", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+
+h1, h2, body, .navbar-brand {
+  font-family: "Stack Sans Notch";
+}

@@ -1,0 +1,28 @@
+.scroll-space {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  position: relative;
+}
+
+.scroll-content {
+  width: 4000px;
+  height: 3500px;
+  position: relative;
+
+  background:
+    radial-gradient(circle at 400px 200px, blue 0%, rgba(0,0,255,0) 1000px),         /* Math */
+    radial-gradient(circle at 1800px 800px, green 0%, rgba(0,128,0,0) 1000px),       /* Science */
+    radial-gradient(circle at 1000px 1200px, red 0%, rgba(255,0,0,0) 1000px),        /* English */
+    radial-gradient(circle at 600px 2000px, orange 0%, rgba(255,165,0,0) 1000px),    /* History */
+    radial-gradient(circle at 2200px 3000px, yellow 0%, rgba(255,255,0,0) 1000px),   /* Language */
+    radial-gradient(circle at 1400px 1500px, black 0%, rgba(0,0,0,0) 1000px);        /* Electives/CS */
+}
+
+.subject {
+  position: absolute;
+  font-size: 2rem;   /* bigger text */
+  font-weight: bold;
+  color: white;      /* make text white */
+  z-index: 1;
+}

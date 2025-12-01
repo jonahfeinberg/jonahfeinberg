@@ -1,18 +1,154 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jonah Feinberg</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subject Colors</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="homepage.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="font.css">
 </head>
 
 <body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary w-100 fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Subject Colors</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <h1>hi, im still developing my website but thanks for stopping by!</h1>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav nav-underline ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Classes</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="classes.html#math">Math</a></li>
+              <li><a class="dropdown-item" href="classes.html#science">Science</a></li>
+              <li><a class="dropdown-item" href="classes.html#english">English</a></li>
+              <li><a class="dropdown-item" href="classes.html#history">History</a></li>
+              <li><a class="dropdown-item" href="classes.html#language">Language</a></li>
+              <li><a class="dropdown-item" href="classes.html#electives">Electives/CS</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="mapping.html">Color Mapping</a></li>
+          <li class="nav-item"><a class="nav-link" href="sources.html">Sources</a></li>
+          <li class="nav-item"><a class="nav-link" href="why.html">Why your opinion doesn't matter</a></li>
+          <li class="nav-item"><a class="nav-link" href="survey.html">Take the survey</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Welcome Section -->
+    <div class="hero-section text-center">
+      <h1 class="hero-title">Welcome to Subject Colors</h1>
+      <p class="hero-subtitle">
+        Discover the 100% objective, scientifically unquestionable colors for every school subject.
+      </p>
+      <a href="mapping.html" class="btn btn-primary btn-lg mt-3 btn-rainbow">Explore Color Mapping</a>
+    </div>
+
+    <!-- Featured Subject -->
+    <div class="container mt-5">
+      <div class="row g-4 align-items-center justify-content-center text-center text-md-start">
+        <div class="col-12 col-md-4">
+          <h2>Today's Featured Subject:</h2>
+        </div>
+        <div class="col-12 col-md-4 d-flex justify-content-center">
+          <div class="card" style="width: 18rem;">
+            <img src="blue.png" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title">Math</h5>
+              <p class="card-text">[text about math]</p>
+              <a href="classes.html#math" class="btn btn-primary subject-btn">Explore</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="rounded mt-5">
+
+    <!-- Info Cards -->
+    <div class="row g-4 mt-4">
+      <div class="cold-12 col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">How We Determine Colors</h5>
+            <p class="card-text">
+              Man, idk how it works don't ask me lol... anyways so my favorite color is blue and the sky is blue
+              and ducks fly in the sky and I am batman.
+            </p>
+            <a href="#" class="btn btn-outline-primary info-btn">See Methodology</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Community Rankings</h5>
+            <p class="card-text">
+              See how thousands of people voted on subject colors — and how most of them were wrong. Very wrong.
+              Because I AM ALWAYS RIGHT
+            </p>
+            <a href="#" class="btn btn-outline-primary info-btn">View Results</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Submit Your Opinion</h5>
+            <p class="card-text">
+              Think you're right? You're not. But you can still submit your opinions in our survey, which we will politely ignore.
+            </p>
+            <a href="#" class="btn btn-outline-primary info-btn">Take the Survey</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backstory -->
+    <div class="row mt-5">
+      <div class="col-md-8 offset-md-2">
+        <h2 class="text-center mb-3">The Backstory</h2>
+        <p class="text-center">
+          Subject Colors began as a simple argument in a classroom — one that escalated far beyond its original purpose.
+          What started as a debate over whether math is blue or red eventually grew into a full-scale mission to bring
+          order, clarity, and ultimate truth to the universe and conquer darkness. After countless polls, harsh
+          and bloody wars, and a near-universe-ending bomb, this site was created to settle the matter once and for all.
+        </p>
+        <p class="text-center">
+          Our goal is simple: to eliminate chaos in your backpack, unify binder colors across the globe, and put an end
+          to the suffering caused by people who think science is blue.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5 mb-3 text-muted">
+      © 2025 Jonah Feinberg - I have no idea what I'm doing
+      <img src="dancing-bird.gif" width="30px">
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
-
