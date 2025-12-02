@@ -13,7 +13,7 @@ window.onmousemove = e => {
     if (track.dataset.mouseDownAt === "0") return;
 
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-        maxDelta = window.innerWidth / 5;
+        maxDelta = window.innerWidth / 2;
 
     const percentage = (mouseDelta / maxDelta) * -100;
         nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
@@ -33,4 +33,5 @@ window.onmousemove = e => {
     }, { duration: 1000, fill: "forwards" });
 
 }
+
 
