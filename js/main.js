@@ -1,10 +1,8 @@
-/* ============================================================
-   JONAH FEINBERG — main.js
-   ============================================================ */
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ── Dark mode ────────────────────────────────────────────
+  // Dark mode 
   const themeToggle = document.getElementById('themeToggle');
   const html = document.documentElement;
 
@@ -22,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Scroll progress bar ──────────────────────────────────
+  // Scroll progress bar 
   const progressBar = document.getElementById('scroll-progress');
   if (progressBar) {
     const updateProgress = () => {
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
   }
 
-  // ── Active nav link ──────────────────────────────────────
+  // Active nav link 
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(link => {
     if (link.getAttribute('href') === currentPage ||
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ── Mobile hamburger ─────────────────────────────────────
+  // Mobile hamburger 
   const hamburger = document.querySelector('.nav-hamburger');
   const navLinks  = document.querySelector('.nav-links');
   if (hamburger && navLinks) {
@@ -53,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // ── Scroll-triggered fade-up ─────────────────────────────
+  // Scroll-triggered fade-up 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }
@@ -61,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
 
-  // ── Parallax "JF" ────────────────────────────────────────
+  //  Parallax
   const heroJ = document.getElementById('heroJ');
   if (heroJ) {
     let ticking = false;
@@ -76,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ── Lightbox ─────────────────────────────────────────────
+  //  Lightbox 
   const lightbox    = document.querySelector('.lightbox');
   const lightboxImg = lightbox?.querySelector('img');
   const lightboxClose = lightbox?.querySelector('.lightbox-close');
@@ -111,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Portfolio item click ─────────────────────────────────
+  // Portfolio item click
   document.querySelectorAll('.portfolio-item[data-link]').forEach(item => {
     item.addEventListener('click', () => {
       const link = item.getAttribute('data-link');
@@ -120,36 +118,42 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+// video manager
+document.addEventListener("DOMContentLoaded", () => {
 
+  document.querySelectorAll(".app-video-col").forEach(col => {
+    const video = col.querySelector("video");
 
-document.querySelectorAll(".app-video-col").forEach(col => {
-  const video = col.querySelector("video");
+    col.addEventListener("click", async () => {
 
-  col.addEventListener("click", async () => {
-    if (!document.fullscreenElement) {
-      if (video.requestFullscreen) {
-        await video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        await video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        await video.msRequestFullscreen();
+      if (!document.fullscreenElement) {
+        if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          await video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+          await video.msRequestFullscreen();
+        }
       }
-    }
 
-    video.controls = true;
-    video.currentTime = 0;
-    video.play();
+      video.controls = true;
+      video.currentTime = 0;
+      video.play();
 
-    col.classList.add("playing");
-  });
-});
-
-document.addEventListener("fullscreenchange", () => {
-  if (!document.fullscreenElement) {
-    document.querySelectorAll(".project-video").forEach(v => {
-      v.pause();
-      v.controls = false;
-      v.closest(".app-video-col")?.classList.remove("playing");
+      col.classList.add("playing");
     });
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+      document.querySelectorAll(".project-video").forEach(v => {
+        v.pause();
+        v.controls = false;
+        v.closest(".app-video-col")?.classList.remove("playing");
+      });
+    }
+  });
+
+});
   }
 });
