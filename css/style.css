@@ -1154,3 +1154,15 @@ a:hover {
 .app-video-col.playing .app-video-placeholder {
   opacity: 0;
 }
+
+.project-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.project-video {
+  pointer-events: none;
+}
+
+.app-video-col {
+  cursor: pointer;
+}
