@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Jonah Feinberg</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+
+  <nav>
+    <a href="/" class="nav-logo">Jonah Feinberg</a>
+    <ul class="nav-links">
+      <li><a href="/">About</a></li>
+      <li><a href="/projects/">Gallery</a></li>
+      <li><a href="/websites/">Websites</a></li>
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/portfolio/">Portfolio</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <section class="hero">
+      <p class="hero-eyebrow fade-up">Projects</p>
+      <h1 class="fade-up fade-up-delay-1">
+        <em><span class="underline-animate">Projects</span></em> I've created.
+      </h1>
+      <p class="hero-sub fade-up fade-up-delay-2">
+        These are the various things I've worked on throughout my life - Apps, videos, and other projects — with demo videos and details about each one.
+      </p>
+    </section>
+
+    <!--
+    ┌──────────────────────────────────────────────────────┐
+    │ HOW TO ADD AN APP                                    │
+    │                                                      │
+    │ 1. Copy the template at the bottom of this file      │
+    │ 2. Paste it inside .apps-list                        │
+    │ 3. Fill in: name, year, description, tech tags       │
+    │ 4. For video: drop your .mp4 into a videos/ folder   │
+    │    and swap the placeholder div (instructions below) │
+    │ 5. Add class="reverse" to alternate video side       │
+    └──────────────────────────────────────────────────────┘
+    -->
+
+    <div class="apps-list">
+
+      <div class="app-entry fade-up">
+        <div class="app-video-col">
+            <video class="project-video" preload="metadata" playsinline>
+              <source src="videos/harry potter.mp4" type="video/mp4" />
+            </video>
+          <div class="app-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span>Harry Potter Trailer</span>
+          </div>
+        </div>
+        <div class="app-info-col">
+          <span class="app-year">2025</span>
+          <h2 class="app-name">Harry Potter Trailer</h2> 
+          <p class="app-desc">
+            This is a trailer I made, one of the first projects I ever did that involved video editing.
+            I used clips from the movies and edited them together in Davinci Resolve, adding music and text
+            to create a cohesive trailer. It was a fun way to practice both my storytelling and video editing skills.
+          </p>
+          <div class="app-tech-row">
+            <span class="tag">Video</span>
+          </div>
+        </div>
+      </div>
+
+            <div class="app-entry fade-up">
+        <div class="app-video-col">
+            <video class="project-video" preload="metadata" playsinline>
+              <source src="videos/dad milk.mp4" type="video/mp4" />
+            </video>
+          <div class="app-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span>Dad Getting Milk</span>
+          </div>
+        </div>
+        <div class="app-info-col">
+          <span class="app-year">2025</span>
+          <h2 class="app-name">Dad Getting Milk</h2> 
+          <p class="app-desc">
+            This was a little project I worked on for my dad, where he asked me to shoot and edit a video of
+            him going to the store to get milk. It was a fun day-long project that allowed me to practice my video
+            editing skills while also creating something silly for my dad.
+          </p>
+          <div class="app-tech-row">
+            <span class="tag">Video</span>
+          </div>
+        </div>
+      </div>
+
+                  <div class="app-entry fade-up">
+        <div class="app-video-col">
+            <video class="project-video" preload="metadata" playsinline>
+              <source src="videos/intros.mp4" type="video/mp4" />
+            </video>
+          <div class="app-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span>Intros</span>
+          </div>
+        </div>
+        <div class="app-info-col">
+          <span class="app-year">2022-2024</span>
+          <h2 class="app-name">Scratch Intros</h2> 
+          <p class="app-desc">
+            Before I really knew anything that I would like to do, I started out on Scratch. While there, I discovered
+            motion design, or "intros" as they're called on the platform, and I made a bunch of them for fun. These were
+            short clips that I created using Scratch's block-based coding system, set to music to introduce a creator.
+          </p>
+          <div class="app-tech-row">
+            <span class="tag">Code</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p class="footer-left">© 2025 Jonah Feinberg</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
+        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
+        <li><a href="mailto:jonahbfeinberg@gmail.com">Email</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+<!--
+┌──────────────────────────────────────────────────────────────┐
+│ APP ENTRY TEMPLATE — copy and paste inside .apps-list        │
+│ Add class="reverse" to .app-entry to flip video to the right │
+├──────────────────────────────────────────────────────────────┤
+
+      <div class="app-entry fade-up">
+        <div class="app-video-col">
+          <video autoplay muted loop playsinline>
+            <source src="videos/YOUR-APP.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="app-info-col">
+          <span class="app-year">2025</span>
+          <h2 class="app-name">App Name</h2>
+          <p class="app-desc">
+            What does it do? Why did you build it? What was interesting about it?
+          </p>
+          <div class="app-tech-row">
+            <span class="tag">Swift</span>
+            <span class="tag">iOS</span>
+          </div>
+          <a href="https://link-to-app.com" target="_blank" class="app-link">View App ↗</a>
+        </div>
+      </div>
+
+└──────────────────────────────────────────────────────────────┘
+-->
