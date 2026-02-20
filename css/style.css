@@ -1168,5 +1168,5 @@ a:hover {
 }
 
 .broken-label {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
