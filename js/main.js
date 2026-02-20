@@ -120,3 +120,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+
+document.querySelectorAll(".app-video-col").forEach(col => {
+  const video = col.querySelector("video");
+
+  col.addEventListener("click", async () => {
+    if (!document.fullscreenElement) {
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        await video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        await video.msRequestFullscreen();
+      }
+    }
+
+    video.controls = true;
+    video.currentTime = 0;
+    video.play();
+
+    col.classList.add("playing");
+  });
+});
+
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) {
+    document.querySelectorAll(".project-video").forEach(v => {
+      v.pause();
+      v.controls = false;
+      v.closest(".app-video-col")?.classList.remove("playing");
+    });
+  }
+});
