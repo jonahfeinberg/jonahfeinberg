@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1 class="title">Hogwarts Sorting Ceremony</h1>
+
+<form action="{{ url_for('index') }}" method="post" style="margin-top: 65px;">
+
+<label>Name:</label><br/>
+<input type="text" name="name" required><br/><br/>
+
+
+<p>1. You find a mysterious, locked door in the castle.</p>
+<input type="radio" name="q1" value="slytherin"> Pick the lock quietly<br/>
+<input type="radio" name="q1" value="gryffindor" required> Kick it open<br/>
+<input type="radio" name="q1" value="hufflepuff"> Ask a professor for help<br/>
+<input type="radio" name="q1" value="ravenclaw"> Analyze how it works<br/><br/>
+
+<p>2. Which quality do you admire most?</p>
+<input type="radio" name="q2" value="ravenclaw"> Intelligence<br/>
+<input type="radio" name="q2" value="gryffindor" required> Courage<br/>
+<input type="radio" name="q2" value="slytherin"> Ambition<br/>
+<input type="radio" name="q2" value="hufflepuff"> Loyalty<br/><br/>
+
+<p>3. Your friend breaks a school rule.</p>
+<input type="radio" name="q3" value="hufflepuff"> Help them fix it<br/>
+<input type="radio" name="q3" value="ravenclaw"> Find a loophole<br/>
+<input type="radio" name="q3" value="slytherin"> Make sure you aren’t caught<br/>
+<input type="radio" name="q3" value="gryffindor" required> Take the blame together<br/><br/>
+
+<p>4. Which class excites you the most?</p>
+<select name="q4" required>
+    <option value="">-- choose --</option>
+    <option value="slytherin">Potions</option>
+    <option value="ravenclaw">Charms</option>
+    <option value="gryffindor">Defense Against the Dark Arts</option>
+    <option value="hufflepuff">Herbology</option>
+</select><br/><br/>
+
+<p>5. How do you handle challenges?</p>
+<input type="radio" name="q5" value="ravenclaw"> With careful planning<br/>
+<input type="radio" name="q5" value="slytherin"> Strategically and quietly<br/>
+<input type="radio" name="q5" value="gryffindor" required> Head-on, no fear<br/>
+<input type="radio" name="q5" value="hufflepuff"> With support from others<br/><br/>
+
+<p>6. Which animal do you feel closest to?</p>
+<input type="radio" name="q6" value="hufflepuff"> Badger<br/>
+<input type="radio" name="q6" value="slytherin"> Snake<br/>
+<input type="radio" name="q6" value="gryffindor" required> Lion<br/>
+<input type="radio" name="q6" value="ravenclaw"> Eagle<br/><br/>
+
+<p>7. What motivates you most?</p>
+<input type="radio" name="q7" value="ravenclaw"> Learning everything I can<br/>
+<input type="radio" name="q7" value="gryffindor" required> Proving myself<br/>
+<input type="radio" name="q7" value="slytherin"> Gaining influence<br/>
+<input type="radio" name="q7" value="hufflepuff"> Helping others<br/><br/>
+
+<p>8. If you had a powerful artifact, you would…</p>
+<input type="radio" name="q8" value="slytherin"> Use it to rise above others<br/>
+<input type="radio" name="q8" value="ravenclaw"> Study how it works<br/>
+<input type="radio" name="q8" value="gryffindor" required> Use it to protect others<br/>
+<input type="radio" name="q8" value="hufflepuff"> Keep it safe<br/><br/>
+
+<p>9. What scares you the most?</p>
+<input type="radio" name="q9" value="hufflepuff"> Losing loved ones<br/>
+<input type="radio" name="q9" value="slytherin"> Being powerless<br/>
+<input type="radio" name="q9" value="ravenclaw"> Being ignorant<br/>
+<input type="radio" name="q9" value="gryffindor" required> Being seen as weak<br/><br/>
+
+<p>10. How do you want to be remembered?</p>
+<input type="radio" name="q10" value="gryffindor" required> As a hero<br/>
+<input type="radio" name="q10" value="slytherin"> As powerful<br/>
+<input type="radio" name="q10" value="ravenclaw"> As brilliant<br/>
+<input type="radio" name="q10" value="hufflepuff"> As kind and loyal<br/><br/>
+
+<p>11. A troll has entered the dungeon!</p>
+<input type="radio" name="q11" value="hufflepuff"> Evacuate the younger students<br/>
+<input type="radio" name="q11" value="gryffindor" required> Fight it immediately<br/>
+<input type="radio" name="q11" value="ravenclaw"> Trap it using a spell<br/>
+<input type="radio" name="q11" value="slytherin"> Slip away while it's distracted<br/><br/>
+
+<p>13. It's Friday night. Where are you?</p>
+<input type="radio" name="q13" value="slytherin"> Networking with important people<br/>
+<input type="radio" name="q13" value="gryffindor" required> At a loud party in the common room<br/>
+<input type="radio" name="q13" value="ravenclaw"> Reading in the library<br/>
+<input type="radio" name="q13" value="hufflepuff"> Hanging out with close friends<br/><br/>
+
+<p>14. I value this more:</p>
+<div style="display: flex; align-items: center; gap: 10px;">
+    <label>Bravery</label>
+    <input type="range" name="q14" min="1" max="10" value="5" step="0.1" style="flex-grow: 1;">
+    <label>Cunning</label>
+</div>
+<br/>
+
+<p>15. I value this more:</p>
+<div style="display: flex; align-items: center; gap: 10px;">
+    <label>Loyalty</label>
+    <input type="range" name="q15" min="1" max="10" value="5" step="0.1" style="flex-grow: 1;">
+    <label>Intelligence</label>
+</div>
+<br/><br/>
+
+<button type="submit">Sort Me</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const snowflakeCount = 50;
+        const body = document.body;
+        const colors = ['#ffffff', '#ffefef', '#e6fff1', '#fff8dc'];
+        const chars = ['❅', '❆'];
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            const flake = document.createElement('div');
+            flake.classList.add('snowflake');
+            flake.textContent = chars[Math.floor(Math.random() * chars.length)];
+            flake.style.color = colors[Math.floor(Math.random() * colors.length)];
+            flake.style.fontSize = (Math.random() * 0.7 + 0.8) + 'em';
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.opacity = Math.random() * 0.5 + 0.4;
+
+            const duration = Math.random() * 10 + 80;
+            flake.style.animationDuration = `${duration}s, 3s`;
+            flake.style.animationDelay = `-${Math.random() * 10}s, ${Math.random() * 2}s`;
+
+            body.appendChild(flake);
+        }
+    });
+</script>
+
+</form>
+
+{% endblock %}

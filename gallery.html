@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Jonah Feinberg</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="scroll-progress"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Jonah Feinberg</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="websites.html">Websites</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <section class="hero">
+      <p class="hero-eyebrow fade-up">Photography</p>
+      <h1 class="fade-up fade-up-delay-1">
+        A <em><span class="underline-animate">gallery</span></em><br />of places &amp; moments.
+      </h1>
+      <p class="hero-sub fade-up fade-up-delay-2">
+        Photos from travels, everyday life, and everywhere in between.
+        Click any image to view full size.
+      </p>
+    </section>
+
+    <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  HOW TO ADD A NEW GALLERY SECTION                        ║
+    ║                                                          ║
+    ║  1. Copy the TEMPLATE block at the bottom of this file   ║
+    ║  2. Paste it above the closing </div> of .page-wrapper   ║
+    ║  3. Change the title, date, and photo count              ║
+    ║  4. Replace image src="" paths with your photo filenames ║
+    ║  5. Put photos in: images/gallery/YOUR-SECTION-FOLDER/   ║
+    ║                                                          ║
+    ║  IMAGE SIZE OPTIONS:                                     ║
+    ║   Normal:    <div class="g-item">                        ║
+    ║   2x wide:   <div class="g-item" data-span="2">          ║
+    ║   Full row:  <div class="g-item" data-span="row">        ║
+    ║                                                          ║
+    ║  GRID COLUMN OPTIONS (on the gallery-grid div):          ║
+    ║   cols-2 / cols-3 / cols-4                               ║
+    ╚══════════════════════════════════════════════════════════╝
+    -->
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SECTION 1 — edit title, date, count, and photos
+    ───────────────────────────────────────────────────────── -->
+    <div class="gallery-section fade-up">
+      <div class="gallery-section-header">
+        <div>
+          <p class="section-label">01</p>
+          <h2 class="gallery-section-title">Section Title</h2>  <!-- EDIT -->
+        </div>
+        <span class="gallery-count">2024 · 0 photos</span>       <!-- EDIT -->
+      </div>
+
+      <div class="gallery-grid cols-3">
+
+        <!-- COPY & PASTE this block for each photo you add -->
+        <div class="g-item">
+          <img src="images/gallery/section1/photo1.jpg" alt="description" />
+          <div class="g-item-caption">Caption here</div>
+        </div>
+        <!-- /end single photo block -->
+
+        <!-- 2x wide photo example — uncomment to use
+        <div class="g-item" data-span="2">
+          <img src="images/gallery/section1/wide-photo.jpg" alt="description" />
+          <div class="g-item-caption">Caption here</div>
+        </div>
+        -->
+
+        <!-- Full-width panoramic example — uncomment to use
+        <div class="g-item" data-span="row">
+          <img src="images/gallery/section1/panorama.jpg" alt="description" />
+          <div class="g-item-caption">Caption here</div>
+        </div>
+        -->
+
+      </div>
+    </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         ADD MORE SECTIONS BELOW by copying the template
+    ───────────────────────────────────────────────────────── -->
+
+
+    <footer>
+      <p class="footer-left">© 2025 Jonah Feinberg</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
+        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
+        <li><a href="mailto:jonahbfeinberg@gmail.com">Email</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox">
+    <button class="lightbox-close">×</button>
+    <img src="" alt="Full size" />
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  GALLERY SECTION TEMPLATE — copy everything between the      ║
+║  dashes and paste it into the page above the footer          ║
+╠══════════════════════════════════════════════════════════════╣
+
+    <div class="gallery-section fade-up">
+      <div class="gallery-section-header">
+        <div>
+          <p class="section-label">02</p>                       ← change number
+          <h2 class="gallery-section-title">Your Title</h2>     ← change title
+        </div>
+        <span class="gallery-count">2024 · 6 photos</span>      ← change date/count
+      </div>
+
+      <div class="gallery-grid cols-3">                         ← cols-2, cols-3, or cols-4
+
+        <div class="g-item">
+          <img src="images/gallery/FOLDER/photo1.jpg" alt="description" />
+          <div class="g-item-caption">Caption</div>
+        </div>
+
+        <div class="g-item">
+          <img src="images/gallery/FOLDER/photo2.jpg" alt="description" />
+          <div class="g-item-caption">Caption</div>
+        </div>
+
+        <div class="g-item">
+          <img src="images/gallery/FOLDER/photo3.jpg" alt="description" />
+          <div class="g-item-caption">Caption</div>
+        </div>
+
+      </div>
+    </div>
+
+╚══════════════════════════════════════════════════════════════╝
+-->

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1 class="title">The Sorting Hat Has Spoken</h1>
+
+<p style="margin-top: 65px;"><strong>{{ name }}</strong>, you belong in:</p>
+
+<h1 class="{% if house == 'Gryffindor' %}gryffindor{%
+            elif house == 'Hufflepuff' %}hufflepuff{%
+            elif house == 'Ravenclaw' %}ravenclaw{%
+            elif house == 'Slytherin' %}slytherin{% endif %}">
+    {{ house }}
+</h1>
+
+<hr>
+
+<h3>House Scores</h3>
+
+<ul>
+    <li>Gryffindor: {{ gryffindor }}</li>
+    <li>Hufflepuff: {{ hufflepuff }}</li>
+    <li>Ravenclaw: {{ ravenclaw }}</li>
+    <li>Slytherin: {{ slytherin }}</li>
+</ul>
+
+<br>
+
+<a href="{{ url_for('index') }}">Take the quiz again</a>
+
+<img src="{{ url_for('static', filename='hogwarts_logo.png') }}" alt="Hogwarts Logo" class="center-image" style="width: 400px;">
+
+{% endblock %}
