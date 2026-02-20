@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+
+    <div class="p-3 mb-4 bg-light rounded border d-flex justify-content-between align-items-center">
+        <div>
+            <div class="text-muted small">Total Portfolio Value</div>
+            <div class="fs-4 fw-semibold">
+                {{ total | usd }}
+                {% if total > 10000 %}
+                    <span class="text-success ms-2">▲</span>
+                {% elif total < 10000 %}
+                    <span class="text-danger ms-2">▼</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="text-muted small text-end">
+            Starting Value<br>
+            {{ 10000 | usd }}
+        </div>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Amount Invested</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in portfolio %}
+            <tr>
+                <td class="fw-semibold">{{ stock.symbol }}</td>
+                <td>{{ stock.cost_basis | usd }}</td>
+                <td>{{ stock.shares }}</td>
+                <td>{{ stock.price | usd }}</td>
+                <td>{{ stock.total | usd }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end gap-4 mt-3 text-muted">
+        <div>Stocks: {{ total_stocks | usd }}</div>
+        <div>Cash: {{ cash | usd }}</div>
+    </div>
+
+</div>
+{% endblock %}
