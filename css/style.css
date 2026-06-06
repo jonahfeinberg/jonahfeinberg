@@ -17,7 +17,7 @@
   --border: #e8e8e8;
   --card-bg: #fafafa;
   --project-hover-bg: #f0f0f0;
-  --grain-opacity: 0.05;
+  --grain-opacity: 0.15;
 }
 
 [data-theme="dark"] {
@@ -30,7 +30,7 @@
   --gray-light: #232323;
   --gray-mid: #666;
   --gray-dark: #b0b0b0;
-  --grain-opacity: 0.08;
+  --grain-opacity: 0.05;
 }
 
 *, *::before, *::after {
@@ -45,6 +45,7 @@ html {
 }
 
 body {
+  position: relative;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
@@ -57,13 +58,13 @@ body {
 
 body::before {
   content: '';
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 9998;
   pointer-events: none;
   opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 320px 320px;
+  background-size: 50% auto;
 }
 
 
@@ -354,12 +355,10 @@ nav {
   object-fit: cover;
   display: block;
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  filter: grayscale(20%);
 }
 
 .photo-frame:hover img {
-  transform: scale(1.04);
-  filter: grayscale(0%);
+  transform: scale(1.00);
 }
 
 .photo-label {
@@ -1106,12 +1105,6 @@ footer {
 
 .nav-logo {
   display: inline-block;
-  transform-origin: left center;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.nav-logo:hover {
-  transform: scaleX(1.06) scaleY(1.06);
 }
 
 
@@ -1155,12 +1148,8 @@ a:hover {
   opacity: 0;
 }
 
-.project-video::-webkit-media-controls {
-  display: none !important;
-}
-
-.project-video {
-  pointer-events: none;
+.app-video-col.playing .project-video {
+  pointer-events: auto;
 }
 
 .app-video-col {
@@ -1169,4 +1158,37 @@ a:hover {
 
 .broken-label {
   font-weight: 700 !important;
+}
+
+/* intro */
+#intro-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: #0e0e0e;
+  transition: transform 1.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+#intro-bg.leaving {
+  transform: translateY(-100%);
+}
+
+#intro-icon-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 1.15s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+#intro-icon-wrap.leaving {
+  transform: translateY(-130vh) rotate(10deg);
+}
+
+#intro-gif {
+  width: min(420px, 65vw);
+  filter: grayscale(1) invert(1) brightness(1.5);
 }

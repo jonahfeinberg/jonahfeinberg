@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — Jonah Feinberg</title>
+  <title>Videos — Jonah Feinberg</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -11,13 +12,13 @@
   <div id="scroll-progress"></div>
 
   <nav>
-    <a href="/" class="nav-logo">Jonah Feinberg</a>
+    <span class="nav-logo">Jonah Feinberg</span>
     <ul class="nav-links">
-      <li><a href="/">About</a></li>
-      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery/">Photos</a></li>
+      <li><a href="/gallery/#albums">Gallery</a></li>
       <li><a href="/websites/">Websites</a></li>
-      <li><a href="/projects/">Projects</a></li>
-      <li><a href="/portfolio/">Portfolio</a></li>
+      <li><a href="/projects/">Videos</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
@@ -30,27 +31,16 @@
   <div class="page-wrapper">
 
     <section class="hero">
-      <p class="hero-eyebrow fade-up">Projects</p>
+      <p class="hero-eyebrow fade-up">Videos</p>
       <h1 class="fade-up fade-up-delay-1">
-        <em><span class="underline-animate">Projects</span></em> I've created.
+        <em><span class="underline-animate">Videos</span></em> I've made.
       </h1>
       <p class="hero-sub fade-up fade-up-delay-2">
-        These are the various things I've worked on - Apps, videos, and other projects — with demo videos and details about each one.
+        A mix of video editing projects — trailers, personal pieces, and motion work.
       </p>
     </section>
 
-    <!--
-    ┌──────────────────────────────────────────────────────┐
-    │ HOW TO ADD AN APP                                    │
-    │                                                      │
-    │ 1. Copy the template at the bottom of this file      │
-    │ 2. Paste it inside .apps-list                        │
-    │ 3. Fill in: name, year, description, tech tags       │
-    │ 4. For video: drop your .mp4 into a videos/ folder   │
-    │    and swap the placeholder div (instructions below) │
-    │ 5. Add class="reverse" to alternate video side       │
-    └──────────────────────────────────────────────────────┘
-    -->
+    <!-- entries -->
 
     <div class="apps-list">
 
@@ -129,11 +119,11 @@
     </div>
 
     <footer>
-      <p class="footer-left">© 2025 Jonah Feinberg</p>
+      <p class="footer-left">© 2026 Jonah Feinberg</p>
       <ul class="footer-links">
         <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
         <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
-        <li><a href="mailto:jonahbfeinberg@gmail.com">Email</a></li>
+        <li><a href="mailto:jonah@jonahfeinberg.com">Email</a></li>
       </ul>
     </footer>
 
@@ -144,31 +134,3 @@
 </html>
 
 
-<!--
-┌──────────────────────────────────────────────────────────────┐
-│ APP ENTRY TEMPLATE — copy and paste inside .apps-list        │
-│ Add class="reverse" to .app-entry to flip video to the right │
-├──────────────────────────────────────────────────────────────┤
-
-      <div class="app-entry fade-up">
-        <div class="app-video-col">
-          <video autoplay muted loop playsinline>
-            <source src="videos/YOUR-APP.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="app-info-col">
-          <span class="app-year">2025</span>
-          <h2 class="app-name">App Name</h2>
-          <p class="app-desc">
-            What does it do? Why did you build it? What was interesting about it?
-          </p>
-          <div class="app-tech-row">
-            <span class="tag">Swift</span>
-            <span class="tag">iOS</span>
-          </div>
-          <a href="https://link-to-app.com" target="_blank" class="app-link">View App ↗</a>
-        </div>
-      </div>
-
-└──────────────────────────────────────────────────────────────┘
--->

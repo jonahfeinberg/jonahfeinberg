@@ -118,47 +118,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-// video manager
+// intro
+const introBg = document.getElementById('intro-bg');
+const introIconWrap = document.getElementById('intro-icon-wrap');
+if (introBg) {
+  if (sessionStorage.getItem('intro-seen')) {
+    introBg.style.display = 'none';
+    introIconWrap.style.display = 'none';
+  } else {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      introBg.classList.add('leaving');
+      introIconWrap.classList.add('leaving');
+      introBg.addEventListener('transitionend', () => {
+        introBg.remove();
+        introIconWrap.remove();
+        document.body.style.overflow = '';
+        sessionStorage.setItem('intro-seen', '1');
+      }, { once: true });
+    }, 2000);
+  }
+}
 
+// videos
 document.addEventListener("DOMContentLoaded", () => {
-
-  const videos = document.querySelectorAll(".project-video");
-
-  videos.forEach(video => {
-
+  document.querySelectorAll(".project-video").forEach(video => {
     const container = video.closest(".app-video-col");
-
     video.controls = false;
 
-    const playVideo = async () => {
-
-      if (!document.fullscreenElement) {
-        if (video.requestFullscreen) {
-          await video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-          await video.webkitRequestFullscreen();
-        }
-      }
-
-      video.currentTime = 0;
+    container.addEventListener("click", () => {
+      if (container.classList.contains("playing")) return;
       video.controls = true;
       video.play();
-
       container.classList.add("playing");
-    };
-
-    container.addEventListener("click", playVideo);
-    video.addEventListener("click", playVideo);
+    });
   });
-
-  document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement) {
-      document.querySelectorAll(".project-video").forEach(video => {
-        video.pause();
-        video.controls = false;
-        video.closest(".app-video-col")?.classList.remove("playing");
-      });
-    }
-  });
-
 });

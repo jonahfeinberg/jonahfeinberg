@@ -4,21 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jonah Feinberg</title>
-  <meta name="description" content="Jonah Feinberg — high school sophomore from Lincoln, MA. Into psychology, CS, volleyball, photography, and building things." />
+  <meta name="description" content="Jonah Feinberg — I build websites, take photos, and edit videos. Student at Lincoln Sudbury, class of 2028." />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 
+  <!-- intro -->
+  <div id="intro-bg"></div>
+  <div id="intro-icon-wrap">
+    <img src="/images/jf-transparent.gif" alt="" id="intro-gif" />
+  </div>
+
   <div id="scroll-progress"></div>
 
   <nav>
-    <a href="/" class="nav-logo">Jonah Feinberg</a>
+    <span class="nav-logo">Jonah Feinberg</span>
     <ul class="nav-links">
-      <li><a href="/">About</a></li>
-      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery/">Photos</a></li>
+      <li><a href="/gallery/#albums">Gallery</a></li>
       <li><a href="/websites/">Websites</a></li>
-      <li><a href="/projects/">Projects</a></li>
-      <li><a href="/portfolio/">Portfolio</a></li>
+      <li><a href="/projects/">Videos</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
@@ -30,6 +37,7 @@
 
   <div class="page-wrapper">
 
+    <!-- hero -->
     <section class="hero">
       <div class="hero-bg-letter" id="heroJ" aria-hidden="true">JF</div>
       <p class="hero-eyebrow fade-up">About Me</p>
@@ -37,11 +45,12 @@
         Hi, I'm <em><span class="underline-animate">Jonah.</span></em>
       </h1>
       <p class="hero-sub fade-up fade-up-delay-2">
-        High school sophomore from Lincoln, MA. I build apps, take photos,
-        play volleyball, and think a lot about people — how they work, why they do what they do.
+        I build websites for people, take photos, and edit videos.
+        Student at Lincoln Sudbury Regional High School, class of 2028.
       </p>
     </section>
 
+    <!-- about -->
     <section class="section">
       <div class="about-grid">
 
@@ -49,20 +58,23 @@
           <p class="section-label fade-up">A little about me</p>
 
           <p class="fade-up fade-up-delay-1">
-            I'm Jonah Feinberg — a sophomore at Lincoln-Sudbury Regional High School,
-            class of 2028. I spend most of my time building things with code, shooting photos,
-            or on the volleyball court. When I'm not doing any of that, I'm probably
-            editing videos or out on a walk with my dog Jasper.
+            Hi! My name is Jonah Feinberg. I'm currently a student at Lincoln Sudbury Regional High School,
+            class of 2028. I spend my time building websites, editing videos, playing volleyball,
+            or walking my dog, Jasper.
           </p>
           <p class="fade-up fade-up-delay-2">
-            I'm drawn to subjects that sit at the intersection of people and systems —
-            psychology, sociology, and computer science. I find it interesting how technology
-            shapes behavior and how understanding people can make you a better builder.
-            I'm still figuring out exactly where I want to take all of that, but I'm in no rush.
+            I'm drawn to subjects that are intersected by people and how they function: psychology,
+            sociology, and sometimes even computer science. I find it interesting how technology can
+            shape behavior and how understanding people can make you a better builder.
           </p>
           <p class="fade-up fade-up-delay-3">
-            Jasper is a rescue from Antigua — an American Village Dog with a lot of
-            personality and zero chill. He's probably the most photographed subject in my camera roll.
+            I've had the opportunity to captain the JVA volleyball team as well as closely connect
+            with many of my peers, which has taught me the importance of communication.
+          </p>
+          <p class="fade-up">
+            I value creativity, collaboration, and using my skills to help others. I'm interested in
+            exploring psychology potentially alongside computer science to better understand how people
+            think and how technology can be designed to serve them more effectively.
           </p>
 
           <div class="about-info-row fade-up">
@@ -80,13 +92,13 @@
             </div>
             <div class="info-item">
               <label>Contact</label>
-              <span><a href="mailto:jonahbfeinberg@gmail.com">jonahbfeinberg@gmail.com</a></span>
+              <span><a href="mailto:jonah@jonahfeinberg.com">jonah@jonahfeinberg.com</a></span>
             </div>
           </div>
         </div>
 
+        <!-- photos -->
         <div class="photo-stack fade-up fade-up-delay-2">
-          <!-- EDIT: drop your photos into images/ and update src below -->
           <div class="photo-frame">
             <img src="images/me.jpg" alt="Jonah Feinberg" />
             <span class="photo-label">Me</span>
@@ -97,33 +109,46 @@
           </div>
           <div class="photo-frame wide">
             <img src="images/volleyball.jpg" alt="Volleyball" />
-            <span class="photo-label">Volleyball</span>
+            <span class="photo-label">Boston United Volleyball</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!--
+    <!-- websites -->
     <hr class="divider" />
-    <section class="section-sm cta-row">
-      <p class="cta-intro fade-up">
-        Explore my work, travels, and the things I've built.
+    <section class="section-sm">
+      <p class="section-label fade-up">I build websites</p>
+      <h2 class="fade-up fade-up-delay-1" style="font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 0.75rem;">
+        Need a website? <em>Let's talk.</em>
+      </h2>
+      <p class="fade-up fade-up-delay-2" style="max-width: 540px; color: var(--fg-muted, #555); margin-bottom: 1.5rem; line-height: 1.7;">
+        I design and build websites for people, personal sites, small businesses, portfolios, anything!
+        Clean, cheap, fast, and built from scratch for your needs.
       </p>
-      <div class="cta-buttons fade-up fade-up-delay-1">
-        <a href="/gallery/" class="btn-outline">Gallery</a>
-        <a href="/portfolio/" class="btn-outline">Portfolio</a>
-        <a href="/projects/" class="btn-solid">Projects</a>
+      <div class="fade-up fade-up-delay-3" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <a href="/websites/" class="btn-solid">See my work</a>
+        <a href="mailto:jonah@jonahfeinberg.com" class="btn-outline">Get in touch</a>
       </div>
     </section>
-    -->
+
+    <!-- monkeyboard -->
+    <section class="section" style="padding-top: 2rem;">
+      <p class="section-label fade-up">Featured</p>
+      <a class="project-card fade-up fade-up-delay-1" href="https://monkeyboard.jonahfeinberg.com" target="_blank" style="display: block; max-width: 560px;">
+        <h3>monkeyboard</h3>
+        <p>A typing speed test I built from scratch — mechanical keyboard sounds, leaderboards, and custom word lists.</p>
+        <span class="project-card-link">Visit monkeyboard.jonahfeinberg.com →</span>
+      </a>
+    </section>
 
     <footer>
-      <p class="footer-left">© 2025 Jonah Feinberg</p>
+      <p class="footer-left">© 2026 Jonah Feinberg</p>
       <ul class="footer-links">
         <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
         <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
-        <li><a href="mailto:jonahbfeinberg@gmail.com">Email</a></li>
+        <li><a href="mailto:jonah@jonahfeinberg.com">Email</a></li>
       </ul>
     </footer>
 
