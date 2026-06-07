@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery — Jonah Feinberg</title>
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
+
+  <div class="grain"></div>
 
   <div id="scroll-progress"></div>
 
@@ -15,8 +19,7 @@
     <span class="nav-logo">Jonah Feinberg</span>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/gallery/">Photos</a></li>
-      <li><a href="/gallery/#albums">Gallery</a></li>
+      <li><a href="/gallery/">Gallery</a></li>
       <li><a href="/websites/">Websites</a></li>
       <li><a href="/projects/">Videos</a></li>
     </ul>
@@ -33,11 +36,10 @@
     <section class="hero">
       <p class="hero-eyebrow fade-up">Photography</p>
       <h1 class="fade-up fade-up-delay-1">
-        A <em><span class="underline-animate">gallery</span></em><br />of places &amp; moments.
+        A <em><span class="underline-animate">gallery</span></em><br />of photo's I've taken.
       </h1>
-      <p class="hero-sub fade-up fade-up-delay-2">
-        Photos from travels, everyday life, and things I find interesting.
-        Click any image to view full size.
+      <p class="hero-sub fade-up fade-up-delay-2" style="white-space: nowrap;">
+        Photos from travels, everyday life, and things I find interesting. Click any image to view full size.
       </p>
     </section>
 
@@ -394,8 +396,12 @@
   <!-- lightbox -->
   <div class="lightbox">
     <button class="lightbox-close">×</button>
+    <button class="lightbox-prev">‹</button>
+    <button class="lightbox-next">›</button>
     <img src="" alt="Full size" />
   </div>
+
+  <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <script src="/js/main.js"></script>
 </body>

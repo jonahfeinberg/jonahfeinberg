@@ -56,15 +56,41 @@ body {
 }
 
 
-body::before {
+.grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.grain::before {
   content: '';
   position: absolute;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
+  top: -10rem;
+  left: -10rem;
+  width: calc(100% + 20rem);
+  height: calc(100% + 20rem);
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png);
   opacity: var(--grain-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 50% auto;
+  pointer-events: none;
+  animation: grain-shift 2s steps(8) infinite;
+}
+
+@keyframes grain-shift {
+  0%  { transform: translate3d(0, 9rem, 0); }
+  10% { transform: translate3d(-1rem, -4rem, 0); }
+  20% { transform: translate3d(-8rem, 2rem, 0); }
+  30% { transform: translate3d(9rem, -9rem, 0); }
+  40% { transform: translate3d(-2rem, 7rem, 0); }
+  50% { transform: translate3d(-9rem, -4rem, 0); }
+  60% { transform: translate3d(2rem, 6rem, 0); }
+  70% { transform: translate3d(7rem, -8rem, 0); }
+  80% { transform: translate3d(-9rem, 1rem, 0); }
+  90% { transform: translate3d(6rem, -5rem, 0); }
+  to  { transform: translate3d(-7rem, 0, 0); }
 }
 
 
@@ -300,8 +326,14 @@ nav {
   color: var(--fg);
 }
 
+h2 {
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  margin-bottom: 0.75rem;
+}
+
 .section-label {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -324,11 +356,37 @@ nav {
 }
 
 .about-text p {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   line-height: 1.85;
   color: var(--gray-dark);
   margin-bottom: 20px;
   font-weight: 300;
+}
+
+.info-item p {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--fg);
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* prevent .about-text p from overriding the label */
+.about-text .section-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gray-mid);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.section-sm p {
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--gray-dark);
+  max-width: 540px;
+  margin-bottom: 0.6rem;
 }
 
 .photo-stack {
@@ -346,7 +404,7 @@ nav {
 
 .photo-frame.wide {
   grid-column: 1 / -1;
-  aspect-ratio: 16/7;
+  aspect-ratio: 12/7.5;
 }
 
 .photo-frame img {
@@ -354,11 +412,6 @@ nav {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.photo-frame:hover img {
-  transform: scale(1.00);
 }
 
 .photo-label {
@@ -372,6 +425,21 @@ nav {
   background: rgba(0,0,0,0.45);
   padding: 4px 10px;
   backdrop-filter: blur(4px);
+}
+
+.jasper-banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21/2;
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.jasper-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .about-info-row {
@@ -392,7 +460,8 @@ nav {
   margin-bottom: 6px;
 }
 
-.info-item span {
+.info-item span,
+.info-item p {
   font-family: var(--font-serif);
   font-size: 1rem;
   color: var(--fg);
@@ -523,6 +592,63 @@ nav {
 }
 
 .lightbox-close:hover { opacity: 1; }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 200;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-prev:hover,
+.lightbox-next:hover { opacity: 1; border-color: rgba(255,255,255,0.6); }
+
+.lightbox-prev.hidden,
+.lightbox-next.hidden { opacity: 0; pointer-events: none; }
+
+#back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 40px;
+  height: 40px;
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#back-to-top.visible {
+  opacity: 0.7;
+  pointer-events: all;
+}
+
+#back-to-top:hover { opacity: 1; }
 
 
 .portfolio-list {
@@ -1094,7 +1220,7 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  height: 1px;
+  height: 1.5px;
   width: 0%;
   background: var(--fg);
   z-index: 9999;
