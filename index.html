@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  <div class="grain"></div>
+
   <!-- intro -->
   <div id="intro-bg"></div>
   <div id="intro-icon-wrap">
@@ -25,8 +27,7 @@
     <span class="nav-logo">Jonah Feinberg</span>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/gallery/">Photos</a></li>
-      <li><a href="/gallery/#albums">Gallery</a></li>
+      <li><a href="/gallery/">Gallery</a></li>
       <li><a href="/websites/">Websites</a></li>
       <li><a href="/projects/">Videos</a></li>
     </ul>
@@ -44,7 +45,6 @@
     <a href="https://monkeyboard.jonahfeinberg.com" target="_blank" id="monkey-banner">
       <span class="mb-try">try</span>
       <span class="mb-name">monkeyboard<span class="mb-cursor">_</span></span>
-      <span class="mb-sep">·</span>
       <span class="mb-sub">a monkey typing simulator (you may need to wait ~30s to load)</span>
     </a>
 
@@ -91,39 +91,37 @@
           <div class="about-info-row fade-up">
             <div class="info-item">
               <label>Based in</label>
-              <span>Lincoln, MA</span>
+              <p>Lincoln, MA</p>
             </div>
             <div class="info-item">
               <label>Class of</label>
-              <span>2028</span>
+              <p>2028</p>
             </div>
             <div class="info-item">
               <label>Interested in</label>
-              <span>Psych · Sociology · CS</span>
+              <p>Psych · Sociology · CS</p>
             </div>
             <div class="info-item">
               <label>Contact</label>
-              <span><a href="mailto:jonah@jonahfeinberg.com">jonah@jonahfeinberg.com</a></span>
+              <p><a href="mailto:jonah@jonahfeinberg.com">jonah@jonahfeinberg.com</a></p>
             </div>
           </div>
         </div>
 
         <!-- photos -->
         <div class="photo-stack fade-up fade-up-delay-2">
-          <div class="photo-frame">
-            <img src="images/me.jpg" alt="Jonah Feinberg" />
-            <span class="photo-label">Me</span>
-          </div>
-          <div class="photo-frame">
-            <img src="images/jasper.jpg" alt="Jasper" />
-            <span class="photo-label">Jasper</span>
-          </div>
           <div class="photo-frame wide">
-            <img src="images/volleyball.jpg" alt="Volleyball" />
-            <span class="photo-label">Boston United Volleyball</span>
+            <img src="images/me.jpg" alt="Jonah Feinberg" style="object-position: center 35%;" />
+            <span class="photo-label">Me</span>
           </div>
         </div>
 
+      </div>
+
+      <!-- jasper banner -->
+      <div class="jasper-banner fade-up">
+        <img src="images/jasper.jpg" alt="Jasper" style="object-position: center 42%;"/>
+        <span class="photo-label">Jasper</span>
       </div>
     </section>
 
@@ -131,27 +129,17 @@
     <hr class="divider" />
     <section class="section-sm">
       <p class="section-label fade-up">I build websites</p>
-      <h2 class="fade-up fade-up-delay-1" style="font-size: clamp(1.6rem, 4vw, 2.6rem); margin-bottom: 0.75rem;">
-        Need a website? <em>Let's talk.</em>
-      </h2>
-      <p class="fade-up fade-up-delay-2" style="max-width: 540px; color: var(--fg-muted, #555); margin-bottom: 1.5rem; line-height: 1.7;">
-        I design and build websites for people, personal sites, small businesses, portfolios, anything!
-        Clean, cheap, fast, and built from scratch for your needs.
+      <p class="fade-up fade-up-delay-1">
+        Need a website? Let's talk.
+      </p>
+      <p class="fade-up fade-up-delay-2" >
+        I design and build websites: personal sites, small business sites, portfolios, anything!
+        Clean, affordable, fast, and built from scratch for your needs.
       </p>
       <div class="fade-up fade-up-delay-3" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
         <a href="/websites/" class="btn-solid">See my work</a>
         <a href="mailto:jonah@jonahfeinberg.com" class="btn-outline">Get in touch</a>
       </div>
-    </section>
-
-    <!-- monkeyboard -->
-    <section class="section" style="padding-top: 2rem;">
-      <p class="section-label fade-up">Featured</p>
-      <a class="project-card fade-up fade-up-delay-1" href="https://monkeyboard.jonahfeinberg.com" target="_blank" style="display: block; max-width: 560px;">
-        <h3>monkeyboard</h3>
-        <p>A typing speed test I built from scratch — mechanical keyboard sounds, leaderboards, and custom word lists.</p>
-        <span class="project-card-link">Visit monkeyboard.jonahfeinberg.com →</span>
-      </a>
     </section>
 
     <footer>
