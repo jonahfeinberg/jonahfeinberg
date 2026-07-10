@@ -9,7 +9,16 @@
 
 exports.handler = async (event) => {
   try {
-    const payload = JSON.parse(event.body);
+    if (!event.body || event.body.trim() === "") {
+      console.log("submission-created: empty body, ignoring invocation");
+      return { statusCode: 200, body: "Ignored: empty body" };
+    }
+
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body, "base64").toString("utf8")
+      : event.body;
+
+    const payload = JSON.parse(rawBody);
     const data = payload.payload;
 
     // Only handle the project-questionnaire form; ignore any other forms
