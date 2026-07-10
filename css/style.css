@@ -1385,3 +1385,331 @@ a:hover {
   opacity: 0.7;
   transform: translateX(3px);
 }
+
+
+/* ============ /start questionnaire ============ */
+
+[hidden] { display: none !important; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.wizard-hero {
+  padding: 100px 24px 40px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.wizard-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: 16px;
+}
+
+.wizard-hero h1 em { font-style: italic; }
+
+.package-info {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+}
+
+.package-info .section-label { margin-bottom: 20px; }
+
+.package-card {
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.package-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.package-card-header h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--fg);
+}
+
+.package-price {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--gray-mid);
+}
+
+.package-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--gray-dark);
+}
+
+[data-theme="dark"] .package-card p { color: #a0a0a0; }
+
+.wizard-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+.wizard-progress { margin-bottom: 48px; }
+
+.wizard-progress-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-bottom: 10px;
+}
+
+.wizard-progress-track {
+  height: 3px;
+  background: var(--border);
+  width: 100%;
+}
+
+.wizard-progress-fill {
+  height: 100%;
+  background: var(--fg);
+  width: 20%;
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.wizard-step { display: none; }
+.wizard-step.active { display: block; }
+
+.wizard-step-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 36px;
+}
+
+.field { margin-bottom: 32px; }
+
+.field > label,
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-dark);
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+.field .optional {
+  color: var(--gray-mid);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--gray-mid);
+  margin: -4px 0 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--fg);
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 0.9rem;
+  color: var(--gray-dark);
+}
+
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.radio-option:has(input:checked),
+.checkbox-option:has(input:checked) {
+  border-color: var(--fg);
+}
+
+.radio-option input,
+.checkbox-option input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--fg);
+  flex-shrink: 0;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 12px;
+}
+
+.toggle-option {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.toggle-option input { display: none; }
+
+.toggle-option:has(input:checked) {
+  border-color: var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.conditional-field { margin-top: 16px; }
+
+.chip-input {
+  border: 1px solid var(--border);
+  padding: 12px;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-list:not(:empty) { margin-bottom: 10px; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+
+.chip-remove {
+  background: none;
+  border: none;
+  color: var(--gray-mid);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 4px;
+}
+
+.chip-remove:hover { color: var(--fg); }
+
+.chip-input input[type="text"] {
+  border: none;
+  padding: 8px 4px;
+}
+
+.wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.wizard-nav .btn-outline,
+.wizard-nav .btn-solid {
+  border-radius: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.wizard-nav .btn-solid { margin-left: auto; }
+
+.wizard-confirmation {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 60px 24px 140px;
+  text-align: center;
+}
+
+.wizard-confirmation h2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 16px;
+}
+
+.wizard-confirmation .hero-sub { max-width: 480px; margin: 0 auto; }
+
+@media (max-width: 600px) {
+  .wizard-hero { padding: 90px 20px 32px; }
+  .wizard-wrap { padding: 0 20px 100px; }
+  .field { margin-bottom: 28px; }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  .radio-option,
+  .checkbox-option,
+  .toggle-option { font-size: 16px; }
+}
+
+[data-theme="dark"] input[type="file"] { color: #a0a0a0; }
+[data-theme="dark"] .field > label,
+[data-theme="dark"] .field-label { color: #b0b0b0; }
+[data-theme="dark"] .wizard-progress-label { color: #666; }
+[data-theme="dark"] .field-hint { color: #666; }
