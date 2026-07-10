@@ -1,62 +1,139 @@
-const SKIP_FIELDS = new Set(['form-name', 'bot-field']);
+// netlify/functions/submission-created.js
+//
+// Netlify automatically invokes any function named "submission-created"
+// as a background function whenever ANY form on the site is submitted.
+// No manual webhook configuration needed.
+//
+// Requires the RESEND_API_KEY environment variable to be set in
+// Netlify's Project configuration > Environment variables.
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, char => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]
-  ));
-}
-
-function formatValue(value) {
-  if (Array.isArray(value)) return value.join(', ') || '—';
-  return value || '—';
-}
-
-exports.handler = async event => {
+exports.handler = async (event) => {
   try {
-    const { payload } = JSON.parse(event.body);
+    const payload = JSON.parse(event.body);
+    const data = payload.payload;
 
-    const entries = payload.ordered_human_fields && payload.ordered_human_fields.length
-      ? payload.ordered_human_fields.map(f => [f.title || f.name, f.value])
-      : Object.entries(payload.data || {});
+    // Only handle the project-questionnaire form; ignore any other forms
+    // that might exist on the site.
+    if (!data || data.form_name !== "project-questionnaire") {
+      return { statusCode: 200, body: "Ignored: not the target form" };
+    }
 
-    const rows = entries
-      .filter(([key]) => !SKIP_FIELDS.has(key))
-      .map(([key, value]) => `
-        <tr>
-          <td style="padding:8px 14px;border:1px solid #ddd;font-weight:600;vertical-align:top;white-space:nowrap;">${escapeHtml(key)}</td>
-          <td style="padding:8px 14px;border:1px solid #ddd;">${escapeHtml(formatValue(value))}</td>
-        </tr>`)
-      .join('');
+    const fields = data.data || {};
 
-    const html = `
-      <h2>New project questionnaire submission</h2>
-      <table style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">${rows}</table>
-      <p style="font-family:sans-serif;font-size:13px;color:#555;">
-        Uploaded files (logo, photos, marketing materials) can be viewed in the Netlify Forms dashboard for this submission.
-      </p>`;
+    // Human-readable labels for each field name used in the form.
+    const fieldLabels = {
+      package: "Package",
+      businessName: "Business name",
+      businessAddress: "Business address",
+      businessPhone: "Business phone",
+      currentWebsite: "Current website",
+      yearFounded: "Year founded",
+      logoColors: "Logo / preferred colors",
+      contactName: "Primary contact name",
+      contactEmail: "Primary contact email",
+      contactPhone: "Primary contact phone",
+      services: "Services / products",
+      serviceArea: "Service area",
+      differentiators: "What sets them apart",
+      advertising: "Past/current advertising",
+      domainHosting: "Domain / hosting status",
+      mainGoal: "Main goal",
+      pages: "Pages wanted",
+      pagesOther: "Other page(s)",
+      contactFormNeeded: "Contact form needed",
+      socialLinks: "Social media links",
+      certifications: "Organizations / certifications",
+      copyReady: "Copy ready?",
+      hasPhotos: "Has photos?",
+      hasTestimonials: "Has testimonials?",
+      testimonialsText: "Testimonials",
+      videoLinks: "Video links",
+      websitesLiked: "Websites they like",
+      marketingMaterials: "Marketing materials note",
+      launchDate: "Target launch date",
+      updateFrequency: "Update frequency",
+      searchTerms: "Google search terms",
+    };
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
+    // Build the list of non-empty fields, skipping anything blank/undefined,
+    // and skipping Netlify's internal bookkeeping keys.
+    const skipKeys = new Set(["form-name", "bot-field"]);
+    const rows = [];
+
+    for (const [key, rawValue] of Object.entries(fields)) {
+      if (skipKeys.has(key)) continue;
+
+      let value = rawValue;
+      if (Array.isArray(value)) {
+        value = value.filter(Boolean).join(", ");
+      }
+      if (value === undefined || value === null) continue;
+      if (typeof value === "string" && value.trim() === "") continue;
+
+      const label = fieldLabels[key] || key;
+      rows.push({ label, value });
+    }
+
+    const textBody = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
+
+    const htmlBody = `
+      <h2>New questionnaire submission</h2>
+      <table cellpadding="6" cellspacing="0" border="0">
+        ${rows
+          .map(
+            (r) => `
+          <tr>
+            <td style="font-weight:bold; vertical-align:top; padding-right:12px;">${escapeHtml(
+              r.label
+            )}</td>
+            <td>${escapeHtml(String(r.value)).replace(/\n/g, "<br/>")}</td>
+          </tr>`
+          )
+          .join("")}
+      </table>
+    `;
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("RESEND_API_KEY environment variable is not set");
+      return { statusCode: 200, body: "Skipped: missing API key" };
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: 'onboarding@resend.dev',
-        to: 'jonah@jonahfeinberg.com',
-        subject: 'New form submission!',
-        html,
+        from: "onboarding@resend.dev",
+        to: "jonah@jonahfeinberg.com",
+        subject: "New form submission!",
+        text: textBody,
+        html: htmlBody,
       }),
     });
 
-    if (!res.ok) {
-      console.error('Resend API error', res.status, await res.text());
-      return { statusCode: 502, body: 'Failed to send notification email' };
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("Resend API error:", response.status, errText);
+      // Don't throw — a failed email shouldn't cause Netlify to treat
+      // the form submission itself as failed.
+      return { statusCode: 200, body: "Submission received; email failed" };
     }
 
-    return { statusCode: 200, body: 'ok' };
+    return { statusCode: 200, body: "Notification sent" };
   } catch (err) {
-    console.error('submission-created function error', err);
-    return { statusCode: 500, body: 'error' };
+    console.error("submission-created function error:", err);
+    return { statusCode: 200, body: "Submission received; handler error" };
   }
 };
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
