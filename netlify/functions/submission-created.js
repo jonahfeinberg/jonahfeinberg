@@ -46,7 +46,6 @@ exports.handler = async (event) => {
       differentiators: "What sets them apart",
       advertising: "Past/current advertising",
       domainHosting: "Domain / hosting status",
-      mainGoal: "Main goal",
       pages: "Pages wanted",
       pagesOther: "Other page(s)",
       contactFormNeeded: "Contact form needed",
@@ -59,9 +58,11 @@ exports.handler = async (event) => {
       videoLinks: "Video links",
       websitesLiked: "Websites they like",
       marketingMaterials: "Marketing materials note",
-      launchDate: "Target launch date",
+      launchSpeed: "Launch speed / urgency",
       updateFrequency: "Update frequency",
+      updateFrequencyOther: "Update frequency (other)",
       searchTerms: "Google search terms",
+      anythingElse: "Anything else",
     };
 
     // Build the list of non-empty fields, skipping anything blank/undefined,

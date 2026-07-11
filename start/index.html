@@ -16,6 +16,7 @@
 <body>
 
   <div class="grain"></div>
+  <div id="scroll-progress"></div>
 
   <nav>
     <span class="nav-logo">Jonah Feinberg</span>
@@ -35,7 +36,7 @@
 
   <div class="page-wrapper">
 
-    <section class="wizard-hero">
+    <section class="wizard-hero" data-screen="package">
       <p class="hero-eyebrow">Project Questionnaire</p>
       <h1>Let's get your website <em>started</em>.</h1>
       <p class="hero-sub">
@@ -44,7 +45,7 @@
       </p>
     </section>
 
-    <section class="package-info" id="packageInfo">
+    <section class="package-info" id="packageInfo" data-screen="package">
       <p class="section-label">Packages</p>
       <div class="package-card">
         <div class="package-card-header">
@@ -72,13 +73,6 @@
 
     <div class="wizard-wrap">
 
-      <div class="wizard-progress">
-        <p class="wizard-progress-label"><span id="stepLabel">Step 1 of 6</span></p>
-        <div class="wizard-progress-track">
-          <div class="wizard-progress-fill" id="progressFill"></div>
-        </div>
-      </div>
-
       <form
         name="project-questionnaire"
         method="POST"
@@ -92,336 +86,339 @@
           <label>Don't fill this out if you're human: <input name="bot-field" /></label>
         </p>
 
-        <!-- Step 1 — Package -->
-        <section class="wizard-step active" data-step="1">
-          <h2 class="wizard-step-title">Your Package</h2>
+        <!-- Screen 1 — Package -->
+        <div id="screenPackage" data-screen="package">
+          <section>
+            <h2 class="wizard-step-title">Your Package</h2>
 
-          <div class="field">
-            <label>Which package did you select?</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="package" value="Landing Page - $150" required />
-                <span>Landing Page - $150</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="package" value="Starter - $350" />
-                <span>Starter - $350</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="package" value="Growth - $500" />
-                <span>Growth - $500</span>
-              </label>
+            <div class="field">
+              <label>Which package did you select?</label>
+              <div class="radio-group" data-required-group="package">
+                <label class="radio-option">
+                  <input type="radio" name="package" value="Landing Page - $150" />
+                  <span>Landing Page - $150</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="package" value="Starter - $350" />
+                  <span>Starter - $350</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="package" value="Growth - $500" />
+                  <span>Growth - $500</span>
+                </label>
+              </div>
+              <p class="required-indicator" hidden>Not selected</p>
             </div>
+          </section>
+
+          <div class="wizard-nav">
+            <button type="button" class="btn-solid" id="continueBtn">Continue</button>
           </div>
-        </section>
+        </div>
 
-        <!-- Step 2 — Business Info -->
-        <section class="wizard-step" data-step="2">
-          <h2 class="wizard-step-title">Business Info</h2>
+        <!-- Screen 2 — everything else, one continuous form -->
+        <div id="screenDetails" data-screen="details" hidden>
 
-          <div class="field">
-            <label for="businessName">Business name</label>
-            <input type="text" id="businessName" name="businessName" required />
-          </div>
+          <section>
+            <h2 class="wizard-step-title">Business Info</h2>
 
-          <div class="field">
-            <label for="businessAddress">Business address <span class="optional">(optional)</span></label>
-            <input type="text" id="businessAddress" name="businessAddress" />
-          </div>
-
-          <div class="field">
-            <label for="businessPhone">Business phone <span class="optional">(optional)</span></label>
-            <input type="tel" id="businessPhone" name="businessPhone" />
-          </div>
-
-          <div class="field">
-            <label for="currentWebsite">Current website <span class="optional">(optional)</span></label>
-            <input type="url" id="currentWebsite" name="currentWebsite" placeholder="https://" />
-          </div>
-
-          <div class="field">
-            <label for="yearFounded">Year founded <span class="optional">(optional)</span></label>
-            <input type="number" id="yearFounded" name="yearFounded" min="1900" max="2026" placeholder="e.g. 2015" />
-          </div>
-
-          <div class="field">
-            <label for="logoColors">Logo / preferred colors <span class="optional">(optional)</span></label>
-            <input type="text" id="logoColors" name="logoColors" placeholder="Describe your logo, brand colors, or style you like" />
-          </div>
-
-          <div class="field">
-            <label for="logoFile">Upload a logo <span class="optional">(optional)</span></label>
-            <input type="file" id="logoFile" name="logoFile" accept="image/*" />
-          </div>
-
-          <div class="field">
-            <label for="contactName">Primary contact name</label>
-            <input type="text" id="contactName" name="contactName" required />
-          </div>
-
-          <div class="field">
-            <label for="contactEmail">Primary contact email</label>
-            <input type="email" id="contactEmail" name="contactEmail" required />
-          </div>
-
-          <div class="field">
-            <label for="contactPhone">Primary contact phone <span class="optional">(optional)</span></label>
-            <input type="tel" id="contactPhone" name="contactPhone" />
-          </div>
-        </section>
-
-        <!-- Step 3 — Services & Market -->
-        <section class="wizard-step" data-step="3">
-          <h2 class="wizard-step-title">Services &amp; Market</h2>
-
-          <div class="field">
-            <label for="services">What services or products do you want listed?</label>
-            <textarea id="services" name="services" required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="serviceArea">What towns / areas do you serve? <span class="optional">(optional)</span></label>
-            <textarea id="serviceArea" name="serviceArea"></textarea>
-          </div>
-
-          <div class="field">
-            <label for="differentiators">What sets you apart from competitors? <span class="optional">(optional)</span></label>
-            <textarea id="differentiators" name="differentiators"></textarea>
-          </div>
-
-          <div class="field">
-            <label for="advertising">How have you advertised in the past (or currently)? <span class="optional">(optional)</span></label>
-            <textarea id="advertising" name="advertising"></textarea>
-          </div>
-        </section>
-
-        <!-- Step 4 — Website Goals & Pages -->
-        <section class="wizard-step" data-step="4">
-          <h2 class="wizard-step-title">Website Goals &amp; Pages</h2>
-
-          <div class="field">
-            <label>Do you already have a domain / hosting?</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="domainHosting" value="Yes, managed by me" required />
-                <span>Yes, managed by me</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="domainHosting" value="Yes, need help" />
-                <span>Yes, need help</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="domainHosting" value="No" />
-                <span>No</span>
-              </label>
+            <div class="field">
+              <label for="businessName">Business name</label>
+              <input type="text" id="businessName" name="businessName" required />
             </div>
-          </div>
 
-          <div class="field">
-            <label>What's the main goal of the website?</label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="mainGoal" value="More phone calls" required />
-                <span>More phone calls</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="mainGoal" value="More emails" />
-                <span>More emails</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="mainGoal" value="Look more credible" />
-                <span>Look more credible</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="mainGoal" value="Showcase my work" />
-                <span>Showcase my work</span>
-              </label>
+            <div class="field">
+              <label for="businessAddress">Business address <span class="optional">(optional)</span></label>
+              <input type="text" id="businessAddress" name="businessAddress" />
             </div>
-          </div>
 
-          <div class="field" id="pagesWantedField">
-            <label>Which pages do you want? <span class="optional">(optional)</span></label>
-            <p class="field-hint" id="singlePageNote" hidden>
-              Your package includes a single scrolling page covering Home, About, Services, and Contact (no separate pages needed).
+            <div class="field">
+              <label for="businessPhone">Business phone <span class="optional">(optional)</span></label>
+              <input type="tel" id="businessPhone" name="businessPhone" />
+            </div>
+
+            <div class="field">
+              <label for="currentWebsite">Current website <span class="optional">(optional)</span></label>
+              <input type="url" id="currentWebsite" name="currentWebsite" placeholder="https://" />
+            </div>
+
+            <div class="field">
+              <label for="yearFounded">Year founded <span class="optional">(optional)</span></label>
+              <input type="number" id="yearFounded" name="yearFounded" min="1900" max="2026" placeholder="e.g. 2015" />
+            </div>
+
+            <div class="field">
+              <label for="logoColors">Logo / preferred colors <span class="optional">(optional)</span></label>
+              <input type="text" id="logoColors" name="logoColors" placeholder="Describe your logo, brand colors, or style you like" />
+            </div>
+
+            <div class="field">
+              <label for="logoFile">Upload a logo <span class="optional">(optional)</span></label>
+              <input type="file" id="logoFile" name="logoFile" accept="image/*" />
+              <div class="file-preview-list" id="logoFilePreview"></div>
+              <p class="field-error" id="logoFileError" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="contactName">Primary contact name</label>
+              <input type="text" id="contactName" name="contactName" required />
+            </div>
+
+            <div class="field">
+              <label for="contactEmail">Primary contact email</label>
+              <input type="email" id="contactEmail" name="contactEmail" required />
+            </div>
+
+            <div class="field">
+              <label for="contactPhone">Primary contact phone <span class="optional">(optional)</span></label>
+              <input type="tel" id="contactPhone" name="contactPhone" />
+            </div>
+          </section>
+
+          <section>
+            <h2 class="wizard-step-title">Services &amp; Market</h2>
+
+            <div class="field">
+              <label for="services">What services or products do you want listed?</label>
+              <textarea id="services" name="services" required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="serviceArea">What towns / areas do you serve? <span class="optional">(optional)</span></label>
+              <textarea id="serviceArea" name="serviceArea"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="differentiators">What sets you apart from competitors? <span class="optional">(optional)</span></label>
+              <textarea id="differentiators" name="differentiators"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="advertising">How have you advertised in the past (or currently)? <span class="optional">(optional)</span></label>
+              <textarea id="advertising" name="advertising"></textarea>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="wizard-step-title">Website Goals &amp; Pages</h2>
+
+            <div class="field">
+              <label>Do you already have a domain / hosting?</label>
+              <div class="radio-group" data-required-group="domainHosting">
+                <label class="radio-option">
+                  <input type="radio" name="domainHosting" value="Yes, managed by me" />
+                  <span>Yes, managed by me</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="domainHosting" value="Yes, need help" />
+                  <span>Yes, need help</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="domainHosting" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+              <p class="required-indicator" hidden>Not selected</p>
+            </div>
+
+            <div class="field" id="pagesWantedField">
+              <label>Which pages do you want? <span class="optional">(optional)</span></label>
+              <p class="field-hint" id="singlePageNote" hidden>
+                Your package includes a single scrolling page covering Home, About, Services, and Contact (no separate pages needed).
+              </p>
+              <div class="checkbox-group" id="pagesCheckboxGroup">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="pages" value="Home" />
+                  <span>Home</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="pages" value="About" />
+                  <span>About</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="pages" value="Services" />
+                  <span>Services</span>
+                </label>
+                <label class="checkbox-option" data-package-gate="growth">
+                  <input type="checkbox" name="pages" value="Gallery" />
+                  <span>Gallery</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="pages" value="Contact" />
+                  <span>Contact</span>
+                </label>
+                <label class="checkbox-option" data-package-gate="growth">
+                  <input type="checkbox" name="pages" value="Reviews" />
+                  <span>Reviews</span>
+                </label>
+                <label class="checkbox-option" data-package-gate="growth">
+                  <input type="checkbox" name="pages" value="Other" id="pagesOtherCheck" />
+                  <span>Other</span>
+                </label>
+              </div>
+              <input type="text" id="pagesOther" name="pagesOther" placeholder="What other page(s)?" class="conditional-field" hidden />
+            </div>
+
+            <div class="field" id="contactFormField" data-package-gate="growth">
+              <label>Do you need a contact form? <span class="optional">(optional)</span></label>
+              <p class="field-hint">A contact form is included with the Growth package, other tiers list your contact info directly.</p>
+              <div class="toggle-group">
+                <label class="toggle-option">
+                  <input type="radio" name="contactFormNeeded" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="toggle-option">
+                  <input type="radio" name="contactFormNeeded" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="socialLinks">Social media links <span class="optional">(optional)</span></label>
+              <textarea id="socialLinks" name="socialLinks" placeholder="Instagram, Facebook, LinkedIn, etc."></textarea>
+            </div>
+
+            <div class="field">
+              <label for="certifications">Any organizations / certifications to list? <span class="optional">(optional)</span></label>
+              <textarea id="certifications" name="certifications"></textarea>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="wizard-step-title">Content Readiness</h2>
+            <p class="field-hint">
+              Photos and text are supplied by you, photography and copywriting aren't included in any package.
             </p>
-            <div class="checkbox-group" id="pagesCheckboxGroup">
-              <label class="checkbox-option">
-                <input type="checkbox" name="pages" value="Home" />
-                <span>Home</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="pages" value="About" />
-                <span>About</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="pages" value="Services" />
-                <span>Services</span>
-              </label>
-              <label class="checkbox-option" data-package-gate="growth">
-                <input type="checkbox" name="pages" value="Gallery" />
-                <span>Gallery</span>
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="pages" value="Contact" />
-                <span>Contact</span>
-              </label>
-              <label class="checkbox-option" data-package-gate="growth">
-                <input type="checkbox" name="pages" value="Reviews" />
-                <span>Reviews</span>
-              </label>
-              <label class="checkbox-option" data-package-gate="growth">
-                <input type="checkbox" name="pages" value="Other" id="pagesOtherCheck" />
-                <span>Other</span>
-              </label>
+
+            <div class="field">
+              <label>Do you have text / copy ready?</label>
+              <div class="toggle-group" data-required-group="copyReady">
+                <label class="toggle-option">
+                  <input type="radio" name="copyReady" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="toggle-option">
+                  <input type="radio" name="copyReady" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+              <p class="required-indicator" hidden>Not selected</p>
             </div>
-            <input type="text" id="pagesOther" name="pagesOther" placeholder="What other page(s)?" class="conditional-field" hidden />
-          </div>
 
-          <div class="field" id="contactFormField" data-package-gate="growth">
-            <label>Do you need a contact form? <span class="optional">(optional)</span></label>
-            <p class="field-hint">A contact form is included with the Growth package, other tiers list your contact info directly.</p>
-            <div class="toggle-group">
-              <label class="toggle-option">
-                <input type="radio" name="contactFormNeeded" value="Yes" />
-                <span>Yes</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" name="contactFormNeeded" value="No" />
-                <span>No</span>
-              </label>
+            <div class="field">
+              <label>Do you have photos?</label>
+              <div class="toggle-group" data-reveals="photosFileWrap" data-required-group="hasPhotos">
+                <label class="toggle-option">
+                  <input type="radio" name="hasPhotos" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="toggle-option">
+                  <input type="radio" name="hasPhotos" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+              <p class="required-indicator" hidden>Not selected</p>
+              <div class="conditional-field" id="photosFileWrap" hidden>
+                <label for="photosFile">Upload photos</label>
+                <input type="file" id="photosFile" name="photosFile" accept="image/*" multiple />
+                <div class="file-preview-list" id="photosFilePreview"></div>
+                <p class="field-error" id="photosFileError" hidden></p>
+              </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label for="socialLinks">Social media links <span class="optional">(optional)</span></label>
-            <textarea id="socialLinks" name="socialLinks" placeholder="Instagram, Facebook, LinkedIn, etc."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="certifications">Any organizations / certifications to list? <span class="optional">(optional)</span></label>
-            <textarea id="certifications" name="certifications"></textarea>
-          </div>
-        </section>
-
-        <!-- Step 5 — Content Readiness -->
-        <section class="wizard-step" data-step="5">
-          <h2 class="wizard-step-title">Content Readiness</h2>
-          <p class="field-hint">
-            Photos and text are supplied by you, photography and copywriting aren't included in any package.
-          </p>
-
-          <div class="field">
-            <label>Do you have text / copy ready?</label>
-            <div class="toggle-group">
-              <label class="toggle-option">
-                <input type="radio" name="copyReady" value="Yes" required />
-                <span>Yes</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" name="copyReady" value="No" />
-                <span>No</span>
-              </label>
+            <div class="field" id="testimonialsField" data-package-gate="growth">
+              <label>Do you have testimonials? <span class="optional">(optional)</span></label>
+              <p class="field-hint">Testimonials/reviews are included with the Growth package.</p>
+              <div class="toggle-group" data-reveals="testimonialsTextWrap">
+                <label class="toggle-option">
+                  <input type="radio" name="hasTestimonials" value="Yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="toggle-option">
+                  <input type="radio" name="hasTestimonials" value="No" />
+                  <span>No</span>
+                </label>
+              </div>
+              <div class="conditional-field" id="testimonialsTextWrap" hidden>
+                <label for="testimonialsText">Paste them here</label>
+                <textarea id="testimonialsText" name="testimonialsText"></textarea>
+              </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label>Do you have photos?</label>
-            <div class="toggle-group" data-reveals="photosFileWrap">
-              <label class="toggle-option">
-                <input type="radio" name="hasPhotos" value="Yes" required />
-                <span>Yes</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" name="hasPhotos" value="No" />
-                <span>No</span>
-              </label>
+            <div class="field">
+              <label for="videoLinks">Videos to feature <span class="optional">(optional, links)</span></label>
+              <input type="text" id="videoLinks" name="videoLinks" placeholder="YouTube / Vimeo / Google Drive links" />
             </div>
-            <div class="conditional-field" id="photosFileWrap" hidden>
-              <label for="photosFile">Upload photos</label>
-              <input type="file" id="photosFile" name="photosFile" accept="image/*" multiple />
+
+            <div class="field">
+              <label for="websitesLikedEntry">2-3 websites you like <span class="optional">(optional)</span></label>
+              <div class="chip-input" data-hidden-field="websitesLiked">
+                <div class="chip-list"></div>
+                <input type="text" id="websitesLikedEntry" placeholder="Paste a URL and press Enter" />
+              </div>
+              <input type="hidden" name="websitesLiked" />
             </div>
-          </div>
 
-          <div class="field" id="testimonialsField" data-package-gate="growth">
-            <label>Do you have testimonials? <span class="optional">(optional)</span></label>
-            <p class="field-hint">Testimonials/reviews are included with the Growth package.</p>
-            <div class="toggle-group" data-reveals="testimonialsTextWrap">
-              <label class="toggle-option">
-                <input type="radio" name="hasTestimonials" value="Yes" />
-                <span>Yes</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" name="hasTestimonials" value="No" />
-                <span>No</span>
-              </label>
+            <div class="field">
+              <label for="marketingMaterials">Existing marketing materials for inspiration <span class="optional">(optional)</span></label>
+              <input type="file" id="marketingMaterials" name="marketingMaterials" multiple />
+              <div class="file-preview-list" id="marketingMaterialsPreview"></div>
+              <p class="field-error" id="marketingMaterialsError" hidden></p>
             </div>
-            <div class="conditional-field" id="testimonialsTextWrap" hidden>
-              <label for="testimonialsText">Paste them here</label>
-              <textarea id="testimonialsText" name="testimonialsText"></textarea>
+          </section>
+
+          <section>
+            <h2 class="wizard-step-title">Logistics</h2>
+
+            <div class="field">
+              <label for="launchSpeed">In a hurry? How fast should this site get put on the web (speed may reduce website quality): <span class="optional">(optional)</span></label>
+              <input type="text" id="launchSpeed" name="launchSpeed" />
             </div>
-          </div>
 
-          <div class="field">
-            <label for="videoLinks">Videos to feature <span class="optional">(optional, links)</span></label>
-            <input type="text" id="videoLinks" name="videoLinks" placeholder="YouTube / Vimeo / Google Drive links" />
-          </div>
-
-          <div class="field">
-            <label for="websitesLikedEntry">2-3 websites you like <span class="optional">(optional)</span></label>
-            <div class="chip-input" data-hidden-field="websitesLiked">
-              <div class="chip-list"></div>
-              <input type="text" id="websitesLikedEntry" placeholder="Paste a URL and press Enter" />
+            <div class="field">
+              <label>How often will you want updates after launch? <span class="optional">(optional)</span></label>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="updateFrequency" value="Weekly" />
+                  <span>Weekly</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="updateFrequency" value="Monthly" />
+                  <span>Monthly</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="updateFrequency" value="Yearly" />
+                  <span>Yearly</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="updateFrequency" value="Other" id="updateFrequencyOtherRadio" />
+                  <span>Other</span>
+                </label>
+              </div>
+              <input type="text" id="updateFrequencyOther" name="updateFrequencyOther" placeholder="Please specify" class="conditional-field" hidden />
             </div>
-            <input type="hidden" name="websitesLiked" />
-          </div>
 
-          <div class="field">
-            <label for="marketingMaterials">Existing marketing materials for inspiration <span class="optional">(optional)</span></label>
-            <input type="file" id="marketingMaterials" name="marketingMaterials" multiple />
-          </div>
-        </section>
-
-        <!-- Step 6 — Logistics -->
-        <section class="wizard-step" data-step="6">
-          <h2 class="wizard-step-title">Logistics</h2>
-
-          <div class="field">
-            <label for="launchDate">Target launch date <span class="optional">(optional)</span></label>
-            <input type="date" id="launchDate" name="launchDate" />
-          </div>
-
-          <div class="field">
-            <label>How often will you want updates after launch? <span class="optional">(optional)</span></label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="updateFrequency" value="Rarely" />
-                <span>Rarely</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="updateFrequency" value="Monthly" />
-                <span>Monthly</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="updateFrequency" value="Frequently" />
-                <span>Frequently</span>
-              </label>
+            <div class="field">
+              <label for="searchTermsEntry">What would a customer type into Google to find you? <span class="optional">(optional)</span></label>
+              <p class="field-hint">Add 5-10 short search phrases.</p>
+              <div class="chip-input" data-hidden-field="searchTerms">
+                <div class="chip-list"></div>
+                <input type="text" id="searchTermsEntry" placeholder="Type a phrase and press Enter" />
+              </div>
+              <input type="hidden" name="searchTerms" />
             </div>
-          </div>
 
-          <div class="field">
-            <label for="searchTermsEntry">What would a customer type into Google to find you? <span class="optional">(optional)</span></label>
-            <p class="field-hint">Add 5-10 short search phrases.</p>
-            <div class="chip-input" data-hidden-field="searchTerms">
-              <div class="chip-list"></div>
-              <input type="text" id="searchTermsEntry" placeholder="Type a phrase and press Enter" />
+            <div class="field">
+              <label for="anythingElse">Anything else I need to know? <span class="optional">(optional)</span></label>
+              <textarea id="anythingElse" name="anythingElse"></textarea>
             </div>
-            <input type="hidden" name="searchTerms" />
-          </div>
-        </section>
+          </section>
 
-        <div class="wizard-nav">
-          <button type="button" class="btn-outline" id="backBtn" hidden>Back</button>
-          <button type="button" class="btn-solid" id="nextBtn">Next</button>
+          <div class="wizard-nav">
+            <button type="button" class="btn-outline" id="backBtn">Back</button>
+            <button type="button" class="btn-solid" id="submitBtn">Submit</button>
+          </div>
         </div>
       </form>
 
@@ -433,6 +430,11 @@
 
     </div>
 
+  </div>
+
+  <div class="file-lightbox" id="filePreviewLightbox">
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <img src="" alt="Preview" />
   </div>
 
   <script src="/js/main.js"></script>

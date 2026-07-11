@@ -2,54 +2,79 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('wizardForm');
   if (!form) return;
 
-  const steps = [...form.querySelectorAll('.wizard-step')];
-  const totalSteps = steps.length;
-  const stepLabel = document.getElementById('stepLabel');
-  const progressFill = document.getElementById('progressFill');
+  const screenPackage = document.getElementById('screenPackage');
+  const screenDetails = document.getElementById('screenDetails');
+  const continueBtn = document.getElementById('continueBtn');
   const backBtn = document.getElementById('backBtn');
-  const nextBtn = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
   const confirmation = document.getElementById('wizardConfirmation');
-  const wizardNav = document.querySelector('.wizard-nav');
-  const packageInfo = document.getElementById('packageInfo');
 
-  let currentStep = 1;
+  let submitted = false;
 
-  const renderStep = () => {
-    steps.forEach(step => {
-      step.classList.toggle('active', Number(step.dataset.step) === currentStep);
+  // Screen switching (package selection vs. the long details form), driven
+  // by the History API so the browser's native Back/Forward buttons work.
+  const showScreen = name => {
+    document.querySelectorAll('[data-screen]').forEach(el => {
+      el.hidden = el.dataset.screen !== name;
     });
-    stepLabel.textContent = `Step ${currentStep} of ${totalSteps}`;
-    progressFill.style.width = `${(currentStep / totalSteps) * 100}%`;
-    backBtn.hidden = currentStep === 1;
-    nextBtn.textContent = currentStep === totalSteps ? 'Submit' : 'Next';
-    if (packageInfo) packageInfo.hidden = currentStep !== 1;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const validateStep = stepEl => {
-    const fields = stepEl.querySelectorAll('input, textarea, select');
-    for (const field of fields) {
-      if (!field.reportValidity()) return false;
+  history.replaceState({ screen: 'package' }, '', location.href);
+  showScreen('package');
+
+  window.addEventListener('popstate', e => {
+    if (submitted) return;
+    showScreen(e.state?.screen === 'details' ? 'details' : 'package');
+  });
+
+  // Required radio/toggle groups ("choices") show a persistent indicator
+  // whenever nothing in the group is checked yet.
+  const groupIsAnswered = group => !!group.querySelector('input:checked');
+
+  const refreshIndicator = group => {
+    const indicator = group.closest('.field')?.querySelector('.required-indicator');
+    if (indicator) indicator.hidden = groupIsAnswered(group);
+  };
+
+  document.querySelectorAll('[data-required-group]').forEach(group => {
+    refreshIndicator(group);
+    group.addEventListener('change', () => refreshIndicator(group));
+  });
+
+  continueBtn.addEventListener('click', () => {
+    const packageGroup = document.querySelector('[data-required-group="package"]');
+    refreshIndicator(packageGroup);
+    if (!groupIsAnswered(packageGroup)) {
+      packageGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    history.pushState({ screen: 'details' }, '', location.href);
+    showScreen('details');
+  });
+
+  backBtn.addEventListener('click', () => history.back());
+
+  const validateDetailsScreen = () => {
+    const markers = [...screenDetails.querySelectorAll('[required], [data-required-group]')];
+    for (const marker of markers) {
+      if (marker.hasAttribute('data-required-group')) {
+        if (!groupIsAnswered(marker)) {
+          marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return false;
+        }
+      } else if (!marker.checkValidity()) {
+        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        marker.focus();
+        marker.reportValidity();
+        return false;
+      }
     }
     return true;
   };
 
-  backBtn.addEventListener('click', () => {
-    if (currentStep === 1) return;
-    currentStep -= 1;
-    renderStep();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    const activeStep = steps[currentStep - 1];
-    if (!validateStep(activeStep)) return;
-
-    if (currentStep < totalSteps) {
-      currentStep += 1;
-      renderStep();
-      return;
-    }
-
+  submitBtn.addEventListener('click', () => {
+    if (!validateDetailsScreen()) return;
     submitForm();
   });
 
@@ -70,6 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (pagesOtherCheck && pagesOtherField) {
     pagesOtherCheck.addEventListener('change', () => {
       pagesOtherField.hidden = !pagesOtherCheck.checked;
+    });
+  }
+
+  // "Other" update-frequency radio reveals a "please specify" text field
+  const updateFrequencyOtherRadio = document.getElementById('updateFrequencyOtherRadio');
+  const updateFrequencyOtherField = document.getElementById('updateFrequencyOther');
+  if (updateFrequencyOtherRadio && updateFrequencyOtherField) {
+    form.querySelectorAll('input[name="updateFrequency"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        updateFrequencyOtherField.hidden = !updateFrequencyOtherRadio.checked;
+      });
     });
   }
 
@@ -156,9 +192,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // File input previews: small thumbnail (or filename chip for non-images),
+  // per-file delete, fullscreen viewer for images, and a 10MB per-file cap
+  // (Netlify Forms' documented per-file upload limit).
+  const MAX_FILE_BYTES = 10 * 1024 * 1024;
+
+  const fileLightbox = document.getElementById('filePreviewLightbox');
+  const fileLightboxImg = fileLightbox?.querySelector('img');
+
+  const openFileLightbox = src => {
+    if (!fileLightbox || !fileLightboxImg) return;
+    fileLightboxImg.src = src;
+    fileLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeFileLightbox = () => {
+    if (!fileLightbox) return;
+    fileLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  fileLightbox?.querySelector('.lightbox-close')?.addEventListener('click', closeFileLightbox);
+  fileLightbox?.addEventListener('click', e => { if (e.target === fileLightbox) closeFileLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && fileLightbox?.classList.contains('open')) closeFileLightbox();
+  });
+
+  const setupFileInput = input => {
+    const previewList = document.getElementById(`${input.id}Preview`);
+    const errorEl = document.getElementById(`${input.id}Error`);
+    if (!previewList) return;
+    let files = [];
+
+    const rebuildInputFiles = () => {
+      const dt = new DataTransfer();
+      files.forEach(f => dt.items.add(f));
+      input.files = dt.files;
+    };
+
+    const renderPreviews = () => {
+      previewList.innerHTML = '';
+      files.forEach((file, index) => {
+        const item = document.createElement('div');
+        item.className = 'file-preview-item';
+
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.alt = file.name;
+          img.addEventListener('click', () => openFileLightbox(img.src));
+          item.appendChild(img);
+        } else {
+          const chip = document.createElement('span');
+          chip.className = 'file-preview-chip';
+          chip.textContent = file.name;
+          item.appendChild(chip);
+        }
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'file-preview-remove';
+        removeBtn.setAttribute('aria-label', `Remove ${file.name}`);
+        removeBtn.textContent = '×';
+        removeBtn.addEventListener('click', () => {
+          files.splice(index, 1);
+          rebuildInputFiles();
+          renderPreviews();
+        });
+        item.appendChild(removeBtn);
+
+        previewList.appendChild(item);
+      });
+    };
+
+    input.addEventListener('change', () => {
+      const incoming = [...input.files];
+      const accepted = [];
+      const rejected = [];
+      incoming.forEach(f => (f.size > MAX_FILE_BYTES ? rejected.push(f.name) : accepted.push(f)));
+
+      files = input.multiple ? files.concat(accepted) : accepted.slice(0, 1);
+
+      if (errorEl) {
+        errorEl.hidden = rejected.length === 0;
+        if (rejected.length) {
+          errorEl.textContent = `${rejected.join(', ')} exceed${rejected.length === 1 ? 's' : ''} the 10MB limit and ${rejected.length === 1 ? 'was' : 'were'} not added.`;
+        }
+      }
+
+      rebuildInputFiles();
+      renderPreviews();
+    });
+  };
+
+  ['logoFile', 'photosFile', 'marketingMaterials'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) setupFileInput(input);
+  });
+
   const submitForm = () => {
-    nextBtn.disabled = true;
-    nextBtn.textContent = 'Submitting…';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
 
     fetch(window.location.pathname, {
       method: 'POST',
@@ -166,18 +301,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then(response => {
         if (!response.ok) throw new Error(`Submission failed: ${response.status}`);
+        submitted = true;
         form.hidden = true;
-        wizardNav.hidden = true;
-        document.querySelector('.wizard-progress').hidden = true;
+        document.querySelectorAll('[data-screen]').forEach(el => { el.hidden = true; });
         confirmation.hidden = false;
         window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(() => {
-        nextBtn.disabled = false;
-        nextBtn.textContent = 'Submit';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
         alert('Something went wrong submitting the form. Please check your connection and try again.');
       });
   };
-
-  renderStep();
 });
