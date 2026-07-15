@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <script>
-    (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+    (function(){if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Videos — Jonah Feinberg</title>
@@ -25,6 +25,7 @@
       <li><a href="/projects/">Videos</a></li>
     </ul>
     <div class="nav-right">
+      <span class="theme-hint" id="themeHint" hidden>Try dark mode →</span>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
       <button class="nav-hamburger" aria-label="Menu">
         <span></span><span></span><span></span>

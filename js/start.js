@@ -34,7 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const refreshIndicator = group => {
     const indicator = group.closest('.field')?.querySelector('.required-indicator');
-    if (indicator) indicator.hidden = groupIsAnswered(group);
+    const answered = groupIsAnswered(group);
+    if (indicator) indicator.hidden = answered;
+    if (answered) group.classList.remove('group-invalid');
+  };
+
+  // Marks a required field/group as invalid so it's clearly highlighted after
+  // a scroll-to-error; clears itself as soon as the user fixes it.
+  const flagFieldInvalid = marker => {
+    const field = marker.closest('.field');
+    if (!field) return;
+    field.classList.add('field-invalid');
+    const clear = () => field.classList.remove('field-invalid');
+    marker.addEventListener('input', clear, { once: true });
+    marker.addEventListener('change', clear, { once: true });
   };
 
   document.querySelectorAll('[data-required-group]').forEach(group => {
@@ -46,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const packageGroup = document.querySelector('[data-required-group="package"]');
     refreshIndicator(packageGroup);
     if (!groupIsAnswered(packageGroup)) {
+      packageGroup.classList.add('group-invalid');
       packageGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -60,13 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const marker of markers) {
       if (marker.hasAttribute('data-required-group')) {
         if (!groupIsAnswered(marker)) {
+          marker.classList.add('group-invalid');
           marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
           return false;
         }
       } else if (!marker.checkValidity()) {
-        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        marker.focus();
+        flagFieldInvalid(marker);
+        // Focus without letting it trigger its own (non-smooth) scroll, let
+        // reportValidity's native jump happen, then let our smooth centered
+        // scroll run last so it's the one that actually decides where we land.
+        marker.focus({ preventScroll: true });
         marker.reportValidity();
+        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return false;
       }
     }

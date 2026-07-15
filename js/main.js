@@ -2,14 +2,20 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Dark mode 
+  // Dark mode
   const themeToggle = document.getElementById('themeToggle');
+  const themeHint = document.getElementById('themeHint');
   const html = document.documentElement;
 
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if ((savedTheme || (prefersDark ? 'dark' : 'light')) === 'dark') {
+  if (localStorage.getItem('theme') === 'dark') {
     html.setAttribute('data-theme', 'dark');
+  }
+
+  // Show the "try dark mode" hint once, ever, on the very first page load —
+  // never again after that, whether or not the user actually toggled it.
+  if (themeHint && !localStorage.getItem('themeHintSeen')) {
+    themeHint.hidden = false;
+    localStorage.setItem('themeHintSeen', '1');
   }
 
   if (themeToggle) {
@@ -17,10 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const isDark = html.getAttribute('data-theme') === 'dark';
       isDark ? html.removeAttribute('data-theme') : html.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      if (themeHint) themeHint.hidden = true;
     });
   }
 
-  // Scroll progress bar 
+  // Scroll progress bar
   const progressBar = document.getElementById('scroll-progress');
   if (progressBar) {
     const updateProgress = () => {
@@ -38,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (link.getAttribute('href') === path) link.classList.add('active');
   });
 
-  // Mobile hamburger 
+  // Mobile hamburger
   const hamburger = document.querySelector('.nav-hamburger');
   const navLinks  = document.querySelector('.nav-links');
   if (hamburger && navLinks) {
@@ -48,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  // Scroll-triggered fade-up 
+  // Scroll-triggered fade-up
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }
@@ -146,15 +153,22 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
-  // Portfolio item click
-  document.querySelectorAll('.portfolio-item[data-link]').forEach(item => {
-    item.addEventListener('click', () => {
-      const link = item.getAttribute('data-link');
-      if (link) window.open(link, '_blank');
+  // Video click-to-play
+  document.querySelectorAll('.project-video').forEach(video => {
+    const container = video.closest('.app-video-col');
+    if (!container) return;
+    video.controls = false;
+
+    container.addEventListener('click', () => {
+      if (container.classList.contains('playing')) return;
+      video.controls = true;
+      video.play();
+      container.classList.add('playing');
     });
   });
 
 });
+
 // intro
 const introBg = document.getElementById('intro-bg');
 const introIconWrap = document.getElementById('intro-icon-wrap');
@@ -176,18 +190,3 @@ if (introBg) {
     }, 2000);
   }
 }
-
-// videos
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".project-video").forEach(video => {
-    const container = video.closest(".app-video-col");
-    video.controls = false;
-
-    container.addEventListener("click", () => {
-      if (container.classList.contains("playing")) return;
-      video.controls = true;
-      video.play();
-      container.classList.add("playing");
-    });
-  });
-});

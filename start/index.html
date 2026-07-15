@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <script>
-    (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+    (function(){if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -27,6 +27,7 @@
       <li><a href="/projects/">Videos</a></li>
     </ul>
     <div class="nav-right">
+      <span class="theme-hint" id="themeHint" hidden>Try dark mode →</span>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
       <button class="nav-hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -45,72 +46,57 @@
       </p>
     </section>
 
-    <section class="package-info" id="packageInfo" data-screen="package">
-      <p class="section-label">Packages</p>
-      <div class="package-card">
-        <div class="package-card-header">
-          <h3>Landing Page</h3>
-          <span class="package-price">$150</span>
-        </div>
-        <p>Single scrolling page: hero, about, services, photos, and contact info. 1 revision round, ~3-5 days.</p>
-      </div>
-      <div class="package-card">
-        <div class="package-card-header">
-          <h3>Starter</h3>
-          <span class="package-price">$350</span>
-        </div>
-        <p>Up to 4 navigable pages (Home, About, Services, Contact) with deeper service descriptions and basic on-page SEO. 3 revision rounds, ~1 week.</p>
-      </div>
-      <div class="package-card">
-        <div class="package-card-header">
-          <h3>Growth</h3>
-          <span class="package-price">$500</span>
-        </div>
-        <p>5-7 pages including a contact form, an updatable photo gallery, testimonials/reviews, and custom feature requests, plus a more refined design pass. 5 revision rounds, ~1.5–2 weeks.</p>
-      </div>
-      <p class="field-hint">Photos and text are supplied by you for every package; photography and copywriting aren't included.</p>
-    </section>
+    <form
+      name="project-questionnaire"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      enctype="multipart/form-data"
+      id="wizardForm"
+    >
+      <input type="hidden" name="form-name" value="project-questionnaire" />
+      <p class="visually-hidden">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
 
-    <div class="wizard-wrap">
+      <section class="package-info" id="packageInfo" data-screen="package">
+        <p class="section-label">Packages</p>
+        <div class="field">
+          <div class="radio-group" data-required-group="package">
+            <label class="package-card">
+              <input type="radio" name="package" value="Landing Page - $150" class="visually-hidden" />
+              <div class="package-card-header">
+                <h3>Landing Page</h3>
+                <span class="package-price">$150</span>
+              </div>
+              <p>Single scrolling page: hero, about, services, photos, and contact info. 1 revision round, ~3-5 days.</p>
+            </label>
+            <label class="package-card">
+              <input type="radio" name="package" value="Starter - $350" class="visually-hidden" />
+              <div class="package-card-header">
+                <h3>Starter</h3>
+                <span class="package-price">$350</span>
+              </div>
+              <p>Up to 4 navigable pages (Home, About, Services, Contact) with deeper service descriptions and basic on-page SEO. 3 revision rounds, ~1 week.</p>
+            </label>
+            <label class="package-card">
+              <input type="radio" name="package" value="Growth - $500" class="visually-hidden" />
+              <div class="package-card-header">
+                <h3>Growth</h3>
+                <span class="package-price">$500</span>
+              </div>
+              <p>5-7 pages including a contact form, an updatable photo gallery, testimonials/reviews, and custom feature requests, plus a more refined design pass. 5 revision rounds, ~1.5–2 weeks.</p>
+            </label>
+          </div>
+          <p class="required-indicator" hidden>Not selected</p>
+        </div>
+        <p class="field-hint">Photos and text are supplied by you for every package; photography and copywriting aren't included.</p>
+      </section>
 
-      <form
-        name="project-questionnaire"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        enctype="multipart/form-data"
-        id="wizardForm"
-      >
-        <input type="hidden" name="form-name" value="project-questionnaire" />
-        <p class="visually-hidden">
-          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-        </p>
+      <div class="wizard-wrap">
 
         <!-- Screen 1 — Package -->
         <div id="screenPackage" data-screen="package">
-          <section>
-            <h2 class="wizard-step-title">Your Package</h2>
-
-            <div class="field">
-              <label>Which package did you select?</label>
-              <div class="radio-group" data-required-group="package">
-                <label class="radio-option">
-                  <input type="radio" name="package" value="Landing Page - $150" />
-                  <span>Landing Page - $150</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="package" value="Starter - $350" />
-                  <span>Starter - $350</span>
-                </label>
-                <label class="radio-option">
-                  <input type="radio" name="package" value="Growth - $500" />
-                  <span>Growth - $500</span>
-                </label>
-              </div>
-              <p class="required-indicator" hidden>Not selected</p>
-            </div>
-          </section>
-
           <div class="wizard-nav">
             <button type="button" class="btn-solid" id="continueBtn">Continue</button>
           </div>
@@ -123,54 +109,54 @@
             <h2 class="wizard-step-title">Business Info</h2>
 
             <div class="field">
-              <label for="businessName">Business name</label>
+              <label for="businessName">Business name <span class="tag-required">(required)</span></label>
               <input type="text" id="businessName" name="businessName" required />
             </div>
 
             <div class="field">
-              <label for="businessAddress">Business address <span class="optional">(optional)</span></label>
+              <label for="businessAddress">Business address</label>
               <input type="text" id="businessAddress" name="businessAddress" />
             </div>
 
             <div class="field">
-              <label for="businessPhone">Business phone <span class="optional">(optional)</span></label>
+              <label for="businessPhone">Business phone</label>
               <input type="tel" id="businessPhone" name="businessPhone" />
             </div>
 
             <div class="field">
-              <label for="currentWebsite">Current website <span class="optional">(optional)</span></label>
+              <label for="currentWebsite">Current website</label>
               <input type="url" id="currentWebsite" name="currentWebsite" placeholder="https://" />
             </div>
 
             <div class="field">
-              <label for="yearFounded">Year founded <span class="optional">(optional)</span></label>
+              <label for="yearFounded">Year founded</label>
               <input type="number" id="yearFounded" name="yearFounded" min="1900" max="2026" placeholder="e.g. 2015" />
             </div>
 
             <div class="field">
-              <label for="logoColors">Logo / preferred colors <span class="optional">(optional)</span></label>
+              <label for="logoColors">Logo / preferred colors</label>
               <input type="text" id="logoColors" name="logoColors" placeholder="Describe your logo, brand colors, or style you like" />
             </div>
 
             <div class="field">
-              <label for="logoFile">Upload a logo <span class="optional">(optional)</span></label>
+              <label for="logoFile">Upload a logo</label>
               <input type="file" id="logoFile" name="logoFile" accept="image/*" />
               <div class="file-preview-list" id="logoFilePreview"></div>
               <p class="field-error" id="logoFileError" hidden></p>
             </div>
 
             <div class="field">
-              <label for="contactName">Primary contact name</label>
+              <label for="contactName">Primary contact name <span class="tag-required">(required)</span></label>
               <input type="text" id="contactName" name="contactName" required />
             </div>
 
             <div class="field">
-              <label for="contactEmail">Primary contact email</label>
+              <label for="contactEmail">Primary contact email <span class="tag-required">(required)</span></label>
               <input type="email" id="contactEmail" name="contactEmail" required />
             </div>
 
             <div class="field">
-              <label for="contactPhone">Primary contact phone <span class="optional">(optional)</span></label>
+              <label for="contactPhone">Primary contact phone</label>
               <input type="tel" id="contactPhone" name="contactPhone" />
             </div>
           </section>
@@ -179,22 +165,22 @@
             <h2 class="wizard-step-title">Services &amp; Market</h2>
 
             <div class="field">
-              <label for="services">What services or products do you want listed?</label>
+              <label for="services">What services or products do you want listed? <span class="tag-required">(required)</span></label>
               <textarea id="services" name="services" required></textarea>
             </div>
 
             <div class="field">
-              <label for="serviceArea">What towns / areas do you serve? <span class="optional">(optional)</span></label>
+              <label for="serviceArea">What towns / areas do you serve?</label>
               <textarea id="serviceArea" name="serviceArea"></textarea>
             </div>
 
             <div class="field">
-              <label for="differentiators">What sets you apart from competitors? <span class="optional">(optional)</span></label>
+              <label for="differentiators">What sets you apart from competitors?</label>
               <textarea id="differentiators" name="differentiators"></textarea>
             </div>
 
             <div class="field">
-              <label for="advertising">How have you advertised in the past (or currently)? <span class="optional">(optional)</span></label>
+              <label for="advertising">How have you advertised in the past (or currently)?</label>
               <textarea id="advertising" name="advertising"></textarea>
             </div>
           </section>
@@ -203,7 +189,7 @@
             <h2 class="wizard-step-title">Website Goals &amp; Pages</h2>
 
             <div class="field">
-              <label>Do you already have a domain / hosting?</label>
+              <label>Do you already have a domain / hosting? <span class="tag-required">(required)</span></label>
               <div class="radio-group" data-required-group="domainHosting">
                 <label class="radio-option">
                   <input type="radio" name="domainHosting" value="Yes, managed by me" />
@@ -222,7 +208,7 @@
             </div>
 
             <div class="field" id="pagesWantedField">
-              <label>Which pages do you want? <span class="optional">(optional)</span></label>
+              <label>Which pages do you want?</label>
               <p class="field-hint" id="singlePageNote" hidden>
                 Your package includes a single scrolling page covering Home, About, Services, and Contact (no separate pages needed).
               </p>
@@ -260,7 +246,7 @@
             </div>
 
             <div class="field" id="contactFormField" data-package-gate="growth">
-              <label>Do you need a contact form? <span class="optional">(optional)</span></label>
+              <label>Do you need a contact form?</label>
               <p class="field-hint">A contact form is included with the Growth package, other tiers list your contact info directly.</p>
               <div class="toggle-group">
                 <label class="toggle-option">
@@ -275,12 +261,12 @@
             </div>
 
             <div class="field">
-              <label for="socialLinks">Social media links <span class="optional">(optional)</span></label>
+              <label for="socialLinks">Social media links</label>
               <textarea id="socialLinks" name="socialLinks" placeholder="Instagram, Facebook, LinkedIn, etc."></textarea>
             </div>
 
             <div class="field">
-              <label for="certifications">Any organizations / certifications to list? <span class="optional">(optional)</span></label>
+              <label for="certifications">Any organizations / certifications to list?</label>
               <textarea id="certifications" name="certifications"></textarea>
             </div>
           </section>
@@ -292,7 +278,7 @@
             </p>
 
             <div class="field">
-              <label>Do you have text / copy ready?</label>
+              <label>Do you have text / copy ready? <span class="tag-required">(required)</span></label>
               <div class="toggle-group" data-required-group="copyReady">
                 <label class="toggle-option">
                   <input type="radio" name="copyReady" value="Yes" />
@@ -307,7 +293,7 @@
             </div>
 
             <div class="field">
-              <label>Do you have photos?</label>
+              <label>Do you have photos? <span class="tag-required">(required)</span></label>
               <div class="toggle-group" data-reveals="photosFileWrap" data-required-group="hasPhotos">
                 <label class="toggle-option">
                   <input type="radio" name="hasPhotos" value="Yes" />
@@ -328,7 +314,7 @@
             </div>
 
             <div class="field" id="testimonialsField" data-package-gate="growth">
-              <label>Do you have testimonials? <span class="optional">(optional)</span></label>
+              <label>Do you have testimonials?</label>
               <p class="field-hint">Testimonials/reviews are included with the Growth package.</p>
               <div class="toggle-group" data-reveals="testimonialsTextWrap">
                 <label class="toggle-option">
@@ -347,12 +333,12 @@
             </div>
 
             <div class="field">
-              <label for="videoLinks">Videos to feature <span class="optional">(optional, links)</span></label>
+              <label for="videoLinks">Videos to feature</label>
               <input type="text" id="videoLinks" name="videoLinks" placeholder="YouTube / Vimeo / Google Drive links" />
             </div>
 
             <div class="field">
-              <label for="websitesLikedEntry">2-3 websites you like <span class="optional">(optional)</span></label>
+              <label for="websitesLikedEntry">2-3 websites you like</label>
               <div class="chip-input" data-hidden-field="websitesLiked">
                 <div class="chip-list"></div>
                 <input type="text" id="websitesLikedEntry" placeholder="Paste a URL and press Enter" />
@@ -361,7 +347,7 @@
             </div>
 
             <div class="field">
-              <label for="marketingMaterials">Existing marketing materials for inspiration <span class="optional">(optional)</span></label>
+              <label for="marketingMaterials">Existing marketing materials for inspiration</label>
               <input type="file" id="marketingMaterials" name="marketingMaterials" multiple />
               <div class="file-preview-list" id="marketingMaterialsPreview"></div>
               <p class="field-error" id="marketingMaterialsError" hidden></p>
@@ -372,12 +358,12 @@
             <h2 class="wizard-step-title">Logistics</h2>
 
             <div class="field">
-              <label for="launchSpeed">In a hurry? How fast should this site get put on the web (speed may reduce website quality): <span class="optional">(optional)</span></label>
+              <label for="launchSpeed">In a hurry? How fast should this site get put on the web (speed may reduce website quality):</label>
               <input type="text" id="launchSpeed" name="launchSpeed" />
             </div>
 
             <div class="field">
-              <label>How often will you want updates after launch? <span class="optional">(optional)</span></label>
+              <label>How often will you want updates after launch?</label>
               <div class="radio-group">
                 <label class="radio-option">
                   <input type="radio" name="updateFrequency" value="Weekly" />
@@ -400,7 +386,7 @@
             </div>
 
             <div class="field">
-              <label for="searchTermsEntry">What would a customer type into Google to find you? <span class="optional">(optional)</span></label>
+              <label for="searchTermsEntry">What would a customer type into Google to find you?</label>
               <p class="field-hint">Add 5-10 short search phrases.</p>
               <div class="chip-input" data-hidden-field="searchTerms">
                 <div class="chip-list"></div>
@@ -410,7 +396,7 @@
             </div>
 
             <div class="field">
-              <label for="anythingElse">Anything else I need to know? <span class="optional">(optional)</span></label>
+              <label for="anythingElse">Anything else I need to know?</label>
               <textarea id="anythingElse" name="anythingElse"></textarea>
             </div>
           </section>
@@ -420,14 +406,15 @@
             <button type="button" class="btn-solid" id="submitBtn">Submit</button>
           </div>
         </div>
-      </form>
 
-      <div class="wizard-confirmation" id="wizardConfirmation" hidden>
-        <p class="hero-eyebrow">Submitted</p>
-        <h2>Got it, thank you!</h2>
-        <p class="hero-sub">I'll review this and follow up the soonest possible date.</p>
       </div>
 
+    </form>
+
+    <div class="wizard-confirmation" id="wizardConfirmation" hidden>
+      <p class="hero-eyebrow">Submitted</p>
+      <h2>Got it, thank you!</h2>
+      <p class="hero-sub">I'll review this and follow up the soonest possible date.</p>
     </div>
 
   </div>

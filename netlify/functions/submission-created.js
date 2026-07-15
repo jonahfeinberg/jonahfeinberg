@@ -28,6 +28,7 @@ exports.handler = async (event) => {
     }
 
     const fields = data.data || {};
+    console.log("submission-created: raw fields", JSON.stringify(fields));
 
     // Human-readable labels for each field name used in the form.
     const fieldLabels = {
@@ -65,6 +66,23 @@ exports.handler = async (event) => {
       anythingElse: "Anything else",
     };
 
+    // File-upload fields come through as an object (not a plain string), so
+    // a naive String(value) renders as "[object Object]". Pull out whatever
+    // Netlify gave us — a URL to link to, a filename to at least label it —
+    // instead of dumping the raw object.
+    const toDisplayItem = (item) => {
+      if (item === undefined || item === null || item === "") return null;
+      if (typeof item === "string" || typeof item === "number") {
+        return { text: String(item), url: null };
+      }
+      if (typeof item === "object") {
+        const url = typeof item.url === "string" ? item.url : null;
+        const text = item.filename || item.name || url || JSON.stringify(item);
+        return { text, url };
+      }
+      return { text: String(item), url: null };
+    };
+
     // Build the list of non-empty fields, skipping anything blank/undefined,
     // and skipping Netlify's internal bookkeeping keys.
     const skipKeys = new Set(["form-name", "bot-field"]);
@@ -73,18 +91,23 @@ exports.handler = async (event) => {
     for (const [key, rawValue] of Object.entries(fields)) {
       if (skipKeys.has(key)) continue;
 
-      let value = rawValue;
-      if (Array.isArray(value)) {
-        value = value.filter(Boolean).join(", ");
-      }
-      if (value === undefined || value === null) continue;
-      if (typeof value === "string" && value.trim() === "") continue;
+      const items = (Array.isArray(rawValue) ? rawValue : [rawValue])
+        .map(toDisplayItem)
+        .filter(Boolean);
+      if (items.length === 0) continue;
 
       const label = fieldLabels[key] || key;
-      rows.push({ label, value });
+      rows.push({ label, items });
     }
 
-    const textBody = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
+    const textBody = rows
+      .map(
+        (r) =>
+          `${r.label}: ${r.items
+            .map((i) => (i.url ? `${i.text} (${i.url})` : i.text))
+            .join(", ")}`
+      )
+      .join("\n");
 
     const htmlBody = `
       <h2>New questionnaire submission</h2>
@@ -96,7 +119,13 @@ exports.handler = async (event) => {
             <td style="font-weight:bold; vertical-align:top; padding-right:12px;">${escapeHtml(
               r.label
             )}</td>
-            <td>${escapeHtml(String(r.value)).replace(/\n/g, "<br/>")}</td>
+            <td>${r.items
+              .map((i) =>
+                i.url
+                  ? `<a href="${escapeHtml(i.url)}">${escapeHtml(i.text)}</a>`
+                  : escapeHtml(i.text).replace(/\n/g, "<br/>")
+              )
+              .join(", ")}</td>
           </tr>`
           )
           .join("")}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function(){if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}})();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Page Not Found — Jonah Feinberg</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div id="scroll-progress"></div>
+
+  <nav>
+    <span class="nav-logo">Jonah Feinberg</span>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/websites/">Websites</a></li>
+      <li><a href="/projects/">Videos</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="theme-hint" id="themeHint" hidden>Try dark mode →</span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <section class="hero">
+      <div class="hero-bg-letter" id="heroJ" aria-hidden="true">404</div>
+      <p class="hero-eyebrow fade-up">Error</p>
+      <h1 class="fade-up fade-up-delay-1">
+        Page not <em><span class="underline-animate">found.</span></em>
+      </h1>
+      <p class="hero-sub fade-up fade-up-delay-2">
+        Whatever you were looking for isn't here — it may have moved, or the link might be off.
+      </p>
+      <div class="fade-up fade-up-delay-3" style="margin-top: 32px;">
+        <a href="/" class="btn-solid">Back to home</a>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-left">© 2026 Jonah Feinberg</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
+        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
+        <li><a href="mailto:jonah@jonahfeinberg.com">Email</a></li>
+      </ul>
+    </footer>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
