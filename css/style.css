@@ -1250,13 +1250,15 @@ a {
 .field { margin-bottom: 32px; }
 
 .field > label,
-.field > label.required,
-/* Keep the "(required)" hint, but bold like the rest of the label. */
-.field > label.required::after,
 .field-hint {
   font-size: 0.8rem;
   color: var(--gray-mid);
   margin: -4px 0 10px;
+}
+
+.field > label.required::after {
+  content: " (required)";
+  font-weight: 700;
 }
 
 input[type="text"],
