@@ -390,7 +390,7 @@ h2 {
 .jasper-banner {
   position: relative;
   width: 100%;
-  aspect-ratio: 21/2;
+  height: clamp(190px, 5rem + 8vw, 800px);
   overflow: hidden;
   margin-top: 48px;
 }
