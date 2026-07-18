@@ -1289,11 +1289,54 @@ input:focus, textarea:focus {
   border-color: var(--fg);
 }
 
+/* -- file input -- */
 input[type="file"] {
   width: 100%;
   padding: 14px 0;
-  font-size: 0.9rem;
-  color: var(--gray-dark);
+  font-size: 0.85rem;
+  color: var(--gray-mid);
+}
+
+/* the choose file button borrows the outline button look.
+   !! kept as separate rules !! one unknown selector drops the whole list */
+input[type="file"]::file-selector-button {
+  margin-right: 16px;
+  padding: 10px 20px;
+  border: 1px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+input[type="file"]::file-selector-button:hover {
+  background: var(--fg);
+  color: var(--bg);
+  opacity: 1;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  margin-right: 16px;
+  padding: 10px 20px;
+  border: 1px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--fg);
+  color: var(--bg);
+  opacity: 1;
 }
 
 .radio-group,
