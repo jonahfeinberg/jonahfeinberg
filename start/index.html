@@ -16,7 +16,7 @@
 <body>
 
   <div class="grain"></div>
-  <div id="scroll-progress"></div>
+  <div id="frame" aria-hidden="true"></div>
 
   <nav>
     <span class="nav-logo">Jonah Feinberg</span>
@@ -38,7 +38,7 @@
   <div class="page-wrapper">
 
     <section class="wizard-hero" data-screen="package">
-      <p class="hero-eyebrow">Project Questionnaire</p>
+      <p class="section-label">Project Questionnaire</p>
       <h1>Let's get your website <em>started</em>.</h1>
       <p class="hero-sub">
         A few questions about your business and what you're looking for. It takes about 10 minutes;
@@ -87,8 +87,22 @@
               </div>
               <p>5-7 pages including a contact form, an updatable photo gallery, testimonials/reviews, and custom feature requests, plus a more refined design pass. 5 revision rounds, ~1.5–2 weeks.</p>
             </label>
+            <label class="package-card">
+              <input type="radio" name="package" value="Custom" class="visually-hidden" />
+              <div class="package-card-header">
+                <h3>Custom</h3>
+                <span class="package-price">To be discussed</span>
+              </div>
+              <p>Something else in mind? Tell me what you're picturing below and we'll work out the scope and pricing together.</p>
+            </label>
           </div>
           <p class="required-indicator" hidden>Not selected</p>
+          <div class="conditional-field custom-package-fields" id="customPackageFields" hidden>
+            <div class="field">
+              <label for="customComments">What do you have in mind?</label>
+              <textarea id="customComments" name="customComments" placeholder="Describe the scope, pages, features, or anything else you're thinking about — we'll settle on pricing together"></textarea>
+            </div>
+          </div>
         </div>
         <p class="field-hint">Photos and text are supplied by you for every package; photography and copywriting aren't included.</p>
       </section>
@@ -109,7 +123,7 @@
             <h2 class="wizard-step-title">Business Info</h2>
 
             <div class="field">
-              <label for="businessName">Business name <span class="tag-required">(required)</span></label>
+              <label for="businessName" class="required">Business name</label>
               <input type="text" id="businessName" name="businessName" required />
             </div>
 
@@ -146,12 +160,12 @@
             </div>
 
             <div class="field">
-              <label for="contactName">Primary contact name <span class="tag-required">(required)</span></label>
+              <label for="contactName" class="required">Primary contact name</label>
               <input type="text" id="contactName" name="contactName" required />
             </div>
 
             <div class="field">
-              <label for="contactEmail">Primary contact email <span class="tag-required">(required)</span></label>
+              <label for="contactEmail" class="required">Primary contact email</label>
               <input type="email" id="contactEmail" name="contactEmail" required />
             </div>
 
@@ -165,7 +179,7 @@
             <h2 class="wizard-step-title">Services &amp; Market</h2>
 
             <div class="field">
-              <label for="services">What services or products do you want listed? <span class="tag-required">(required)</span></label>
+              <label for="services" class="required">What services or products do you want listed?</label>
               <textarea id="services" name="services" required></textarea>
             </div>
 
@@ -189,7 +203,7 @@
             <h2 class="wizard-step-title">Website Goals &amp; Pages</h2>
 
             <div class="field">
-              <label>Do you already have a domain / hosting? <span class="tag-required">(required)</span></label>
+              <label class="required">Do you already have a domain / hosting?</label>
               <div class="radio-group" data-required-group="domainHosting">
                 <label class="radio-option">
                   <input type="radio" name="domainHosting" value="Yes, managed by me" />
@@ -278,7 +292,7 @@
             </p>
 
             <div class="field">
-              <label>Do you have text / copy ready? <span class="tag-required">(required)</span></label>
+              <label class="required">Do you have text / copy ready?</label>
               <div class="toggle-group" data-required-group="copyReady">
                 <label class="toggle-option">
                   <input type="radio" name="copyReady" value="Yes" />
@@ -293,7 +307,7 @@
             </div>
 
             <div class="field">
-              <label>Do you have photos? <span class="tag-required">(required)</span></label>
+              <label class="required">Do you have photos?</label>
               <div class="toggle-group" data-reveals="photosFileWrap" data-required-group="hasPhotos">
                 <label class="toggle-option">
                   <input type="radio" name="hasPhotos" value="Yes" />
@@ -412,7 +426,7 @@
     </form>
 
     <div class="wizard-confirmation" id="wizardConfirmation" hidden>
-      <p class="hero-eyebrow">Submitted</p>
+      <p class="section-label">Submitted</p>
       <h2>Got it, thank you!</h2>
       <p class="hero-sub">I'll review this and follow up at the soonest possible date.</p>
     </div>
@@ -425,6 +439,5 @@
   </div>
 
   <script src="/js/main.js"></script>
-  <script src="/js/start.js"></script>
 </body>
 </html>
