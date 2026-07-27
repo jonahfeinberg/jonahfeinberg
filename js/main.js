@@ -195,7 +195,7 @@ if (introBg) {
         document.body.style.overflow = '';
         sessionStorage.setItem('intro-seen', '1');
       }, { once: true });
-    }, 2000);
+    }, 1300);
   }
 }
 

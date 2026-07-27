@@ -15,7 +15,7 @@
   --card-bg: #f4eee1;
   --project-hover-bg: #ebe1cf;
   --gray-light: #e3d9c5;
-  --gray-mid: #8d8371;
+  --gray-mid: #90836c;
   --gray-dark: #3f3a2f;
 
   /* -- grain -- */
@@ -36,7 +36,7 @@
   --card-bg: #1d1810;
   --project-hover-bg: #262013;
   --gray-light: #2c2617;
-  --gray-mid: #7d7561;
+  --gray-mid: #7c735d;
   --gray-dark: #b5ab93;
   --grain-opacity: 0.22;
   --desk: #b5ab93;  /* light desk vs dark sheet */
@@ -1352,7 +1352,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
   align-items: center;
   gap: 14px;
   padding: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--bg);
   cursor: pointer;
   transition: border-color 0.2s ease;
 }
@@ -1368,6 +1368,9 @@ input[type="file"]::-webkit-file-upload-button:hover {
   height: 20px;
   accent-color: var(--fg);
   flex-shrink: 0;
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  border-radius: 50%;
 }
 
 .toggle-group {
@@ -1485,7 +1488,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 [data-theme="dark"] input[type="file"] { color: #a0a0a0; }
 [data-theme="dark"] .field > label,
 [data-theme="dark"] .field > label.required,
-[data-theme="dark"] .field-hint { color: #666; }
+[data-theme="dark"] .field-hint { color: var(--gray-mid); }
 
 .required-indicator {
   font-size: 0.78rem;
