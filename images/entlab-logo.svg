@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="EntLab">
+  <rect width="256" height="256" fill="#0f0f0f"/>
+  <path stroke="#171717" stroke-width="1" shape-rendering="crispEdges"
+        d="M32 0V256M64 0V256M96 0V256M128 0V256M160 0V256M192 0V256M224 0V256
+           M0 32H256M0 64H256M0 96H256M0 128H256M0 160H256M0 192H256M0 224H256"/>
+  <g fill="#ffffff" shape-rendering="crispEdges">
+    <rect x="99" y="67" width="26" height="26"/>
+    <rect x="131" y="99" width="26" height="26"/>
+    <rect x="67" y="131" width="26" height="26"/>
+    <rect x="99" y="131" width="26" height="26"/>
+    <rect x="131" y="131" width="26" height="26"/>
+  </g>
+  <rect x="2" y="2" width="252" height="252" fill="none" stroke="#171717" stroke-width="4"/>
+</svg>
