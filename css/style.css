@@ -887,6 +887,7 @@ footer {
   .nav-hamburger { display: flex; }
 
   .hero { padding: 80px 24px 60px; }
+  .away-notice { padding: 20px 24px; gap: 10px; }
   .section, .gallery-section { padding: 60px 24px; }
   .section-sm { padding: 40px 24px; }
 
@@ -1133,6 +1134,38 @@ a {
   font-family: 'Courier Prime', monospace;
   font-size: 0.75rem;
   opacity: 0.48;
+}
+
+/* -- away notice -- */
+/* strip under the hero, same paper tokens as the cards */
+.away-notice {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 24px 80px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.away-notice .section-label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.away-notice p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--gray-dark);
+  max-width: 620px;
+}
+
+.away-dates {
+  font-family: 'Special Elite', serif;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: 0.02em;
 }
 
 /* -- questionnaire -- */
