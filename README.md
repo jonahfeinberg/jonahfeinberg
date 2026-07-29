@@ -5,9 +5,9 @@
        src="https://raw.githubusercontent.com/jonahfeinberg/jonahfeinberg/main/banner-light.svg">
 </picture>
 
-Hi, I'm Jonah. I build websites for people, take photos, and edit videos. I'm a student at Lincoln-Sudbury Regional High School, class of 2028.
+Hi, I'm Jonah. I build websites, take photos, and edit videos. I'm a student at Lincoln-Sudbury Regional High School, class of 2028.
 
-Most of what's here is either client work or something I got curious about and couldn't leave alone. I'm drawn to the places where people and systems meet — psychology, sociology, and computer science — and I find it interesting how technology shapes behavior, and how understanding people makes you a better builder.
+Most of what's here is client work or passion projects. I'm drawn to subjects that are intersected by people and how they function: psychology, sociology, and sometimes computer science. I find it interesting how technology can shape human behavior and how understanding people can make you a better builder.
 
 ### EntLab
 
