@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img">
+<title>Jonah Feinberg — Lincoln, MA, class of 2028</title>
+<!-- CLAUDE -->
+<style>
+.s{opacity:1;animation:lay 9s ease-out infinite backwards}
+@keyframes lay{
+0%{opacity:0;transform:translateY(-7px)}
+7%{opacity:1;transform:translateY(0)}
+86%{opacity:1;transform:translateY(0)}
+95%{opacity:0;transform:translateY(-7px)}
+100%{opacity:0;transform:translateY(-7px)}
+}
+@media (prefers-reduced-motion:reduce){.s{animation:none;opacity:1;transform:none}}
+.lb{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:1.4px;fill:#8b9188}
+.vl{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;letter-spacing:.3px;fill:#e9e5d8}
+</style>
+<rect width="900" height="220" fill="#1a1d1a"/>
+<text x="60" y="92" font-family="Palatino Linotype, Palatino, Book Antiqua, Georgia, serif" font-size="54" fill="#e9e5d8" letter-spacing="1.5">Jonah Feinberg</text>
+<text class="lb" x="62" y="128">Based in</text>
+<text class="vl" x="60" y="150">Lincoln, MA</text>
+<text class="lb" x="234" y="128">Class of</text>
+<text class="vl" x="232" y="150">2028</text>
+<text class="lb" x="372" y="128">Interested in</text>
+<text class="vl" x="370" y="150">Psychology · CS</text>
+<text class="lb" x="578" y="128">Contact</text>
+<text class="vl" x="576" y="150">jonah@jonahfeinberg.com</text>
+<g>
+<rect class="s" style="animation-delay:0s" x="60" y="180" width="54" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:.16s" x="118" y="180" width="38" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:.32s" x="160" y="180" width="62" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:.48s" x="226" y="180" width="44" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:.64s" x="274" y="180" width="30" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:.8s" x="308" y="180" width="58" height="14" fill="#93a97e"/>
+<rect class="s" style="animation-delay:.96s" x="370" y="180" width="48" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:1.12s" x="422" y="180" width="66" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:1.28s" x="492" y="180" width="34" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:1.44s" x="530" y="180" width="52" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:1.6s" x="586" y="180" width="40" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:1.76s" x="630" y="180" width="58" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:1.92s" x="692" y="180" width="32" height="14" fill="#3a413b"/>
+<rect class="s" style="animation-delay:2.08s" x="728" y="180" width="50" height="14" fill="#2f3531"/>
+<rect class="s" style="animation-delay:2.24s" x="782" y="180" width="58" height="14" fill="#3a413b"/>
+</g>
+</svg>
