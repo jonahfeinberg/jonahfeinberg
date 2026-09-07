@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <script>
-    (function(){if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}})();
+    (function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gallery — Jonah Feinberg</title>
   <link rel="icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css?v=20260907-grain" />
+  <noscript><style>
+    .fade-up{opacity:1!important;transform:none!important;filter:none!important}
+    #intro-bg,#intro-icon-wrap,.nav-hamburger,.theme-toggle,.theme-hint{display:none!important}
+    nav{position:relative!important;height:auto;min-height:68px;flex-wrap:wrap;gap:16px;padding:16px 24px}
+    nav .nav-links{display:flex;flex-wrap:wrap;gap:16px} .page-wrapper{padding-top:0}
+  </style></noscript>
 </head>
 <body>
 
@@ -18,8 +22,8 @@
   <div id="frame" aria-hidden="true"></div>
 
 
-  <nav>
-    <span class="nav-logo">Jonah Feinberg</span>
+  <nav aria-label="Main navigation">
+    <a class="nav-logo" href="/" aria-label="Jonah Feinberg — home">Jonah Feinberg</a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/gallery/">Gallery</a></li>
@@ -42,7 +46,7 @@
       <h1 class="fade-up fade-up-delay-1">
         A <em><span class="underline-animate">gallery</span></em><br />of photos I've taken.
       </h1>
-      <p class="hero-sub fade-up fade-up-delay-2" style="white-space: nowrap;">
+      <p class="hero-sub fade-up fade-up-delay-2">
         Photos from travels, everyday life, and things I find interesting. Click any image to view full size.
       </p>
     </section>
@@ -61,65 +65,29 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-01.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-001-2000.webp" href="/images/Acadia%202026/acadia-01.jpg" aria-label="View Acadia, photograph 1"><img src="/images/gallery-previews/gallery-001-960.webp" srcset="/images/gallery-previews/gallery-001-480.webp 480w, /images/gallery-previews/gallery-001-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 1" width="1170" height="877" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-02.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-002-2000.webp" href="/images/Acadia%202026/acadia-02.jpg" aria-label="View Acadia, photograph 2"><img src="/images/gallery-previews/gallery-002-960.webp" srcset="/images/gallery-previews/gallery-002-480.webp 480w, /images/gallery-previews/gallery-002-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 2" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-03.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-003-2000.webp" href="/images/Acadia%202026/acadia-03.jpg" aria-label="View Acadia, photograph 3"><img src="/images/gallery-previews/gallery-003-960.webp" srcset="/images/gallery-previews/gallery-003-480.webp 480w, /images/gallery-previews/gallery-003-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 3" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-04.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-004-2000.webp" href="/images/Acadia%202026/acadia-04.jpg" aria-label="View Acadia, photograph 4"><img src="/images/gallery-previews/gallery-004-960.webp" srcset="/images/gallery-previews/gallery-004-480.webp 480w, /images/gallery-previews/gallery-004-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 4" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-05.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-005-2000.webp" href="/images/Acadia%202026/acadia-05.jpg" aria-label="View Acadia, photograph 5"><img src="/images/gallery-previews/gallery-005-960.webp" srcset="/images/gallery-previews/gallery-005-480.webp 480w, /images/gallery-previews/gallery-005-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 5" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-06.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-006-2000.webp" href="/images/Acadia%202026/acadia-06.jpg" aria-label="View Acadia, photograph 6"><img src="/images/gallery-previews/gallery-006-960.webp" srcset="/images/gallery-previews/gallery-006-480.webp 480w, /images/gallery-previews/gallery-006-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 6" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-07.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-007-2000.webp" href="/images/Acadia%202026/acadia-07.jpg" aria-label="View Acadia, photograph 7"><img src="/images/gallery-previews/gallery-007-960.webp" srcset="/images/gallery-previews/gallery-007-480.webp 480w, /images/gallery-previews/gallery-007-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 7" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-08.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-008-2000.webp" href="/images/Acadia%202026/acadia-08.jpg" aria-label="View Acadia, photograph 8"><img src="/images/gallery-previews/gallery-008-960.webp" srcset="/images/gallery-previews/gallery-008-480.webp 480w, /images/gallery-previews/gallery-008-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 8" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-09.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-009-2000.webp" href="/images/Acadia%202026/acadia-09.jpg" aria-label="View Acadia, photograph 9"><img src="/images/gallery-previews/gallery-009-960.webp" srcset="/images/gallery-previews/gallery-009-480.webp 480w, /images/gallery-previews/gallery-009-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 9" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-10.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-010-2000.webp" href="/images/Acadia%202026/acadia-10.jpg" aria-label="View Acadia, photograph 10"><img src="/images/gallery-previews/gallery-010-960.webp" srcset="/images/gallery-previews/gallery-010-480.webp 480w, /images/gallery-previews/gallery-010-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 10" width="1170" height="877" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-11.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-011-2000.webp" href="/images/Acadia%202026/acadia-11.jpg" aria-label="View Acadia, photograph 11"><img src="/images/gallery-previews/gallery-011-960.webp" srcset="/images/gallery-previews/gallery-011-480.webp 480w, /images/gallery-previews/gallery-011-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 11" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Acadia 2026/acadia-12.jpg" alt="Acadia" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-012-2000.webp" href="/images/Acadia%202026/acadia-12.jpg" aria-label="View Acadia, photograph 12"><img src="/images/gallery-previews/gallery-012-960.webp" srcset="/images/gallery-previews/gallery-012-480.webp 480w, /images/gallery-previews/gallery-012-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Acadia, photograph 12" width="1170" height="878" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -137,45 +105,21 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/750233647_17937012540323462_5117531721211784611_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-013-2000.webp" href="/images/Vineyard%202026/750233647_17937012540323462_5117531721211784611_n.jpg" aria-label="View Vineyard, photograph 13"><img src="/images/gallery-previews/gallery-013-960.webp" srcset="/images/gallery-previews/gallery-013-480.webp 480w, /images/gallery-previews/gallery-013-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 13" width="1752" height="2336" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/751127750_17937012558323462_371555649464044509_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-014-2000.webp" href="/images/Vineyard%202026/751127750_17937012558323462_371555649464044509_n.jpg" aria-label="View Vineyard, photograph 14"><img src="/images/gallery-previews/gallery-014-960.webp" srcset="/images/gallery-previews/gallery-014-480.webp 480w, /images/gallery-previews/gallery-014-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 14" width="1901" height="2534" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/751798878_17937012513323462_7053451825206399316_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-015-2000.webp" href="/images/Vineyard%202026/751798878_17937012513323462_7053451825206399316_n.jpg" aria-label="View Vineyard, photograph 15"><img src="/images/gallery-previews/gallery-015-960.webp" srcset="/images/gallery-previews/gallery-015-480.webp 480w, /images/gallery-previews/gallery-015-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 15" width="3072" height="4096" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/751804964_17937012549323462_2841575291226607370_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-016-2000.webp" href="/images/Vineyard%202026/751804964_17937012549323462_2841575291226607370_n.jpg" aria-label="View Vineyard, photograph 16"><img src="/images/gallery-previews/gallery-016-960.webp" srcset="/images/gallery-previews/gallery-016-480.webp 480w, /images/gallery-previews/gallery-016-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 16" width="3072" height="4096" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/752297164_17937012522323462_8374965392575602227_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-017-2000.webp" href="/images/Vineyard%202026/752297164_17937012522323462_8374965392575602227_n.jpg" aria-label="View Vineyard, photograph 17"><img src="/images/gallery-previews/gallery-017-960.webp" srcset="/images/gallery-previews/gallery-017-480.webp 480w, /images/gallery-previews/gallery-017-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 17" width="2674" height="3565" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/752643252_17937012495323462_420134142398254445_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-018-2000.webp" href="/images/Vineyard%202026/752643252_17937012495323462_420134142398254445_n.jpg" aria-label="View Vineyard, photograph 18"><img src="/images/gallery-previews/gallery-018-960.webp" srcset="/images/gallery-previews/gallery-018-480.webp 480w, /images/gallery-previews/gallery-018-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 18" width="2381" height="3174" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/752807670_17937012504323462_7563501744192121359_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-019-2000.webp" href="/images/Vineyard%202026/752807670_17937012504323462_7563501744192121359_n.jpg" aria-label="View Vineyard, photograph 19"><img src="/images/gallery-previews/gallery-019-960.webp" srcset="/images/gallery-previews/gallery-019-480.webp 480w, /images/gallery-previews/gallery-019-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 19" width="2254" height="3005" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2026/753137647_17937012531323462_1881067963956117805_n.jpg" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-020-2000.webp" href="/images/Vineyard%202026/753137647_17937012531323462_1881067963956117805_n.jpg" aria-label="View Vineyard, photograph 20"><img src="/images/gallery-previews/gallery-020-960.webp" srcset="/images/gallery-previews/gallery-020-480.webp 480w, /images/gallery-previews/gallery-020-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 20" width="2216" height="2954" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -193,50 +137,23 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_734686880_17935270395323462_5673755398927953626_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-021-2000.webp" href="/images/Florida%202026/SaveClip.App_734686880_17935270395323462_5673755398927953626_n.jpg" aria-label="View Florida, photograph 21"><img src="/images/gallery-previews/gallery-021-960.webp" srcset="/images/gallery-previews/gallery-021-480.webp 480w, /images/gallery-previews/gallery-021-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 21" width="2512" height="3349" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741106300_17935270383323462_1048254854675653536_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-022-2000.webp" href="/images/Florida%202026/SaveClip.App_741106300_17935270383323462_1048254854675653536_n.jpg" aria-label="View Florida, photograph 22"><img src="/images/gallery-previews/gallery-022-960.webp" srcset="/images/gallery-previews/gallery-022-480.webp 480w, /images/gallery-previews/gallery-022-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 22" width="456" height="608" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741120696_17935270323323462_3917750204869783846_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-023-2000.webp" href="/images/Florida%202026/SaveClip.App_741120696_17935270323323462_3917750204869783846_n.jpg" aria-label="View Florida, photograph 23"><img src="/images/gallery-previews/gallery-023-960.webp" srcset="/images/gallery-previews/gallery-023-480.webp 480w, /images/gallery-previews/gallery-023-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 23" width="2268" height="3024" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741215337_17935270404323462_7392482099629315049_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-024-2000.webp" href="/images/Florida%202026/SaveClip.App_741215337_17935270404323462_7392482099629315049_n.jpg" aria-label="View Florida, photograph 24"><img src="/images/gallery-previews/gallery-024-960.webp" srcset="/images/gallery-previews/gallery-024-480.webp 480w, /images/gallery-previews/gallery-024-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 24" width="2268" height="3024" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741360808_17935270347323462_1332246126290689534_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-025-2000.webp" href="/images/Florida%202026/SaveClip.App_741360808_17935270347323462_1332246126290689534_n.jpg" aria-label="View Florida, photograph 25"><img src="/images/gallery-previews/gallery-025-960.webp" srcset="/images/gallery-previews/gallery-025-480.webp 480w, /images/gallery-previews/gallery-025-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 25" width="2870" height="3826" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741481352_17935270374323462_3321747701652811965_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-026-2000.webp" href="/images/Florida%202026/SaveClip.App_741481352_17935270374323462_3321747701652811965_n.jpg" aria-label="View Florida, photograph 26"><img src="/images/gallery-previews/gallery-026-960.webp" srcset="/images/gallery-previews/gallery-026-480.webp 480w, /images/gallery-previews/gallery-026-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 26" width="936" height="1248" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_741614098_17935270365323462_7863687830073637530_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-027-2000.webp" href="/images/Florida%202026/SaveClip.App_741614098_17935270365323462_7863687830073637530_n.jpg" aria-label="View Florida, photograph 27"><img src="/images/gallery-previews/gallery-027-960.webp" srcset="/images/gallery-previews/gallery-027-480.webp 480w, /images/gallery-previews/gallery-027-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 27" width="1877" height="2502" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_742953955_17935270314323462_5379382499552839011_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-028-2000.webp" href="/images/Florida%202026/SaveClip.App_742953955_17935270314323462_5379382499552839011_n.jpg" aria-label="View Florida, photograph 28"><img src="/images/gallery-previews/gallery-028-960.webp" srcset="/images/gallery-previews/gallery-028-480.webp 480w, /images/gallery-previews/gallery-028-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 28" width="2619" height="3492" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Florida 2026/SaveClip.App_743276441_17935270356323462_1980808354309931335_n.jpg" alt="Florida" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-029-2000.webp" href="/images/Florida%202026/SaveClip.App_743276441_17935270356323462_1980808354309931335_n.jpg" aria-label="View Florida, photograph 29"><img src="/images/gallery-previews/gallery-029-960.webp" srcset="/images/gallery-previews/gallery-029-480.webp 480w, /images/gallery-previews/gallery-029-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Florida, photograph 29" width="1053" height="1404" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -254,55 +171,25 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Aruba/670773623_17922319305323462_3543055476944455249_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-030-2000.webp" href="/images/Aruba/670773623_17922319305323462_3543055476944455249_n.jpg" aria-label="View Aruba, photograph 30"><img src="/images/gallery-previews/gallery-030-960.webp" srcset="/images/gallery-previews/gallery-030-480.webp 480w, /images/gallery-previews/gallery-030-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 30" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/670876611_17922319338323462_6453223348512438100_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-031-2000.webp" href="/images/Aruba/670876611_17922319338323462_6453223348512438100_n.jpg" aria-label="View Aruba, photograph 31"><img src="/images/gallery-previews/gallery-031-960.webp" srcset="/images/gallery-previews/gallery-031-480.webp 480w, /images/gallery-previews/gallery-031-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 31" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/670910548_17922319356323462_4730191687603747997_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-032-2000.webp" href="/images/Aruba/670910548_17922319356323462_4730191687603747997_n.jpg" aria-label="View Aruba, photograph 32"><img src="/images/gallery-previews/gallery-032-960.webp" srcset="/images/gallery-previews/gallery-032-480.webp 480w, /images/gallery-previews/gallery-032-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 32" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/670929122_17922319296323462_7630673019007106237_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-033-2000.webp" href="/images/Aruba/670929122_17922319296323462_7630673019007106237_n.jpg" aria-label="View Aruba, photograph 33"><img src="/images/gallery-previews/gallery-033-960.webp" srcset="/images/gallery-previews/gallery-033-480.webp 480w, /images/gallery-previews/gallery-033-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 33" width="894" height="1192" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/671037569_17922319365323462_7942451470521391797_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-034-2000.webp" href="/images/Aruba/671037569_17922319365323462_7942451470521391797_n.jpg" aria-label="View Aruba, photograph 34"><img src="/images/gallery-previews/gallery-034-960.webp" srcset="/images/gallery-previews/gallery-034-480.webp 480w, /images/gallery-previews/gallery-034-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 34" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/671058814_17922319374323462_6751868466479282654_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-035-2000.webp" href="/images/Aruba/671058814_17922319374323462_6751868466479282654_n.jpg" aria-label="View Aruba, photograph 35"><img src="/images/gallery-previews/gallery-035-960.webp" srcset="/images/gallery-previews/gallery-035-480.webp 480w, /images/gallery-previews/gallery-035-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 35" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/671094671_17922319347323462_2152400646691412607_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-036-2000.webp" href="/images/Aruba/671094671_17922319347323462_2152400646691412607_n.jpg" aria-label="View Aruba, photograph 36"><img src="/images/gallery-previews/gallery-036-960.webp" srcset="/images/gallery-previews/gallery-036-480.webp 480w, /images/gallery-previews/gallery-036-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 36" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/671233847_17922319329323462_3837346882782143116_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-037-2000.webp" href="/images/Aruba/671233847_17922319329323462_3837346882782143116_n.jpg" aria-label="View Aruba, photograph 37"><img src="/images/gallery-previews/gallery-037-960.webp" srcset="/images/gallery-previews/gallery-037-480.webp 480w, /images/gallery-previews/gallery-037-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 37" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/671254149_17922319326323462_1662278774398497419_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-038-2000.webp" href="/images/Aruba/671254149_17922319326323462_1662278774398497419_n.jpg" aria-label="View Aruba, photograph 38"><img src="/images/gallery-previews/gallery-038-960.webp" srcset="/images/gallery-previews/gallery-038-480.webp 480w, /images/gallery-previews/gallery-038-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 38" width="1080" height="1440" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Aruba/672456308_17922319383323462_9030462127240726956_n.jpg" alt="Aruba" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-039-2000.webp" href="/images/Aruba/672456308_17922319383323462_9030462127240726956_n.jpg" aria-label="View Aruba, photograph 39"><img src="/images/gallery-previews/gallery-039-960.webp" srcset="/images/gallery-previews/gallery-039-480.webp 480w, /images/gallery-previews/gallery-039-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Aruba, photograph 39" width="1080" height="1439" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -319,50 +206,23 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1824.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-040-2000.webp" href="/images/Canada%202026/IMG_1824.JPEG" aria-label="View Canada, photograph 40"><img src="/images/gallery-previews/gallery-040-960.webp" srcset="/images/gallery-previews/gallery-040-480.webp 480w, /images/gallery-previews/gallery-040-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 40" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1825.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-041-2000.webp" href="/images/Canada%202026/IMG_1825.JPEG" aria-label="View Canada, photograph 41"><img src="/images/gallery-previews/gallery-041-960.webp" srcset="/images/gallery-previews/gallery-041-480.webp 480w, /images/gallery-previews/gallery-041-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 41" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1826.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-042-2000.webp" href="/images/Canada%202026/IMG_1826.JPEG" aria-label="View Canada, photograph 42"><img src="/images/gallery-previews/gallery-042-960.webp" srcset="/images/gallery-previews/gallery-042-480.webp 480w, /images/gallery-previews/gallery-042-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 42" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1827.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-043-2000.webp" href="/images/Canada%202026/IMG_1827.JPEG" aria-label="View Canada, photograph 43"><img src="/images/gallery-previews/gallery-043-960.webp" srcset="/images/gallery-previews/gallery-043-480.webp 480w, /images/gallery-previews/gallery-043-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 43" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1830.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-044-2000.webp" href="/images/Canada%202026/IMG_1830.JPEG" aria-label="View Canada, photograph 44"><img src="/images/gallery-previews/gallery-044-960.webp" srcset="/images/gallery-previews/gallery-044-480.webp 480w, /images/gallery-previews/gallery-044-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 44" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1845.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-045-2000.webp" href="/images/Canada%202026/IMG_1845.JPEG" aria-label="View Canada, photograph 45"><img src="/images/gallery-previews/gallery-045-960.webp" srcset="/images/gallery-previews/gallery-045-480.webp 480w, /images/gallery-previews/gallery-045-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 45" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1854.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-046-2000.webp" href="/images/Canada%202026/IMG_1854.JPEG" aria-label="View Canada, photograph 46"><img src="/images/gallery-previews/gallery-046-960.webp" srcset="/images/gallery-previews/gallery-046-480.webp 480w, /images/gallery-previews/gallery-046-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 46" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1873.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-047-2000.webp" href="/images/Canada%202026/IMG_1873.JPEG" aria-label="View Canada, photograph 47"><img src="/images/gallery-previews/gallery-047-960.webp" srcset="/images/gallery-previews/gallery-047-480.webp 480w, /images/gallery-previews/gallery-047-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 47" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Canada 2026/IMG_1921.JPEG" alt="Canada" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-048-2000.webp" href="/images/Canada%202026/IMG_1921.JPEG" aria-label="View Canada, photograph 48"><img src="/images/gallery-previews/gallery-048-960.webp" srcset="/images/gallery-previews/gallery-048-480.webp 480w, /images/gallery-previews/gallery-048-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Canada, photograph 48" width="360" height="480" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -380,80 +240,35 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1182.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-049-2000.webp" href="/images/Arizona%202026/IMG_1182.JPEG" aria-label="View Arizona, photograph 49"><img src="/images/gallery-previews/gallery-049-960.webp" srcset="/images/gallery-previews/gallery-049-480.webp 480w, /images/gallery-previews/gallery-049-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 49" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1491.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-050-2000.webp" href="/images/Arizona%202026/IMG_1491.JPEG" aria-label="View Arizona, photograph 50"><img src="/images/gallery-previews/gallery-050-960.webp" srcset="/images/gallery-previews/gallery-050-480.webp 480w, /images/gallery-previews/gallery-050-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 50" width="360" height="480" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1492.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-051-2000.webp" href="/images/Arizona%202026/IMG_1492.JPEG" aria-label="View Arizona, photograph 51"><img src="/images/gallery-previews/gallery-051-960.webp" srcset="/images/gallery-previews/gallery-051-480.webp 480w, /images/gallery-previews/gallery-051-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 51" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1501.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-052-2000.webp" href="/images/Arizona%202026/IMG_1501.JPEG" aria-label="View Arizona, photograph 52"><img src="/images/gallery-previews/gallery-052-960.webp" srcset="/images/gallery-previews/gallery-052-480.webp 480w, /images/gallery-previews/gallery-052-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 52" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1508.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-053-2000.webp" href="/images/Arizona%202026/IMG_1508.JPEG" aria-label="View Arizona, photograph 53"><img src="/images/gallery-previews/gallery-053-960.webp" srcset="/images/gallery-previews/gallery-053-480.webp 480w, /images/gallery-previews/gallery-053-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 53" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1509.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-054-2000.webp" href="/images/Arizona%202026/IMG_1509.JPEG" aria-label="View Arizona, photograph 54"><img src="/images/gallery-previews/gallery-054-960.webp" srcset="/images/gallery-previews/gallery-054-480.webp 480w, /images/gallery-previews/gallery-054-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 54" width="2556" height="3408" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1511.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-055-2000.webp" href="/images/Arizona%202026/IMG_1511.JPEG" aria-label="View Arizona, photograph 55"><img src="/images/gallery-previews/gallery-055-960.webp" srcset="/images/gallery-previews/gallery-055-480.webp 480w, /images/gallery-previews/gallery-055-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 55" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1515.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-056-2000.webp" href="/images/Arizona%202026/IMG_1515.JPEG" aria-label="View Arizona, photograph 56"><img src="/images/gallery-previews/gallery-056-960.webp" srcset="/images/gallery-previews/gallery-056-480.webp 480w, /images/gallery-previews/gallery-056-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 56" width="2129" height="2839" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1525.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-057-2000.webp" href="/images/Arizona%202026/IMG_1525.JPEG" aria-label="View Arizona, photograph 57"><img src="/images/gallery-previews/gallery-057-960.webp" srcset="/images/gallery-previews/gallery-057-480.webp 480w, /images/gallery-previews/gallery-057-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 57" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1534.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-058-2000.webp" href="/images/Arizona%202026/IMG_1534.JPEG" aria-label="View Arizona, photograph 58"><img src="/images/gallery-previews/gallery-058-960.webp" srcset="/images/gallery-previews/gallery-058-480.webp 480w, /images/gallery-previews/gallery-058-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 58" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1535.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-059-2000.webp" href="/images/Arizona%202026/IMG_1535.JPEG" aria-label="View Arizona, photograph 59"><img src="/images/gallery-previews/gallery-059-960.webp" srcset="/images/gallery-previews/gallery-059-480.webp 480w, /images/gallery-previews/gallery-059-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 59" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1540.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-060-2000.webp" href="/images/Arizona%202026/IMG_1540.JPEG" aria-label="View Arizona, photograph 60"><img src="/images/gallery-previews/gallery-060-960.webp" srcset="/images/gallery-previews/gallery-060-480.webp 480w, /images/gallery-previews/gallery-060-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 60" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1541.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-061-2000.webp" href="/images/Arizona%202026/IMG_1541.JPEG" aria-label="View Arizona, photograph 61"><img src="/images/gallery-previews/gallery-061-960.webp" srcset="/images/gallery-previews/gallery-061-480.webp 480w, /images/gallery-previews/gallery-061-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 61" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1543.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-062-2000.webp" href="/images/Arizona%202026/IMG_1543.JPEG" aria-label="View Arizona, photograph 62"><img src="/images/gallery-previews/gallery-062-960.webp" srcset="/images/gallery-previews/gallery-062-480.webp 480w, /images/gallery-previews/gallery-062-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 62" width="1558" height="2018" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Arizona 2026/IMG_1555.JPEG" alt="Arizona" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-063-2000.webp" href="/images/Arizona%202026/IMG_1555.JPEG" aria-label="View Arizona, photograph 63"><img src="/images/gallery-previews/gallery-063-960.webp" srcset="/images/gallery-previews/gallery-063-480.webp 480w, /images/gallery-previews/gallery-063-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Arizona, photograph 63" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -471,60 +286,27 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4009.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-064-2000.webp" href="/images/United%20Kingdom%202025/IMG_4009.JPEG" aria-label="View United Kingdom, photograph 64"><img src="/images/gallery-previews/gallery-064-960.webp" srcset="/images/gallery-previews/gallery-064-480.webp 480w, /images/gallery-previews/gallery-064-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 64" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4011.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-065-2000.webp" href="/images/United%20Kingdom%202025/IMG_4011.JPEG" aria-label="View United Kingdom, photograph 65"><img src="/images/gallery-previews/gallery-065-960.webp" srcset="/images/gallery-previews/gallery-065-480.webp 480w, /images/gallery-previews/gallery-065-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 65" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4024.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-066-2000.webp" href="/images/United%20Kingdom%202025/IMG_4024.JPEG" aria-label="View United Kingdom, photograph 66"><img src="/images/gallery-previews/gallery-066-960.webp" srcset="/images/gallery-previews/gallery-066-480.webp 480w, /images/gallery-previews/gallery-066-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 66" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4030.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-067-2000.webp" href="/images/United%20Kingdom%202025/IMG_4030.JPEG" aria-label="View United Kingdom, photograph 67"><img src="/images/gallery-previews/gallery-067-960.webp" srcset="/images/gallery-previews/gallery-067-480.webp 480w, /images/gallery-previews/gallery-067-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 67" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4051.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-068-2000.webp" href="/images/United%20Kingdom%202025/IMG_4051.JPEG" aria-label="View United Kingdom, photograph 68"><img src="/images/gallery-previews/gallery-068-960.webp" srcset="/images/gallery-previews/gallery-068-480.webp 480w, /images/gallery-previews/gallery-068-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 68" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4074.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-069-2000.webp" href="/images/United%20Kingdom%202025/IMG_4074.JPEG" aria-label="View United Kingdom, photograph 69"><img src="/images/gallery-previews/gallery-069-960.webp" srcset="/images/gallery-previews/gallery-069-480.webp 480w, /images/gallery-previews/gallery-069-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 69" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4133.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-070-2000.webp" href="/images/United%20Kingdom%202025/IMG_4133.JPEG" aria-label="View United Kingdom, photograph 70"><img src="/images/gallery-previews/gallery-070-960.webp" srcset="/images/gallery-previews/gallery-070-480.webp 480w, /images/gallery-previews/gallery-070-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 70" width="2048" height="1536" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4143.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-071-2000.webp" href="/images/United%20Kingdom%202025/IMG_4143.JPEG" aria-label="View United Kingdom, photograph 71"><img src="/images/gallery-previews/gallery-071-960.webp" srcset="/images/gallery-previews/gallery-071-480.webp 480w, /images/gallery-previews/gallery-071-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 71" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4153.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-072-2000.webp" href="/images/United%20Kingdom%202025/IMG_4153.JPEG" aria-label="View United Kingdom, photograph 72"><img src="/images/gallery-previews/gallery-072-960.webp" srcset="/images/gallery-previews/gallery-072-480.webp 480w, /images/gallery-previews/gallery-072-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 72" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4155.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-073-2000.webp" href="/images/United%20Kingdom%202025/IMG_4155.JPEG" aria-label="View United Kingdom, photograph 73"><img src="/images/gallery-previews/gallery-073-960.webp" srcset="/images/gallery-previews/gallery-073-480.webp 480w, /images/gallery-previews/gallery-073-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 73" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/United Kingdom 2025/IMG_4193.JPEG" alt="United Kingdom" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-074-2000.webp" href="/images/United%20Kingdom%202025/IMG_4193.JPEG" aria-label="View United Kingdom, photograph 74"><img src="/images/gallery-previews/gallery-074-960.webp" srcset="/images/gallery-previews/gallery-074-480.webp 480w, /images/gallery-previews/gallery-074-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="United Kingdom, photograph 74" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -542,50 +324,23 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5578.JPEG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-075-2000.webp" href="/images/Vineyard%202025/IMG_5578.JPEG" aria-label="View Vineyard, photograph 75"><img src="/images/gallery-previews/gallery-075-960.webp" srcset="/images/gallery-previews/gallery-075-480.webp 480w, /images/gallery-previews/gallery-075-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 75" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5590.JPEG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-076-2000.webp" href="/images/Vineyard%202025/IMG_5590.JPEG" aria-label="View Vineyard, photograph 76"><img src="/images/gallery-previews/gallery-076-960.webp" srcset="/images/gallery-previews/gallery-076-480.webp 480w, /images/gallery-previews/gallery-076-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 76" width="1622" height="1938" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5624.JPG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-077-2000.webp" href="/images/Vineyard%202025/IMG_5624.JPG" aria-label="View Vineyard, photograph 77"><img src="/images/gallery-previews/gallery-077-960.webp" srcset="/images/gallery-previews/gallery-077-480.webp 480w, /images/gallery-previews/gallery-077-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 77" width="1121" height="1407" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5625.JPG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-078-2000.webp" href="/images/Vineyard%202025/IMG_5625.JPG" aria-label="View Vineyard, photograph 78"><img src="/images/gallery-previews/gallery-078-960.webp" srcset="/images/gallery-previews/gallery-078-480.webp 480w, /images/gallery-previews/gallery-078-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 78" width="1125" height="1411" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5626.JPG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-079-2000.webp" href="/images/Vineyard%202025/IMG_5626.JPG" aria-label="View Vineyard, photograph 79"><img src="/images/gallery-previews/gallery-079-960.webp" srcset="/images/gallery-previews/gallery-079-480.webp 480w, /images/gallery-previews/gallery-079-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 79" width="1121" height="1407" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5633.JPEG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-080-2000.webp" href="/images/Vineyard%202025/IMG_5633.JPEG" aria-label="View Vineyard, photograph 80"><img src="/images/gallery-previews/gallery-080-960.webp" srcset="/images/gallery-previews/gallery-080-480.webp 480w, /images/gallery-previews/gallery-080-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 80" width="873" height="1093" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5638.JPEG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-081-2000.webp" href="/images/Vineyard%202025/IMG_5638.JPEG" aria-label="View Vineyard, photograph 81"><img src="/images/gallery-previews/gallery-081-960.webp" srcset="/images/gallery-previews/gallery-081-480.webp 480w, /images/gallery-previews/gallery-081-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 81" width="1198" height="1501" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5693.JPG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-082-2000.webp" href="/images/Vineyard%202025/IMG_5693.JPG" aria-label="View Vineyard, photograph 82"><img src="/images/gallery-previews/gallery-082-960.webp" srcset="/images/gallery-previews/gallery-082-480.webp 480w, /images/gallery-previews/gallery-082-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 82" width="1125" height="1411" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Vineyard 2025/IMG_5694.JPG" alt="Vineyard" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-083-2000.webp" href="/images/Vineyard%202025/IMG_5694.JPG" aria-label="View Vineyard, photograph 83"><img src="/images/gallery-previews/gallery-083-960.webp" srcset="/images/gallery-previews/gallery-083-480.webp 480w, /images/gallery-previews/gallery-083-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Vineyard, photograph 83" width="1125" height="1411" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -603,40 +358,19 @@
 
       <div class="gallery-grid cols-3">
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_0095.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-084-2000.webp" href="/images/Spring%20Silliness%202025/IMG_0095.JPEG" aria-label="View Spring Silliness, photograph 84"><img src="/images/gallery-previews/gallery-084-960.webp" srcset="/images/gallery-previews/gallery-084-480.webp 480w, /images/gallery-previews/gallery-084-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 84" width="3024" height="4032" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_0096.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-085-2000.webp" href="/images/Spring%20Silliness%202025/IMG_0096.JPEG" aria-label="View Spring Silliness, photograph 85"><img src="/images/gallery-previews/gallery-085-960.webp" srcset="/images/gallery-previews/gallery-085-480.webp 480w, /images/gallery-previews/gallery-085-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 85" width="1536" height="2048" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_0339.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-086-2000.webp" href="/images/Spring%20Silliness%202025/IMG_0339.JPEG" aria-label="View Spring Silliness, photograph 86"><img src="/images/gallery-previews/gallery-086-960.webp" srcset="/images/gallery-previews/gallery-086-480.webp 480w, /images/gallery-previews/gallery-086-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 86" width="6048" height="8064" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_0343.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-087-2000.webp" href="/images/Spring%20Silliness%202025/IMG_0343.JPEG" aria-label="View Spring Silliness, photograph 87"><img src="/images/gallery-previews/gallery-087-960.webp" srcset="/images/gallery-previews/gallery-087-480.webp 480w, /images/gallery-previews/gallery-087-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 87" width="6048" height="8064" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_0414.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-088-2000.webp" href="/images/Spring%20Silliness%202025/IMG_0414.JPEG" aria-label="View Spring Silliness, photograph 88"><img src="/images/gallery-previews/gallery-088-960.webp" srcset="/images/gallery-previews/gallery-088-480.webp 480w, /images/gallery-previews/gallery-088-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 88" width="3024" height="4032" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_5759.JPEG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-089-2000.webp" href="/images/Spring%20Silliness%202025/IMG_5759.JPEG" aria-label="View Spring Silliness, photograph 89"><img src="/images/gallery-previews/gallery-089-960.webp" srcset="/images/gallery-previews/gallery-089-480.webp 480w, /images/gallery-previews/gallery-089-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 89" width="1624" height="1934" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
-        <div class="g-item">
-          <img src="/images/Spring Silliness 2025/IMG_6438.JPG" alt="Spring Silliness" />
-          <div class="g-item-caption"></div>
-        </div>
+        <a class="g-item" data-view="/images/gallery-view/gallery-090-2000.webp" href="/images/Spring%20Silliness%202025/IMG_6438.JPG" aria-label="View Spring Silliness, photograph 90"><img src="/images/gallery-previews/gallery-090-960.webp" srcset="/images/gallery-previews/gallery-090-480.webp 480w, /images/gallery-previews/gallery-090-960.webp 960w" sizes="(max-width: 600px) calc(100vw - 48px), (max-width: 900px) calc((100vw - 72px) / 2), calc((100vw - 208px) / 3)" alt="Spring Silliness, photograph 90" width="911" height="1143" loading="lazy" decoding="async" /><span class="g-item-caption"></span></a>
 
       </div>
     </div>
@@ -647,8 +381,8 @@
     <footer>
       <p class="footer-left">© 2026 Jonah Feinberg</p>
       <ul class="footer-links">
-        <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
-        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
+        <li><a href="https://github.com/jonahfeinberg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="mailto:jonah@jonahfeinberg.com">Email</a></li>
       </ul>
     </footer>
@@ -656,15 +390,19 @@
   </div>
 
   <!-- lightbox -->
-  <div class="lightbox">
-    <button class="lightbox-close">×</button>
+  <dialog class="lightbox" aria-label="Full-size gallery photograph">
+    <button type="button" class="lightbox-close" aria-label="Close photo">×</button>
     <button class="lightbox-prev" aria-label="Previous photo">←</button>
     <button class="lightbox-next" aria-label="Next photo">→</button>
-    <img src="" alt="Full size" />
-  </div>
+    <img alt="Full size" />
+    <div class="lightbox-footer">
+      <p class="lightbox-error" role="status" hidden>The photo couldn’t load.</p>
+      <a href="#" class="lightbox-original" target="_blank" rel="noopener">Open original image ↗</a>
+    </div>
+  </dialog>
 
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js?v=20260907-over-under"></script>
 </body>
 </html>

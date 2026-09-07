@@ -3,6 +3,14 @@
 // before paint, so nothing here needs to re-apply it. page-specific blocks
 // are feature-guarded and no-op elsewhere.
 
+const siteMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const scrollBehavior = () => siteMotion.matches ? 'instant' : 'smooth';
+
+const siteStorage = {
+  get(store, key) { try { return window[store].getItem(key); } catch { return null; } },
+  set(store, key, value) { try { window[store].setItem(key, value); } catch { /* storage is optional */ } }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const html = document.documentElement;
 
@@ -11,22 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeHint = document.getElementById('themeHint');
 
   // hint once, ever
-  if (themeHint && !localStorage.getItem('themeHintSeen')) {
+  if (themeHint && !siteStorage.get('localStorage', 'themeHintSeen')) {
     themeHint.hidden = false;
-    localStorage.setItem('themeHintSeen', '1');
+    siteStorage.set('localStorage', 'themeHintSeen', '1');
   }
 
   if (themeToggle) {
+    const updateThemeLabel = () => {
+      const dark = html.getAttribute('data-theme') === 'dark';
+      themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggle.setAttribute('aria-pressed', String(dark));
+    };
+    updateThemeLabel();
     themeToggle.addEventListener('click', () => {
       const isDark = html.getAttribute('data-theme') === 'dark';
       isDark ? html.removeAttribute('data-theme') : html.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      siteStorage.set('localStorage', 'theme', isDark ? 'light' : 'dark');
       if (themeHint) themeHint.hidden = true;
+      updateThemeLabel();
     });
   }
 
   // -- nav --
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/index\.html$/, '');
   document.querySelectorAll('.nav-links a').forEach(link => {
     if (link.getAttribute('href') === path) link.classList.add('active');
   });
@@ -34,26 +49,77 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.nav-hamburger');
   const navLinks  = document.querySelector('.nav-links');
   if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => navLinks.classList.remove('open'))
-    );
+    const nav = hamburger.closest('nav');
+    const mobileMenu = window.matchMedia('(max-width: 900px)');
+    const links = [...navLinks.querySelectorAll('a')];
+    let menuOpen = false;
+    navLinks.id = navLinks.id || 'site-navigation';
+    hamburger.type = 'button';
+    hamburger.setAttribute('aria-controls', navLinks.id);
+    links.forEach((link, index) => {
+      link.parentElement.style.setProperty('--menu-order', index);
+      if (link.classList.contains('active')) link.setAttribute('aria-current', 'page');
+    });
+
+    const setMenu = (open, returnFocus = false) => {
+      menuOpen = open && mobileMenu.matches;
+      hamburger.setAttribute('aria-expanded', String(menuOpen));
+      hamburger.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      navLinks.classList.toggle('open', menuOpen);
+      navLinks.inert = mobileMenu.matches && !menuOpen;
+      if (returnFocus) hamburger.focus({ preventScroll: true });
+    };
+
+    setMenu(false);
+    nav.classList.add('menu-ready');
+    hamburger.addEventListener('click', event => {
+      setMenu(!menuOpen);
+      // The list precedes the toggle in the original DOM. Keyboard opening
+      // enters the links directly; pointer opening keeps focus on the toggle.
+      if (menuOpen && event.detail === 0) links[0]?.focus({ preventScroll: true });
+    });
+    links.forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', event => {
+      if (menuOpen && event.key === 'Escape') {
+        event.preventDefault();
+        setMenu(false, true);
+      }
+    });
+    document.addEventListener('pointerdown', event => {
+      if (menuOpen && !nav.contains(event.target)) setMenu(false);
+    });
+    nav.addEventListener('focusout', event => {
+      // relatedTarget identifies the destination before the browser has assigned
+      // activeElement, keeping theme/toggle focus changes inside the open menu.
+      if (menuOpen && event.relatedTarget && !nav.contains(event.relatedTarget)) setMenu(false);
+    });
+    mobileMenu.addEventListener('change', () => {
+      const focusWasOnToggle = document.activeElement === hamburger;
+      const focusWasOnLink = navLinks.contains(document.activeElement);
+      setMenu(false);
+      if (!mobileMenu.matches && focusWasOnToggle) links.find(link => link.classList.contains('active'))?.focus({ preventScroll: true });
+      if (mobileMenu.matches && focusWasOnLink) hamburger.focus({ preventScroll: true });
+    });
   }
 
   // -- reveal --
-  const fadeObserver = new IntersectionObserver(entries => {
+  const fadeObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }
     });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+  }, { threshold: 0.08 }) : null;
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver ? fadeObserver.observe(el) : el.classList.add('visible'));
 
   // -- scroll fx --
   const heroJ = document.getElementById('heroJ');
   if (heroJ) {
     let ticking = false;
+    let heroVisible = true;
+    if (typeof IntersectionObserver === 'function') new IntersectionObserver(entries => {
+      heroVisible = entries[0].isIntersecting;
+    }).observe(heroJ.closest('.hero'));
     window.addEventListener('scroll', () => {
-      if (!ticking) {
+      if (!ticking && heroVisible && !siteMotion.matches && !document.hidden) {
         requestAnimationFrame(() => {
           heroJ.style.transform = `translateY(${window.scrollY * 0.35}px)`;
           ticking = false;
@@ -61,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ticking = true;
       }
     }, { passive: true });
+    siteMotion.addEventListener('change', () => { if (siteMotion.matches) heroJ.style.transform = ''; });
   }
 
   const backToTop = document.getElementById('back-to-top');
@@ -68,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
       backToTop.classList.toggle('visible', window.scrollY > 400);
     }, { passive: true });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: scrollBehavior() }));
   }
 
   // -- lightbox --
@@ -78,124 +145,144 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxPrev  = lightbox?.querySelector('.lightbox-prev');
   const lightboxNext  = lightbox?.querySelector('.lightbox-next');
 
-  if (lightbox && lightboxImg) {
-    const getImgs = () => [...document.querySelectorAll('.g-item img')].map(i => i.src);
-
-    const updateArrows = () => {
-      if (!lightboxPrev || !lightboxNext) return;
-      const imgs = getImgs();
-      const idx  = imgs.indexOf(lightboxImg.src);
-      lightboxPrev.classList.toggle('hidden', idx === 0);
-      lightboxNext.classList.toggle('hidden', idx === imgs.length - 1);
+  if (lightbox && lightboxImg && typeof lightbox.showModal === 'function') {
+    const items = [...document.querySelectorAll('.g-item')];
+    let index = 0, opener = null, previousOverflow = '';
+    const error = lightbox.querySelector('.lightbox-error');
+    const show = next => {
+      index = next;
+      const item = items[index];
+      error.hidden = true;
+      lightboxImg.alt = item.querySelector('img').alt;
+      // Use the capped viewing derivative in the lightbox; the source image
+      // remains available through the explicit "Open original" link.
+      lightboxImg.src = item.dataset.view || item.href;
+      lightbox.querySelector('.lightbox-original').href = item.href;
+      lightboxPrev.disabled = index === 0;
+      lightboxNext.disabled = index === items.length - 1;
+      lightboxPrev.classList.toggle('hidden', lightboxPrev.disabled);
+      lightboxNext.classList.toggle('hidden', lightboxNext.disabled);
     };
-
-    const showImg = src => {
-      lightboxImg.src = src;
-      updateArrows();
+    const navigate = direction => {
+      const next = index + direction;
+      if (next >= 0 && next < items.length) show(next);
     };
-
-    document.querySelectorAll('.g-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const src = item.querySelector('img')?.src;
-        if (!src) return;
-        showImg(src);
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
+    items.forEach((item, i) => item.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault(); opener = item;
+      previousOverflow = document.body.style.overflow;
+      show(i); lightbox.classList.add('open'); lightbox.showModal();
+      document.body.style.overflow = 'hidden';
+    }));
+    lightboxClose.addEventListener('click', () => lightbox.close());
+    lightboxPrev.addEventListener('click', () => navigate(-1));
+    lightboxNext.addEventListener('click', () => navigate(1));
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
+    lightbox.addEventListener('close', () => {
+      lightbox.classList.remove('open'); document.body.style.overflow = previousOverflow;
+      lightboxImg.removeAttribute('src'); opener?.focus({ preventScroll: true });
     });
-
-    const closeLightbox = () => {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
-    };
-
-    const navigate = dir => {
-      const imgs = getImgs();
-      const idx  = imgs.indexOf(lightboxImg.src);
-      const next = idx + dir;
-      if (next >= 0 && next < imgs.length) showImg(imgs[next]);
-    };
-
-    lightboxClose?.addEventListener('click', closeLightbox);
-    lightboxPrev?.addEventListener('click', () => navigate(-1));
-    lightboxNext?.addEventListener('click', () => navigate(1));
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape')      { closeLightbox(); return; }
-      if (e.key === 'ArrowRight')  navigate(1);
-      if (e.key === 'ArrowLeft')   navigate(-1);
+    lightbox.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        event.preventDefault(); navigate(event.key === 'ArrowRight' ? 1 : -1);
+      }
     });
-
-    // touch swipe
-    let touchStartX = 0;
-    lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    lightbox.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+    lightboxImg.addEventListener('error', () => { if (lightbox.open) error.hidden = false; });
+    let startX = 0, startY = 0;
+    lightbox.addEventListener('touchstart', event => { startX = event.touches[0].clientX; startY = event.touches[0].clientY; }, { passive: true });
+    lightbox.addEventListener('touchend', event => {
+      const dx = event.changedTouches[0].clientX - startX, dy = event.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) navigate(dx < 0 ? 1 : -1);
     }, { passive: true });
   }
 
-  // -- video --
-  document.querySelectorAll('.project-video').forEach(video => {
+  // Native controls remain usable without JS; enhanced play buttons load on demand.
+  const projectVideos = [...document.querySelectorAll('.project-video')];
+  projectVideos.forEach(video => {
     const container = video.closest('.app-video-col');
-    if (!container) return;
+    const play = container?.querySelector('.app-video-placeholder');
+    if (!play) return;
+    container.classList.add('video-ready');
     video.controls = false;
-
-    container.addEventListener('click', () => {
-      if (container.classList.contains('playing')) return;
-      video.controls = true;
-      video.play();
-      container.classList.add('playing');
+    const error = document.createElement('p');
+    error.className = 'video-error'; error.hidden = true; error.setAttribute('role', 'alert');
+    error.textContent = 'This video couldn’t play. Please try again.';
+    container.appendChild(error);
+    play.addEventListener('click', async () => {
+      error.hidden = true; video.controls = true; container.classList.add('playing');
+      video.focus({ preventScroll: true });
+      try { await video.play(); }
+      catch { container.classList.remove('playing'); video.controls = false; error.hidden = false; play.focus({ preventScroll: true }); }
     });
+    video.addEventListener('play', () => { projectVideos.forEach(other => { if (other !== video) other.pause(); }); });
+    if (typeof IntersectionObserver === 'function') new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) video.pause();
+    }).observe(container);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); });
   });
 
-  // -- frame breathe --
-  // the mat thickens with scroll speed, then relaxes
+  // The existing breathing frame now sleeps after it settles.
   const frame = document.getElementById('frame');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (frame && !reduce) {
-    const GAIN = 5, CAP = 10;  // extra px per velocity, and the cap
-    let cur = 0, target = 0, lastY = window.scrollY, lastT = performance.now();
-
-    window.addEventListener('scroll', () => {
-      const now = performance.now();
-      const v = Math.abs(window.scrollY - lastY) / Math.max(now - lastT, 1);
-      target = Math.min(CAP, v * GAIN);
-      lastY = window.scrollY;
-      lastT = now;
-    }, { passive: true });
-
-    (function breathe() {
-      target *= 0.94;
-      cur += (target - cur) * 0.1;
-      html.style.setProperty('--frame-extra', cur.toFixed(2) + 'px');
-      requestAnimationFrame(breathe);
-    })();
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (frame) {
+    let cur=0, target=0, lastY=window.scrollY, lastT=performance.now(), raf=0;
+    const breathe=()=>{
+      raf=0;
+      if(motionPreference.matches || document.hidden) {cur=target=0;html.style.setProperty('--frame-extra','0px');return;}
+      target*=.94;cur+=(target-cur)*.1;
+      html.style.setProperty('--frame-extra',cur.toFixed(2)+'px');
+      if(cur>.01 || target>.01)raf=requestAnimationFrame(breathe);
+      else {cur=target=0;html.style.setProperty('--frame-extra','0px');}
+    };
+    window.addEventListener('scroll',()=>{
+      const now=performance.now();
+      if(!motionPreference.matches)target=Math.min(10,Math.abs(window.scrollY-lastY)/Math.max(now-lastT,1)*5);
+      lastY=window.scrollY;lastT=now;
+      if(!raf && !motionPreference.matches)raf=requestAnimationFrame(breathe);
+    },{passive:true});
+    motionPreference.addEventListener('change',()=>{cancelAnimationFrame(raf);raf=0;cur=target=0;html.style.setProperty('--frame-extra','0px');});
   }
 });
 
 // -- intro --
-// home-page overlay, once per session
+// "Over and under": the selected study, played once per session.
 const introBg = document.getElementById('intro-bg');
 const introIconWrap = document.getElementById('intro-icon-wrap');
 if (introBg) {
-  if (sessionStorage.getItem('intro-seen')) {
-    introBg.style.display = 'none';
-    introIconWrap.style.display = 'none';
-  } else {
+  const seenKey = 'intro-over-under-seen';
+  const preview = new URLSearchParams(location.search).get('intro') === 'preview';
+  const previousOverflow = document.body.style.overflow;
+  const arrivals = [];
+  let timer;
+  const motionChanged = () => { if (siteMotion.matches) finishIntro(); };
+  const finishIntro = () => {
+    clearTimeout(timer);
+    arrivals.forEach(animation => animation.cancel());
+    siteMotion.removeEventListener('change', motionChanged);
+    introBg.remove(); introIconWrap?.remove();
+    document.body.style.overflow = previousOverflow;
+    siteStorage.set('sessionStorage', seenKey, '1');
+  };
+  if ((!preview && siteStorage.get('sessionStorage', seenKey)) || siteMotion.matches) finishIntro();
+  else {
     document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      introBg.classList.add('leaving');
-      introIconWrap.classList.add('leaving');
-      introBg.addEventListener('transitionend', () => {
-        introBg.remove();
-        introIconWrap.remove();
-        document.body.style.overflow = '';
-        sessionStorage.setItem('intro-seen', '1');
-      }, { once: true });
-    }, 1300);
+    // Keep the sampler's exact geometry, stagger, masks, and deceleration.
+    introIconWrap?.querySelectorAll('rect').forEach((piece, i) => {
+      if (!piece.animate) return; // A static SVG remains available in older browsers.
+      const sign = i % 2 ? 1 : -1;
+      const start = (.03 + i * .025) * 3800;
+      const end = (.27 + i * .027) * 3800;
+      arrivals.push(piece.animate([
+        { transform: `translateY(${sign * 38}px)`, clipPath: sign > 0 ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)' },
+        { transform: 'translateY(0px)', clipPath: 'inset(0 0 0 0)' }
+      ], { delay: start, duration: end - start, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' }));
+    });
+    timer = setTimeout(() => {
+      introBg.classList.add('leaving'); introIconWrap?.classList.add('leaving');
+      introBg.addEventListener('transitionend', finishIntro, { once: true });
+      timer = setTimeout(finishIntro, 1500); // cleanup also runs if transition events never fire
+    }, 1800); // Let all four strokes resolve, then hold before revealing the page.
+    siteMotion.addEventListener('change', motionChanged);
   }
 }
 
@@ -205,13 +292,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('wizardForm');
   if (!form) return;
 
+  const yearFounded = document.getElementById('yearFounded');
+  if (yearFounded) yearFounded.max = new Date().getFullYear();
   const screenDetails = document.getElementById('screenDetails');
   const continueBtn = document.getElementById('continueBtn');
   const backBtn = document.getElementById('backBtn');
   const submitBtn = document.getElementById('submitBtn');
   const confirmation = document.getElementById('wizardConfirmation');
 
-  let submitted = false;
+  let submitted = false, submitting = false;
+  const submissionError = document.getElementById('submissionError');
 
   // -- draft persistence --
   // autosave answers so a refresh does not lose progress. files can't serialize
@@ -264,18 +354,21 @@ document.addEventListener('DOMContentLoaded', () => {
     saveTimer = setTimeout(saveDraft, 300);
   });
   form.addEventListener('change', saveDraft);
+  window.addEventListener('pagehide', () => { if (!submitted) saveDraft(); });
 
   // -- screens --
   // package vs details, driven by History so Back/Forward work
-  const showScreen = name => {
+  const showScreen = (name, moveFocus = true) => {
     document.querySelectorAll('[data-screen]').forEach(el => {
       el.hidden = el.dataset.screen !== name;
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const screen = document.querySelector(`[data-screen="${name}"]`);
+    if (screen && moveFocus) { screen.tabIndex = -1; screen.focus({ preventScroll: true }); }
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
   };
 
   history.replaceState({ screen: 'package' }, '', location.href);
-  showScreen('package');
+  showScreen('package', false);
 
   window.addEventListener('popstate', e => {
     if (submitted) return;
@@ -312,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshIndicator(packageGroup);
     if (!groupIsAnswered(packageGroup)) {
       packageGroup.classList.add('group-invalid');
-      packageGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      packageGroup.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
       return;
     }
     history.pushState({ screen: 'details' }, '', location.href);
@@ -327,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (marker.hasAttribute('data-required-group')) {
         if (!groupIsAnswered(marker)) {
           marker.classList.add('group-invalid');
-          marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          marker.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
           return false;
         }
       } else if (!marker.checkValidity()) {
@@ -335,16 +428,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // let our smooth scroll land last
         marker.focus({ preventScroll: true });
         marker.reportValidity();
-        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        marker.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
         return false;
       }
     }
     return true;
   };
 
-  submitBtn.addEventListener('click', () => {
-    if (!validateDetailsScreen()) return;
+  const attemptSubmit = () => {
+    if (submitting || submitted || !validateDetailsScreen()) return;
     submitForm();
+  };
+  submitBtn.addEventListener('click', attemptSubmit);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (screenDetails.hidden) continueBtn.click(); else attemptSubmit();
   });
 
   // -- conditional reveals --
@@ -418,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    if (!isGrowth && pagesOtherField) pagesOtherField.hidden = true;
+    if (pagesOtherField) pagesOtherField.hidden = !hasPages || !pagesOtherCheck?.checked;
   };
 
   form.querySelectorAll('input[name="package"]').forEach(radio => {
@@ -441,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ? hiddenField.value.split(',').map(v => v.trim()).filter(Boolean)
       : [];
 
-    const sync = () => { hiddenField.value = values.join(', '); };
+    const sync = () => { hiddenField.value = values.join(', '); saveDraft(); };
 
     const renderChips = () => {
       list.innerHTML = '';
@@ -485,18 +583,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileLightbox = document.getElementById('filePreviewLightbox');
   const fileLightboxImg = fileLightbox?.querySelector('img');
 
+  let filePreviewOpener = null;
   const openFileLightbox = src => {
     if (!fileLightbox || !fileLightboxImg) return;
+    if (typeof fileLightbox.showModal !== 'function') return;
+    filePreviewOpener = document.activeElement;
     fileLightboxImg.src = src;
     fileLightbox.classList.add('open');
+    fileLightbox.showModal();
     document.body.style.overflow = 'hidden';
   };
 
   const closeFileLightbox = () => {
     if (!fileLightbox) return;
+    fileLightbox.close();
+  };
+
+  fileLightbox?.addEventListener('close', () => {
     fileLightbox.classList.remove('open');
     document.body.style.overflow = '';
-  };
+    filePreviewOpener?.focus({ preventScroll: true });
+  });
 
   fileLightbox?.querySelector('.lightbox-close')?.addEventListener('click', closeFileLightbox);
   fileLightbox?.addEventListener('click', e => { if (e.target === fileLightbox) closeFileLightbox(); });
@@ -509,6 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorEl = document.getElementById(`${input.id}Error`);
     if (!previewList) return;
     let files = [];
+    let previewURLs = [];
 
     const rebuildInputFiles = () => {
       const dt = new DataTransfer();
@@ -517,6 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderPreviews = () => {
+      previewURLs.forEach(url => URL.revokeObjectURL(url));
+      previewURLs = [];
       previewList.innerHTML = '';
       files.forEach((file, index) => {
         const item = document.createElement('div');
@@ -525,9 +635,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file.type.startsWith('image/')) {
           const img = document.createElement('img');
           img.src = URL.createObjectURL(file);
+          previewURLs.push(img.src);
           img.alt = file.name;
-          img.addEventListener('click', () => openFileLightbox(img.src));
-          item.appendChild(img);
+          const previewButton = document.createElement('button');
+          previewButton.type = 'button'; previewButton.className = 'file-preview-open';
+          previewButton.setAttribute('aria-label', `Preview ${file.name}`);
+          previewButton.addEventListener('click', () => openFileLightbox(img.src));
+          previewButton.appendChild(img); item.appendChild(previewButton);
         } else {
           const chip = document.createElement('span');
           chip.className = 'file-preview-chip';
@@ -577,15 +691,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const submitForm = () => {
+    if (submitting || submitted) return;
+    submissionError.hidden = true;
+    if (['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) {
+      submissionError.textContent = 'This local preview cannot send requests. Your answers remain in this form. Email jonah@jonahfeinberg.com to get in touch.';
+      submissionError.hidden = false; saveDraft(); return;
+    }
+    const excluded = [...form.querySelectorAll('input, textarea, select')].filter(input =>
+      !input.disabled && (input.matches('.conditional-field[hidden]') || input.closest('.conditional-field[hidden], [data-package-gate][hidden]'))
+    );
+    excluded.forEach(input => { input.disabled = true; });
+    let data;
+    try { data = new FormData(form); }
+    finally { excluded.forEach(input => { input.disabled = false; }); }
+    const uploadBytes = [...data.values()].reduce((total, value) => total + (value instanceof File ? value.size : 0), 0);
+    if (uploadBytes > MAX_FILE_BYTES) { submissionError.textContent = 'Please keep all attachments together under 10 MB, then try again.'; submissionError.hidden = false; return; }
+    submitting = true;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting…';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
 
     // save before submit
     saveDraft();
 
     fetch(window.location.pathname, {
       method: 'POST',
-      body: new FormData(form),
+      body: data,
+      signal: controller.signal,
     })
       .then(response => {
         if (!response.ok) throw new Error(`Submission failed: ${response.status}`);
@@ -594,13 +727,15 @@ document.addEventListener('DOMContentLoaded', () => {
         form.hidden = true;
         document.querySelectorAll('[data-screen]').forEach(el => { el.hidden = true; });
         confirmation.hidden = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: scrollBehavior() });
       })
       .catch(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit';
-        alert('Something went wrong submitting the form. Please check your connection and try again.');
-      });
+        submissionError.textContent = 'Your request could not be sent. Your answers are still here. Check your connection and try again, or email jonah@jonahfeinberg.com.';
+        submissionError.hidden = false;
+      })
+      .finally(() => { clearTimeout(timeout); submitting = false; });
   };
 
   // replay restored values so reveals and gating catch up

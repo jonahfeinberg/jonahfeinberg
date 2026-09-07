@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <script>
-    (function(){if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}})();
+    (function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Websites — Jonah Feinberg</title>
@@ -11,7 +11,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Hanken+Grotesk:wght@500&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English+SC&family=Nunito+Sans:wght@300;600;700&family=Playfair+Display:wght@400;600&family=Special+Elite&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css?v=20260907-grain" />
+  <noscript><style>
+    .fade-up{opacity:1!important;transform:none!important;filter:none!important}
+    #intro-bg,#intro-icon-wrap,.nav-hamburger,.theme-toggle,.theme-hint{display:none!important}
+    nav{position:relative!important;height:auto;min-height:68px;flex-wrap:wrap;gap:16px;padding:16px 24px}
+    nav .nav-links{display:flex;flex-wrap:wrap;gap:16px} .page-wrapper{padding-top:0}
+  </style></noscript>
 </head>
 <body>
 
@@ -19,8 +25,8 @@
   <div id="frame" aria-hidden="true"></div>
 
 
-  <nav>
-    <span class="nav-logo">Jonah Feinberg</span>
+  <nav aria-label="Main navigation">
+    <a class="nav-logo" href="/" aria-label="Jonah Feinberg — home">Jonah Feinberg</a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/gallery/">Gallery</a></li>
@@ -74,14 +80,14 @@
           <span class="project-card-link">Visit EntLab</span>
         </a>
 
-        <a class="project-card website-card monkeyboard-card fade-up" href="https://monkeyboard.jonahfeinberg.com" target="_blank">
+        <a class="project-card website-card monkeyboard-card fade-up" href="https://monkeyboard.jonahfeinberg.com" target="_blank" rel="noopener noreferrer">
           <span class="site-card-kicker">type test · monkey cage</span>
           <h3>monkeyboard</h3>
           <p>A typing speed test I built from scratch — mechanical keyboard sounds, leaderboards, and custom word lists.</p>
           <span class="project-card-link">Visit monkeyboard</span>
         </a>
 
-        <a class="project-card website-card katherine-card fade-up fade-up-delay-2" href="https://www.katherinemcvety.com" target="_blank">
+        <a class="project-card website-card katherine-card fade-up fade-up-delay-2" href="https://www.katherinemcvety.com" target="_blank" rel="noopener noreferrer">
           <span class="site-card-kicker">Portfolio · Selected work</span>
           <h3>katherinemcvety.com</h3>
           <p>A website made for my mom in around 48 hours, challenging myself to create quality in a short amount of time. It's a simple  showcase of her work.</p>
@@ -95,40 +101,40 @@
           <span class="project-card-tag">You're looking at it</span>
         </div>
 
-        <a class="project-card website-card github-card fade-up fade-up-delay-1" href="https://github.com/jonahfeinberg" target="_blank">
+        <a class="project-card website-card github-card fade-up fade-up-delay-1" href="https://github.com/jonahfeinberg" target="_blank" rel="noopener noreferrer">
           <span class="site-card-kicker"><span class="github-dot"></span>Public profile</span>
           <h3>GitHub</h3>
           <p>All my code, experiments, and work-in-progress projects live here.</p>
           <span class="project-card-link">Visit GitHub</span>
         </a>
 
-        <a class="project-card website-card recall-card fade-up fade-up-delay-2" href="/linkedSites/recall.html" target="_blank">
+        <a class="project-card website-card recall-card fade-up fade-up-delay-2" href="/linkedSites/recall.html" target="_blank" rel="noopener noreferrer">
           <span class="site-card-kicker">study sets / flashcards</span>
           <h3>re:call</h3>
           <p>First website with AI (poor quality, but here we are), created working with ChatGPT in my APCSP class; a simple flashcard tool for students.</p>
           <span class="project-card-link">Visit re:call</span>
         </a>
 
-         <a class="project-card website-card finance-card fade-up fade-up-delay-2" href="/linkedSites/finance/templates/index.html" target="_blank">
+         <article class="project-card website-card finance-card fade-up fade-up-delay-2" data-archived>
           <span class="site-card-kicker">C<span>$</span>50</span>
           <h3>Finance</h3>
-          <p><span class="broken-label">BROKEN WITHOUT CS50</span> | A finance themed game developed from the CS50 guidelines.</p>
-          <span class="project-card-link">Visit C$50 Finance</span>
-        </a>
+          <p>A finance themed game developed from the CS50 guidelines.</p>
+          <span class="project-card-tag">Archived project · live demo unavailable</span>
+        </article>
 
-        <a class="project-card website-card subject-card fade-up fade-up-delay-2" href="/linkedSites/homepage/index.html" target="_blank">
+        <a class="project-card website-card subject-card fade-up fade-up-delay-2" href="/linkedSites/homepage/index.html" target="_blank" rel="noopener noreferrer">
           <span class="site-card-kicker">Math · Science · English · More</span>
           <h3>Subject Colors</h3>
           <p>My first website with help from Gemini (as per requirements), created during my APCSP class.</p>
           <span class="project-card-link">Visit Subject Colors</span>
         </a>
 
-        <a class="project-card website-card hogwarts-card fade-up fade-up-delay-2" href="/linkedSites/Personality/templates/index.html" target="_blank">
+        <article class="project-card website-card hogwarts-card fade-up fade-up-delay-2" data-archived>
           <span class="site-card-kicker">Hogwarts · Sorting ceremony</span>
           <h3>Personality</h3>
-          <p><span class="broken-label">BROKEN WITHOUT CS50</span> | A website created for APCSA to exhibit a form, which uses a simple algorithm to determine your Hogwarts house.</p>
-          <span class="project-card-link">Visit Personality</span>
-        </a>
+          <p>A website created for APCSA to exhibit a form, which uses a simple algorithm to determine your Hogwarts house.</p>
+          <span class="project-card-tag">Archived project · live demo unavailable</span>
+        </article>
         
       </div>
     </section>
@@ -136,14 +142,14 @@
     <footer>
       <p class="footer-left">© 2026 Jonah Feinberg</p>
       <ul class="footer-links">
-        <li><a href="https://github.com/jonahfeinberg" target="_blank">GitHub</a></li>
-        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank">Instagram</a></li>
+        <li><a href="https://github.com/jonahfeinberg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.instagram.com/jonahfeinberger/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         <li><a href="mailto:jonah@jonahfeinberg.com">Email</a></li>
       </ul>
     </footer>
 
   </div>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js?v=20260907-over-under"></script>
 </body>
 </html>
