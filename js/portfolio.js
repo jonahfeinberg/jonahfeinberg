@@ -18,6 +18,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const compact = matchMedia('(max-width: 900px)');
   const pointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const touchViewport = matchMedia('(hover: none) and (pointer: coarse)');
+  let layoutWidth = innerWidth, layoutHeight = innerHeight;
   const supports = window.CSS && CSS.supports('transform-style', 'preserve-3d') && CSS.supports('position', 'sticky') && typeof IntersectionObserver === 'function';
   const titles = ['Selected work.', 'Photography.', 'Websites.', 'Video.', 'Back to the beginning.'];
   const descriptions = ['Websites, photographs, and moving images.', 'Places, people, and the moments in between.', 'Some for clients, some for school, some for fun.', 'Trailers, personal pieces, and motion work.', 'A few things I make. More about me below.'];
@@ -169,9 +171,9 @@
   }
   const configure = () => {
     const prior=spatial;
-    spatial=!!(supports && !reduced.matches && !listChosen && !printing && innerHeight>=(compact.matches?720:640));
+    spatial=!!(supports && !reduced.matches && !listChosen && !printing && layoutHeight>=(compact.matches?720:640));
     root.classList.toggle('is-spatial',spatial);
-    modeButton.hidden=!supports || reduced.matches || innerHeight<(compact.matches?720:640);
+    modeButton.hidden=!supports || reduced.matches || layoutHeight<(compact.matches?720:640);
     modeButton.textContent=spatial?'View as list':'View scroll experience';
     if(!spatial){
       cancelAnimationFrame(frame);frame=0;active=-1;
@@ -198,7 +200,13 @@
   }));
   const onScroll=()=>{updatePaper();if(spatial){targetScroll=clamp((window.scrollY-top)/distance)*4;signal();}};
   window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',()=>{configure();measure();},{passive:true});
+  window.addEventListener('resize',()=>{
+    // Mobile browser chrome changes height when reversing a swipe. Remeasure
+    // without collapsing the sticky scene or resetting its interpolated pose.
+    if (touchViewport.matches && innerWidth === layoutWidth) { measure(); return; }
+    layoutWidth = innerWidth; layoutHeight = innerHeight;
+    configure();measure();
+  },{passive:true});
   reduced.addEventListener('change',configure);
   window.addEventListener('beforeprint',()=>{printing=true;configure();});
   window.addEventListener('afterprint',()=>{printing=false;configure();});

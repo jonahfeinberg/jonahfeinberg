@@ -407,12 +407,18 @@ h2 {
 
 .about-info-row {
   display: flex;
-  gap: 60px;
+  flex-wrap: wrap;
+  gap: 24px 32px;
   padding: 48px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   margin-top: 60px;
 }
+
+.info-item { flex: 0 0 auto; min-width: 0; max-width: 100%; }
+.info-item label { white-space: nowrap; }
+.about-text .info-item p { font-size: 1rem; line-height: 1.4; margin-bottom: 0; font-weight: 400; overflow-wrap: anywhere; }
+.hero-contact { color: inherit; text-decoration: underline; text-underline-offset: .18em; }
 
 .info-item label {
   display: block;
