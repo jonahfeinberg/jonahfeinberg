@@ -1055,6 +1055,66 @@ a.project-card.dawn-card p,
   flex: none;
 }
 
+/* LS SPEC: the club site's paper ground, its ink plate, and orange on links only. */
+a.project-card.spec-card,
+[data-theme="dark"] a.project-card.spec-card {
+  background: #fff;
+  border-color: #e3e6e9;
+  color: #14161a;
+  font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+a.project-card.spec-card:hover,
+[data-theme="dark"] a.project-card.spec-card:hover {
+  background: #f7f8f9;
+}
+
+a.project-card.spec-card h3 {
+  color: #14161a;
+  font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-transform: none;
+}
+
+a.project-card.spec-card p,
+[data-theme="dark"] a.project-card.spec-card p { color: #585d66; }
+
+.spec-card .site-card-kicker {
+  color: #626873;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+}
+
+/* orange marks the link and nothing else, the way the club site uses it */
+.spec-card .project-card-link {
+  width: fit-content;
+  padding-bottom: 2px;
+  color: #14161a;
+  border-bottom: 1px solid #f85e00;
+}
+
+.spec-card:hover .project-card-link { border-bottom-width: 2px; }
+.spec-card::before { background: #f85e00; }
+
+/* the dark plate the club site stands its dot wordmark on */
+.spec-card-plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 24px;
+  background: #14161a;
+  border-radius: 3px;
+}
+
+.spec-card-plate img {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
+
 /* Monkeyboard: parchment, ink, and irregular typewriter character. */
 a.project-card.monkeyboard-card,
 [data-theme="dark"] a.project-card.monkeyboard-card {
