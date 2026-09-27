@@ -1,32 +1,23 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)"
-          srcset="https://raw.githubusercontent.com/jonahfeinberg/jonahfeinberg/main/banner-dark.svg">
-  <img alt="Jonah Feinberg — hand-coded static sites, Lincoln, Massachusetts"
-       src="https://raw.githubusercontent.com/jonahfeinberg/jonahfeinberg/main/banner-light.svg">
-</picture>
+<a href="https://jonahfeinberg.com">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="logo-dark.svg">
+    <img alt="jf" src="logo-light.svg" width="48">
+  </picture>
+</a>
 
-Hi, I'm Jonah. I build websites, take photos, and edit videos. I'm a student at Lincoln-Sudbury Regional High School, class of 2028.
+### Jonah Feinberg
 
-Most of what's here is client work or passion projects. I'm drawn to subjects that are intersected by people and how they function: psychology, sociology, and sometimes computer science. I find it interesting how technology can shape human behavior and how understanding people can make you a better builder.
+I build websites for clients, take photos, and edit videos.
 
-### EntLab
+**Websites**
 
-An alife sandbox created over one week in summer out of curiousity.
+- [admitted](https://admitted-ai.jonahfeinberg.com/): college research and admission chances
+- [LS SPEC](https://lsspec.org): the website for my club, which collects device donations
+- [dawn.place](https://dawn.place/): one pixel a day on one shared canvas
+- [EntLab](https://entlab.jonahfeinberg.com/): an artificial-life sandbox built in a week ([source](https://github.com/jonahfeinberg/EntLab))
+- [monkeyboard](https://monkeyboard.jonahfeinberg.com/): virtual monkeys typing until they spell words ([source](https://github.com/jonahfeinberg/monkeyboard))
+- [Katherine McVety](https://www.katherinemcvety.com): a portfolio for my mother, built in 48 hours
 
-**[entlab.jonahfeinberg.com](https://entlab.jonahfeinberg.com/)**
+If you need a website, [email me](mailto:jonah@jonahfeinberg.com).
 
-### monkeyboard
-
- Virtual monkeys typing random characters until they accidentally spell English words. Flask and SQLite, with a leaderboard, achievements, and per-player stats.
-
- **[monkeyboard](https://monkeyboard.jonahfeinberg.com)**
-
-### Need a website?
-
- design and build any website you might need; a personal site, small business site, portfolio, anything! Clean, affordable, fast, and built from scratch for your needs. Server/domain management and maintenance are also available!
-
-Have a look at [what I've built](https://jonahfeinberg.com/websites/), then [get in touch](mailto:jonah@jonahfeinberg.com).
-
----
-
-[Website](https://jonahfeinberg.com/) · [Photo gallery](https://jonahfeinberg.com/gallery/) · [Video work](https://jonahfeinberg.com/projects/) · [Instagram](https://www.instagram.com/jonahfeinberger/) · [Email](mailto:jonah@jonahfeinberg.com)
+[jonahfeinberg.com](https://jonahfeinberg.com) · [YouTube](https://www.youtube.com/@qzxr.) · [Instagram](https://www.instagram.com/jonahfeinberger/) · [jonah@jonahfeinberg.com](mailto:jonah@jonahfeinberg.com)
